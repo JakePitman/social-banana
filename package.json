@@ -1,0 +1,19 @@
+{
+  "name": "social-banana",
+  "version": "1.0.0",
+  "description": "A prototype microservice application that facilitates automated sharing to user connected social media accounts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fycdev/social-banana.git"
+  },
+  "author": "barbs89, crushoncode, fycdev, JakePitman, marktice",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fycdev/social-banana/issues"
+  },
+  "homepage": "https://github.com/fycdev/social-banana#readme"
+}
