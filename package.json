@@ -2,7 +2,7 @@
   "name": "social-banana",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "client": "cd client && npm start",
     "server": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
