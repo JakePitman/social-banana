@@ -32,4 +32,17 @@ usersRouter.post('/register', async (req, res) => {
   }
 });
 
+usersRouter.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findByCredentials(email, password);
+    const token = await user.generateAuthToken();
+    res.cookie('authToken', token).send();
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ error: error.message });
+  }
+});
+
 module.exports = { usersRouter };
