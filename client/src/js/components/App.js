@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { LoginForm } from './LoginForm'
-import ListingsPage from './ListingsPage'
+import ListingPage from './ListingPage'
 
 class App extends Component {
   // The following code is to test the api call of our backend
@@ -28,7 +28,6 @@ class App extends Component {
     return (
       <div className="App">
         < LoginForm />
-        < ListingsPage />
       </div>
     );
   }
