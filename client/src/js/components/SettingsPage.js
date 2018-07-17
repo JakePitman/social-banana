@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 class SettingsPage extends React.Component {
     constructor(props) {
       super(props);
@@ -7,7 +8,7 @@ class SettingsPage extends React.Component {
         picture: this.props.picture,
         name: this.props.name,
         company: this.props.name,
-        phone: this.props.likes,
+        phone: this.props.phone,
         email: this.props.email,
         isOpen: false,
       };
@@ -59,8 +60,13 @@ class SettingsPage extends React.Component {
                 </button>
             </form>
         </div>
+
+       
+        
+   
+        
         )
-        }
+    }
         
 
     
