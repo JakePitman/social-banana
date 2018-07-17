@@ -5,17 +5,6 @@ const { User } = require('./../models/User');
 
 const usersRouter = express.Router();
 
-usersRouter.get('/me', authenticate, async (req, res) => {
-  const user = req.user;
-
-  try {
-    res.status(200).send(user);
-  } catch (error) {
-    console.log(error);
-    res.status(400).send({ error: error.message });
-  }
-});
-
 usersRouter.post('/register', async (req, res) => {
   const { email, password } = req.body;
 
@@ -35,7 +24,30 @@ usersRouter.post('/login', async (req, res) => {
   try {
     const user = await User.findByCredentials(email, password);
     const token = await user.generateAuthToken();
-    res.cookie('authToken', token).send();
+    res.cookie('authToken', token).send({ user });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ error: error.message });
+  }
+});
+
+usersRouter.get('/me', authenticate, async (req, res) => {
+  const user = req.user;
+
+  try {
+    res.status(200).send({ user });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ error: error.message });
+  }
+});
+
+usersRouter.delete('/logout', authenticate, async (req, res) => {
+  const { user, token } = req;
+
+  try {
+    await user.removeToken(token);
+    res.status(200).send();
   } catch (error) {
     console.log(error);
     res.status(400).send({ error: error.message });

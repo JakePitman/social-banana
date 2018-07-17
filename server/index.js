@@ -9,10 +9,11 @@ const { usersRouter } = require('./routers/usersRouter');
 const app = express();
 const port = process.env.PORT || 3001;
 
+// MIDDLEWARE
 app.use(cookieParser());
 app.use(express.json());
 
-// users routes
+// ROUTES
 app.use('/api/users', usersRouter);
 
 // This is to test the proxy of the front end server for development
