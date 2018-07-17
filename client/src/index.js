@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import 'normalize.css/normalize.css';
+import './css/components/loginForm.css';
+import SocialBananaApp from './js/components/SocialBananaApp';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+ReactDOM.render(< SocialBananaApp />, document.getElementById('root'));
