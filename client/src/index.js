@@ -2,6 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css/normalize.css';
 import './css/components/loginForm.css';
-import SocialBananaApp from './js/components/SocialBananaApp';
+import App from './js/components/App';
 
-ReactDOM.render(< SocialBananaApp />, document.getElementById('root'));
+ReactDOM.render(< App />, document.getElementById('root'));

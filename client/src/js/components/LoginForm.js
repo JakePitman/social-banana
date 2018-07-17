@@ -10,7 +10,7 @@ class LoginForm extends React.Component {
     render() {
 
         return (
-            <form className={this.state.formType === 'login' ? 'form form-loginType' : 'form form-signUpType'}>
+            <form className={this.state.formType === 'login' ? 'form form-loginType' : 'form form-registerType'}>
 
                 <div id="logoWorks">
                     <img src={logo} width="200" height="200" alt="logo" />
@@ -28,25 +28,25 @@ class LoginForm extends React.Component {
                         Login
                 </a>
 
-                    <a className="signUp-toggle"
+                    <a className="register-toggle"
                         onClick={(e) => {
                             e.preventDefault();
                             this.setState({
-                                formType: 'signUp'
+                                formType: 'register'
                             });
                         }}
                     >
-                        Sign Up
+                        Register
                 </a>
                 </div>
 
                 <div className="form-content">
                     <div className="form-input">
-                        <input type="text" value={this.state.username} placeholder="username" />
-                        <input type="text" value={this.state.password} placeholder="Password" />
+                        <input type="text" placeholder="email" />
+                        <input type="text" placeholder="Password" />
                     </div>
                     <button type="submit">
-                        {this.state.formType === 'login' ? 'Login' : 'Sign Up'}
+                        {this.state.formType === 'login' ? 'Login' : 'Register'}
                     </button>
                 </div>
 
