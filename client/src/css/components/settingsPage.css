@@ -1,0 +1,44 @@
+.profile-form {
+    margin: 200px auto;
+    max-width: 30rem;
+    border-radius: 3px;
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;
+  }
+ 
+  .profile-form button {
+    width: 20%;
+    padding: 0.5rem 0;
+    background: #6C92FF;
+    color: #ffffff;
+    border-radius: 8px;
+    margin-left: 395px;
+  }
+
+  .profile-form-input {
+    margin-bottom: 15px;
+  }
+
+  .profile-form-input input {
+    color: #cccccc;
+    font-size: 14px;
+    margin-top: 5px;
+    width: 100%;
+    padding: 0.25rem;
+    border: 0;
+    border-bottom: 1px solid #908F8F;
+    outline: 0;
+  }
+  
+  .profile-form-toggle {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .profile-form-toggle a {
+    color: #908F8F;
+    font-size: 1.25rem;
+    cursor: pointer;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+  }
