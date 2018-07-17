@@ -14,10 +14,6 @@ class LoginForm extends React.Component {
                 loggingIn: true
             };
         });
-
-        e.preventDefault();
-        const username = e.target.elements.username.value;
-        const password = e.target.elements.password.value;
     };
 
     render() {
@@ -57,7 +53,7 @@ class LoginForm extends React.Component {
 
                 <div className="form-content">
                     <div className="form-input">
-                        <input type="text" value={this.state.username} placeholder="Username" />
+                        <input type="text" value={this.state.username} placeholder="username" />
                         <input type="text" value={this.state.password} placeholder="Password" />
                     </div>
                     <button type="submit">
