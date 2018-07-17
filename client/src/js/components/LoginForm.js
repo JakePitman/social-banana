@@ -4,24 +4,13 @@ import logo from './logo.png';
 class LoginForm extends React.Component {
 
     state = {
-        formType: 'login',
-        loggingIn: false
-    };
-
-    handleSubmit = async (e) => {
-        this.setState((prevState) => {
-            return {
-                loggingIn: true
-            };
-        });
+        formType: 'login'
     };
 
     render() {
 
         return (
-
-            <form className={this.state.formType === 'login' ? 'form form-loginType' : 'form form-signUpType'}
-                onSubmit={this.handleSubmit} >
+            <form className={this.state.formType === 'login' ? 'form form-loginType' : 'form form-signUpType'}>
 
                 <div id="logoWorks">
                     <img src={logo} width="200" height="200" alt="logo" />
