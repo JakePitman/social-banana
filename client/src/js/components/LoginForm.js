@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from './logo.png';
+import logo from '../../css/img/logo.png';
 
 class LoginForm extends React.Component {
 
