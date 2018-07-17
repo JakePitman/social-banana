@@ -4,40 +4,44 @@ import logo from './logo.png';
 class LoginForm extends React.Component {
 
     state = {
-        formType: 'login'
+        formTypeIsLogin: true
     };
 
     render() {
 
         return (
-            <form className={this.state.formType === 'login' ? 'form form-loginType' : 'form form-registerType'}>
+            <form className={this.state.formTypeIsLogin ? 'form form-loginType' : 'form form-registerType'}>
 
                 <div id="logoWorks">
                     <img src={logo} width="200" height="200" alt="logo" />
                 </div>
 
                 <div className="form-toggle">
-                    <a className="login-toggle"
+                    <a className="login-toggle active"
                         onClick={(e) => {
                             e.preventDefault();
                             this.setState({
-                                formType: 'login'
+                                formTypeIsLogin: true
                             });
                         }}
                     >
-                        Login
-                </a>
+                        <p className={this.state.formTypeIsLogin ? "active" : ''}>
+                            Login
+                        </p>
+                    </a>
 
                     <a className="register-toggle"
                         onClick={(e) => {
                             e.preventDefault();
                             this.setState({
-                                formType: 'register'
+                                formTypeIsLogin: false
                             });
                         }}
                     >
-                        Register
-                </a>
+                        <p className={this.state.formTypeIsLogin ? "" : "active"}>
+                            Register
+                        </p>
+                    </a>
                 </div>
 
                 <div className="form-content">
@@ -45,10 +49,11 @@ class LoginForm extends React.Component {
                         <input type="text" placeholder="email" />
                         <input type="text" placeholder="Password" />
                     </div>
-                    <button type="submit">
-                        {this.state.formType === 'login' ? 'Login' : 'Register'}
-                    </button>
                 </div>
+
+                <button type="submit" >
+                    {this.state.formTypeIsLogin ? 'Login' : 'Register'}
+                </button>
 
             </form >
         );
