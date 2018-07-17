@@ -1,16 +1,15 @@
 const express = require('express');
-const usersRouter = express.Router();
 
+const { authenticate } = require('./../middleware/authenticate');
 const { User } = require('./../models/User');
 
-usersRouter.get('/me', async (req, res) => {
+const usersRouter = express.Router();
+
+usersRouter.get('/me', authenticate, async (req, res) => {
+  const user = req.user;
+
   try {
-    console.log('hello from /api/users/me');
-    const user = await User.findOne({ email: 'MargaretBananaDev@gmail.com' });
-    if (!user) {
-      throw new Error();
-    }
-    res.status(200).send({ user });
+    res.status(200).send(user);
   } catch (error) {
     console.log(error);
     res.status(400).send({ error: error.message });
@@ -22,10 +21,8 @@ usersRouter.post('/register', async (req, res) => {
 
   try {
     const user = await User.create({ email, password });
-    if (!user) {
-      throw new Error();
-    }
-    res.status(200).send({ user });
+    const token = await user.generateAuthToken();
+    res.cookie('authToken', token).send({ user });
   } catch (error) {
     console.log(error);
     res.status(400).send({ error: error.message });
