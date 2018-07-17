@@ -7,7 +7,6 @@ const authenticate = async (req, res, next) => {
     const user = await User.findByToken(authToken);
     req.user = user;
     req.token = authToken;
-    console.log(`user authenticated: ${user.email}`);
     next();
   } catch (error) {
     res.status(401).send({ error: error.message });

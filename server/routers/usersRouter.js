@@ -13,7 +13,6 @@ usersRouter.post('/register', async (req, res) => {
     const token = await user.generateAuthToken();
     res.cookie('authToken', token).send({ user });
   } catch (error) {
-    console.log(error);
     res.status(400).send({ error: error.message });
   }
 });
@@ -26,7 +25,6 @@ usersRouter.post('/login', async (req, res) => {
     const token = await user.generateAuthToken();
     res.cookie('authToken', token).send({ user });
   } catch (error) {
-    console.log(error);
     res.status(400).send({ error: error.message });
   }
 });
@@ -37,7 +35,6 @@ usersRouter.get('/me', authenticate, async (req, res) => {
   try {
     res.status(200).send({ user });
   } catch (error) {
-    console.log(error);
     res.status(400).send({ error: error.message });
   }
 });
@@ -49,7 +46,6 @@ usersRouter.delete('/logout', authenticate, async (req, res) => {
     await user.removeToken(token);
     res.status(200).send();
   } catch (error) {
-    console.log(error);
     res.status(400).send({ error: error.message });
   }
 });
