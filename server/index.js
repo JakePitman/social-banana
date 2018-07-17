@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 
@@ -12,7 +13,6 @@ app.get('/api/hello', (req, res) => {
 });
 
 // TODO: User Routes
-// TODO: setup mongoose
 
 // After building the front end to static files, get express to host it in production
 if (process.env.NODE_ENV === 'production') {
