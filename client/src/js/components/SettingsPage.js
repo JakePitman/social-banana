@@ -1,4 +1,5 @@
 import React from 'react'
+import placeholder from '../../css/img/placeholder.png'
 
 
 class SettingsPage extends React.Component {
@@ -7,7 +8,7 @@ class SettingsPage extends React.Component {
       this.state = {
         picture: this.props.picture,
         name: this.props.name,
-        company: this.props.name,
+        company: this.props.company,
         phone: this.props.phone,
         email: this.props.email,
         isOpen: false,
@@ -32,11 +33,13 @@ class SettingsPage extends React.Component {
     return (
         <div className="profile">
             <form className="profile-form" onSubmit={this.handleSubmit}>
-                <img
-                    className="profile__image profile-image"
-                    src={this.state.picture}
-                    alt="profile"
-                 />
+                    <div className='profile-photo'>
+                    <img
+                    className="profile-picture"
+                    src={placeholder} width="200" height="200" alt="logo"
+                    alt="profile-picture"
+                     />
+                    </div>
                  <form className="profile-form-input">
                     <label htmlFor='name'>
                     Name
@@ -46,6 +49,8 @@ class SettingsPage extends React.Component {
                     Company
                     </label>
                     <input type='text' value={this.state.company} onChange={this.handleChange} name='company' />
+
+                    
                     <label htmlFor='phone'>
                     Phone
                     </label>
@@ -60,11 +65,6 @@ class SettingsPage extends React.Component {
                 </button>
             </form>
         </div>
-
-       
-        
-   
-        
         )
     }
         
