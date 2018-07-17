@@ -1,7 +1,14 @@
 {
   "name": "social-banana",
   "scripts": {},
-  "env": {},
+  "env": {
+    "MONGODB_URI": {
+      "required": true
+    },
+    "JWT_SECRET": {
+      "required": true
+    }
+  },
   "formation": {
     "web": {
       "quantity": 1
