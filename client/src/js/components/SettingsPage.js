@@ -33,14 +33,13 @@ class SettingsPage extends React.Component {
     return (
         <div className="profile">
             <form className="profile-form" onSubmit={this.handleSubmit}>
-                    <div className='profile-photo'>
-                    <img
-                    className="profile-picture"
-                    src={placeholder} width="200" height="200" alt="logo"
-                    alt="profile-picture"
-                     />
-                    </div>
-                 <form className="profile-form-input">
+                    <div className='profile-section'>
+                        <img
+                        className="profile-picture"
+                        src={placeholder} width="200" height="200" alt="logo"
+                        alt="profile-picture"
+                        id="imageID"
+                        />
                     <label htmlFor='name'>
                     Name
                     </label>
@@ -49,8 +48,8 @@ class SettingsPage extends React.Component {
                     Company
                     </label>
                     <input type='text' value={this.state.company} onChange={this.handleChange} name='company' />
-
-                    
+                    </div>
+                 <form className="profile-form-input">
                     <label htmlFor='phone'>
                     Phone
                     </label>

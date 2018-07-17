@@ -1,3 +1,27 @@
+.profile{
+    margin: 200px auto;
+    max-width: 40rem;
+    box-shadow: 3px 10px 10px #908F8F;
+}
+
+.profile-section {
+    margin: 80px auto;
+    max-width: 30rem;
+    border-radius: 3px;
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.profile-section img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -100px;
+    padding:10px;
+
+}
+
 .profile-form {
     margin: 200px auto;
     max-width: 30rem;
