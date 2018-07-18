@@ -6,39 +6,33 @@ class LoginForm extends React.Component {
     formType: 'login',
   };
 
+  handleFormToggleOnClick = formType => e => {
+    e.preventDefault();
+    this.setState({ formType });
+  };
+
   render() {
     return (
       <div>
+        {console.log(this.state.formType)}
         <div id="logoWorks">
-          <img src={logo} width="200" height="200" alt="logo" />
+          <img src={logo} height="200" alt="logo" />
         </div>
-
         <div className="form-toggle">
           <button
             className="login-toggle"
-            onClick={e => {
-              e.preventDefault();
-              this.setState({
-                formType: 'login',
-              });
-            }}
+            onClick={this.handleFormToggleOnClick('login')}
           >
             Login
           </button>
 
           <button
             className="register-toggle"
-            onClick={e => {
-              e.preventDefault();
-              this.setState({
-                formType: 'register',
-              });
-            }}
+            onClick={this.handleFormToggleOnClick('register')}
           >
             Register
           </button>
         </div>
-
         <form
           className={
             this.state.formType === 'login'
