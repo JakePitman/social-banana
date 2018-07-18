@@ -1,5 +1,5 @@
 import React from 'react'
-import linkedInLogo from '../../css/img/linkedIn.png'
+import linkedInLogo from '../../css/img/linkedin.png'
 
 function MediaBox(props) {
   return (
