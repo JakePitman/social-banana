@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { LoginForm } from './LoginForm'
-import ListingPage from './ListingPage'
+import ListingPage  from './ListingPage'
+import { SettingsPage } from './SettingsPage'
 
 class App extends Component {
-  // The following code is to test the api call of our backend
+  // The following code is to test the api call of our back-end
   // and the proxy we set in client/package.json
   state = {
     response: '',
@@ -28,6 +29,8 @@ class App extends Component {
     return (
       <div className="App">
         < LoginForm />
+        < SettingsPage />
+        < ListingPage />
       </div>
     );
   }
