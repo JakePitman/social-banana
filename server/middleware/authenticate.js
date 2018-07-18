@@ -10,7 +10,6 @@ const authenticate = async (req, res, next) => {
     req.token = authToken;
     next();
   } catch (error) {
-    console.error(error.message);
     res.status(401).send({ error: error.message });
   }
 };
