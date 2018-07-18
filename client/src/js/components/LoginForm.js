@@ -18,32 +18,27 @@ class LoginForm extends React.Component {
         <div id="logoWorks">
           <img src={logo} height="200" alt="logo" />
         </div>
+
         <div className="form-toggle">
           <button
-            className="login-toggle"
+            className={this.state.formType === 'login' ? 'active' : ''}
             onClick={this.handleFormToggleOnClick('login')}
           >
             Login
           </button>
-
           <button
-            className="register-toggle"
+            className={this.state.formType === 'login' ? '' : 'active'}
             onClick={this.handleFormToggleOnClick('register')}
           >
             Register
           </button>
         </div>
-        <form
-          className={
-            this.state.formType === 'login'
-              ? 'form form-loginType'
-              : 'form form-registerType'
-          }
-        >
+
+        <form className="form">
           <div className="form-content">
             <div className="form-input">
               <input type="text" placeholder="email" />
-              <input type="text" placeholder="Password" />
+              <input type="text" placeholder="password" />
             </div>
             <button type="submit">
               {this.state.formType === 'login' ? 'Login' : 'Register'}
