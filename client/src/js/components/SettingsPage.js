@@ -1,6 +1,6 @@
 import React from 'react'
+import SocialLogin from './SocialLogin'
 import placeholder from '../../css/img/placeholder.png'
-import loginlinkedin from '../../css/img/sign-in/Sign-In-Small---Default.png'
 
 
 
