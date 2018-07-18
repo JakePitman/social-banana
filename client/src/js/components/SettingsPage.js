@@ -1,17 +1,19 @@
 import React from 'react'
+import placeholder from '../../css/img/placeholder.png'
 
 
 class SettingsPage extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {
+      this.state = { 
         picture: this.props.picture,
         name: this.props.name,
-        company: this.props.name,
+        company: this.props.company,
         phone: this.props.phone,
         email: this.props.email,
         isOpen: false,
-      };
+      
+      }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -24,6 +26,7 @@ class SettingsPage extends React.Component {
   }
 
   handleSubmit (event) {
+    alert('Updated successfully!');
     event.preventDefault()
   }
 
@@ -32,20 +35,23 @@ class SettingsPage extends React.Component {
     return (
         <div className="profile">
             <form className="profile-form" onSubmit={this.handleSubmit}>
-                <img
-                    className="profile__image profile-image"
-                    src={this.state.picture}
-                    alt="profile"
-                 />
+                    <div className='profile-section'>
+                        <img
+                        className="profile-picture"
+                        src={placeholder} width="200" height="200" alt="logo"
+                        alt="profile-picture"
+                        id="imageID"
+                        />
+                      <label htmlFor='name'>
+                      Name   
+                      </label>
+                      <input type='text' value={this.state.name} onChange={this.handleChange} name='name' />
+                      <label htmlFor='company'>
+                      Company
+                      </label>
+                      <input type='text' value={this.state.company} onChange={this.handleChange} name='company' />
+                    </div>
                  <form className="profile-form-input">
-                    <label htmlFor='name'>
-                    Name
-                    </label>
-                    <input type='text' value={this.state.name} onChange={this.handleChange} name='name' />
-                    <label htmlFor='company'>
-                    Company
-                    </label>
-                    <input type='text' value={this.state.company} onChange={this.handleChange} name='company' />
                     <label htmlFor='phone'>
                     Phone
                     </label>
@@ -60,15 +66,8 @@ class SettingsPage extends React.Component {
                 </button>
             </form>
         </div>
-
-       
-        
-   
-        
         )
     }
-        
-
     
 }
 export { SettingsPage }

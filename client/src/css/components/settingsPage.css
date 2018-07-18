@@ -1,3 +1,39 @@
+.profile{
+    margin: 200px auto;
+    max-width: 40rem;
+    box-shadow: 3px 10px 10px #908F8F;
+}
+
+.profile-section {
+    margin: 70px 10px 30px 10px;
+    max-width: 30rem;
+    border-radius: 3px;
+    padding: 15px;
+    font-family: 'Roboto', sans-serif;
+    
+
+}
+
+.profile-section img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -100px;
+    padding:10px;
+
+}
+
+.profile-section input{
+  color: #cccccc;
+    font-size: 10px;
+    margin-top: 5px;
+    width: 30%;
+    padding: 10px;
+    border: 0;
+    border-bottom: 1px solid #908F8F;
+    outline: 0;
+}
+
 .profile-form {
     margin: 200px auto;
     max-width: 30rem;
@@ -7,12 +43,13 @@
   }
  
   .profile-form button {
-    width: 20%;
-    padding: 0.5rem 0;
+    width: 50%;
+    padding: 10px;
     background: #6C92FF;
     color: #ffffff;
     border-radius: 8px;
-    margin-left: 395px;
+    margin-left: 25%;
+
   }
 
   .profile-form-input {
