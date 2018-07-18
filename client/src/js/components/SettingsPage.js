@@ -119,7 +119,7 @@ class SettingsPage extends React.Component {
                     </form>
                 <div className="social-login">
                      <img
-                        src={loginlinkedin} width="150"
+                        src={loginlinkedin}
                         alt="loginlinkedin"
                         id="imageID"
                         />
