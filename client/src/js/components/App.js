@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { LoginForm } from './LoginForm'
-import ListingPage  from './ListingPage'
 import { SettingsPage } from './SettingsPage'
+import ListingPage from './ListingPage'
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
 
 class App extends Component {
   // The following code is to test the api call of our back-end
@@ -36,11 +37,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        < LoginForm />
-        < SettingsPage />
-        < ListingPage currentUser={this.state.currentUser}/>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <p><Link to="/">Login</Link></p>
+          <p><Link to="/settings">Settings</Link></p>
+          <p><Link to="/listing">Listing</Link></p>
+
+          <Switch>
+            <Route exact path="/" component={LoginForm} />
+            <Route path="/settings" component={SettingsPage} />
+            <Route path="/listing" component={ListingPage} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
