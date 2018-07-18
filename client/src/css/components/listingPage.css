@@ -1,3 +1,4 @@
+
 .listing-title {
 
 }
@@ -13,14 +14,19 @@
 
 .listing-media-box {
   display: flex;
+  height: 40px;
   border: 1px solid #CCCCCC;
-  border-radius: 34px;
-  overflow: hidden;
+  border-radius: 8px;
+  /*overflow: hidden;*/
 }
 
 .listing-media-logo {
-  height: 60px;
-  padding-left: 10px;
+  position: relative;
+  left: -1px;
+  top: -1px;
+  height: 42px;
+  border: 1px;
+  border-radius: 8px 0px 0px 8px;
 }
 
 .listing-media-title-container {
@@ -38,7 +44,7 @@
 }
 
 .listing-media-switch-container {
-  height: 60px;
+  height: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,8 +54,8 @@
 .listing-media-switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 33px;
+  width: 45px;
+  height: 20px;
 }
 
 .listing-media-switch input {
@@ -66,19 +72,21 @@
   background-color: #ccc;
   -webkit-transition: .4s;
   transition: .4s;
+  border: 1px solid #CCCCCC;
   border-radius: 34px;
 }
 
 .slider-round:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  height: 18px;
+  width: 18px;
+  left: -1px;
+  bottom: -1px;
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
+  border: 1px solid #CCCCCC;
   border-radius: 50%;
 }
 
