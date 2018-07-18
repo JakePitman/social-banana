@@ -8,13 +8,7 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <form
-        className={
-          this.state.formType === 'login'
-            ? 'form form-loginType'
-            : 'form form-registerType'
-        }
-      >
+      <div>
         <div id="logoWorks">
           <img src={logo} width="200" height="200" alt="logo" />
         </div>
@@ -45,16 +39,24 @@ class LoginForm extends React.Component {
           </button>
         </div>
 
-        <div className="form-content">
-          <div className="form-input">
-            <input type="text" placeholder="email" />
-            <input type="text" placeholder="Password" />
+        <form
+          className={
+            this.state.formType === 'login'
+              ? 'form form-loginType'
+              : 'form form-registerType'
+          }
+        >
+          <div className="form-content">
+            <div className="form-input">
+              <input type="text" placeholder="email" />
+              <input type="text" placeholder="Password" />
+            </div>
+            <button type="submit">
+              {this.state.formType === 'login' ? 'Login' : 'Register'}
+            </button>
           </div>
-          <button type="submit">
-            {this.state.formType === 'login' ? 'Login' : 'Register'}
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     );
   }
 }
