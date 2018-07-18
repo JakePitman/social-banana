@@ -118,6 +118,9 @@ class SettingsPage extends React.Component {
                     <input type="text" value={this.state.email} onChange={this.handleChange} name='email' />
                     </form>
                 <div className="social-login">
+                <script type="in/Login">
+                    Hello, <?js= firstName ?> <?js= lastName ?>.
+                      </script>
                      <img
                         src={loginlinkedin}
                         alt="loginlinkedin"
