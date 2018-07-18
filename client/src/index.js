@@ -5,4 +5,4 @@ import './css/components/listingPage.css';
 import './css/components/settingsPage.css';
 import App from './js/components/App';
 
-ReactDOM.render(< App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
