@@ -6,8 +6,10 @@ const { User } = require('./../models/User');
 
 beforeEach(populateUsers);
 
+// USER REGISTER
 describe('POST /api/users/register', () => {
   test('should create a user', async (done) => {
+    console.log(`started register tests...`);
     const email = 'example@example.com';
     const password = 'password123';
 
@@ -18,9 +20,9 @@ describe('POST /api/users/register', () => {
     expect(res.status).toBe(200);
     expect(res.body.user._id).toBeTruthy();
     expect(res.body.user.email).toBe(email);
-    expect(res.headers['set-cookie']).toBeTruthy();
 
-    const token = res.headers['set-cookie'][0].split('=')[1].split(';')[0];
+    expect(res.headers.authorization).toBeTruthy();
+    const token = res.headers.authorization.split(' ')[1];
     const user = await User.findOne({ email });
     expect(user).toBeTruthy();
     expect(user.password).not.toBe(password);
@@ -48,12 +50,15 @@ describe('POST /api/users/register', () => {
       .send({ email, password });
 
     expect(res.status).toBe(400);
+    console.log(`...finished register tests`);
     done();
   });
 });
 
+// USER LOGIN
 describe('POST /api/users/login', () => {
   test('should login user', async (done) => {
+    console.log(`started login tests...`);
     const { _id, email, password } = users[0];
 
     const res = await request(app)
@@ -62,9 +67,8 @@ describe('POST /api/users/login', () => {
 
     expect(res.status).toBe(200);
     expect(res.body.user.email).toBe(email);
-    expect(res.headers['set-cookie']).toBeTruthy();
-
-    const token = res.headers['set-cookie'][0].split('=')[1].split(';')[0];
+    expect(res.headers.authorization).toBeTruthy();
+    const token = res.headers.authorization.split(' ')[1];
     const user = await User.findById(_id);
     expect(user.authTokens).toContain(token);
     done();
@@ -81,17 +85,20 @@ describe('POST /api/users/login', () => {
     expect(res.status).toBe(400);
     const user = await User.findById(_id);
     expect(user.authTokens.length).toBe(1);
+    console.log(`...finished login tests`);
     done();
   });
 });
 
+// USER PROFILE
 describe('GET /api/users/me', () => {
   test('should return user if authenticated', async (done) => {
+    console.log(`started profile tests...`);
     const { _id, email, authTokens } = users[0];
 
     const res = await request(app)
       .get('/api/users/me')
-      .set('Cookie', `authToken=${authTokens[0]}`);
+      .set('authorization', `Bearer ${authTokens[0]}`);
 
     expect(res.status).toBe(200);
     expect(res.body.user._id).toBe(_id.toHexString());
@@ -102,25 +109,29 @@ describe('GET /api/users/me', () => {
   test('should return 401 if not authenticated', async (done) => {
     const res = await request(app)
       .get('/api/users/me')
-      .set('Cookie', `authToken=wrong12BADBADio213`);
+      .set('authorization', `Bearer randomString123BADBADio21`);
 
     expect(res.status).toBe(401);
     expect(res.body.user).toBeFalsy();
+    console.log(`...finished profile tests`);
     done();
   });
 });
 
+// USER LOGOUT
 describe('DELETE /api/users/logout', () => {
   test('should delete a users authToken', async (done) => {
+    console.log(`started logout tests...`);
     const { _id, authTokens } = users[0];
 
     const res = await request(app)
       .delete('/api/users/logout')
-      .set('Cookie', `authToken=${authTokens[0]}`);
+      .set('authorization', `Bearer ${authTokens[0]}`);
 
     expect(res.status).toBe(200);
     const user = await User.findById(_id);
     expect(user.authTokens).not.toContain(authTokens[0]);
+    console.log(`...finished ALL user routes tests`);
     done();
   });
 });
