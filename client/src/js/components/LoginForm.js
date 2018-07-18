@@ -38,7 +38,7 @@ class LoginForm extends React.Component {
           <div className="form-content">
             <div className="form-input">
               <input type="text" placeholder="email" />
-              <input type="text" placeholder="password" />
+              <input type="password" placeholder="password" />
             </div>
             <button type="submit">
               {this.state.formType === 'login' ? 'Login' : 'Register'}
