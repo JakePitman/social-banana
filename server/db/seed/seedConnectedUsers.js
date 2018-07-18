@@ -20,7 +20,7 @@ const populateConnectedUsers = async () => {
   try {
     await User.remove({});
     const newUser = await User.create(margaret);
-    console.log(newUser);
+    console.log(`Seeded user: ${newUser.email}`);
     return Promise.resolve(newUser);
   } catch (error) {
     console.log(error);
@@ -28,6 +28,6 @@ const populateConnectedUsers = async () => {
   }
 };
 
-populateConnectedUsers();
+// populateConnectedUsers();
 
-module.exports = { margaret, populateConnectedUsers };
+module.exports = { margaret };
