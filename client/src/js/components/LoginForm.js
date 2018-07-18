@@ -1,9 +1,12 @@
 import React from 'react';
 import logo from '../../css/img/logo.png';
 
+const API_ENDPOINT_LOGIN = 'login';
+const API_ENDPOINT_REGISTER = 'register';
+
 class LoginForm extends React.Component {
   state = {
-    formType: 'login',
+    formType: API_ENDPOINT_LOGIN,
     emailField: '',
     passwordField: '',
   };
@@ -17,6 +20,7 @@ class LoginForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  // requires work for api
   handleSubmit = e => {
     console.log(this.state.emailField, this.state.passwordField);
     e.preventDefault();
@@ -31,13 +35,17 @@ class LoginForm extends React.Component {
 
         <div className="form-toggle">
           <button
-            className={this.state.formType === 'login' ? 'active' : ''}
+            className={
+              this.state.formType === API_ENDPOINT_LOGIN ? 'active' : ''
+            }
             onClick={this.handleFormToggleOnClick('login')}
           >
             Login
           </button>
           <button
-            className={this.state.formType === 'login' ? '' : 'active'}
+            className={
+              this.state.formType === API_ENDPOINT_REGISTER ? 'active' : ''
+            }
             onClick={this.handleFormToggleOnClick('register')}
           >
             Register
@@ -63,7 +71,9 @@ class LoginForm extends React.Component {
               />
             </div>
             <button type="submit">
-              {this.state.formType === 'login' ? 'Login' : 'Register'}
+              {this.state.formType === API_ENDPOINT_LOGIN
+                ? 'Login'
+                : 'Register'}
             </button>
           </div>
         </form>
