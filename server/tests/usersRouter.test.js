@@ -4,12 +4,11 @@ const { app } = require('./../index');
 const { users, populateUsers } = require('./seed/seed');
 const { User } = require('./../models/User');
 
-beforeEach(populateUsers);
+beforeAll(populateUsers);
 
 // USER REGISTER
 describe('POST /api/users/register', () => {
   test('should create a user', async (done) => {
-    console.log(`started register tests...`);
     const email = 'example@example.com';
     const password = 'password123';
 
@@ -50,7 +49,6 @@ describe('POST /api/users/register', () => {
       .send({ email, password });
 
     expect(res.status).toBe(400);
-    console.log(`...finished register tests`);
     done();
   });
 });
@@ -58,7 +56,6 @@ describe('POST /api/users/register', () => {
 // USER LOGIN
 describe('POST /api/users/login', () => {
   test('should login user', async (done) => {
-    console.log(`started login tests...`);
     const { _id, email, password } = users[0];
 
     const res = await request(app)
@@ -85,7 +82,6 @@ describe('POST /api/users/login', () => {
     expect(res.status).toBe(400);
     const user = await User.findById(_id);
     expect(user.authTokens.length).toBe(1);
-    console.log(`...finished login tests`);
     done();
   });
 });
@@ -93,7 +89,6 @@ describe('POST /api/users/login', () => {
 // USER PROFILE
 describe('GET /api/users/me', () => {
   test('should return user if authenticated', async (done) => {
-    console.log(`started profile tests...`);
     const { _id, email, authTokens } = users[0];
 
     const res = await request(app)
@@ -113,7 +108,6 @@ describe('GET /api/users/me', () => {
 
     expect(res.status).toBe(401);
     expect(res.body.user).toBeFalsy();
-    console.log(`...finished profile tests`);
     done();
   });
 });
@@ -121,7 +115,6 @@ describe('GET /api/users/me', () => {
 // USER LOGOUT
 describe('DELETE /api/users/logout', () => {
   test('should delete a users authToken', async (done) => {
-    console.log(`started logout tests...`);
     const { _id, authTokens } = users[0];
 
     const res = await request(app)
@@ -131,7 +124,6 @@ describe('DELETE /api/users/logout', () => {
     expect(res.status).toBe(200);
     const user = await User.findById(_id);
     expect(user.authTokens).not.toContain(authTokens[0]);
-    console.log(`...finished ALL user routes tests`);
     done();
   });
 });
