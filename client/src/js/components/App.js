@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { LoginForm } from './LoginForm'
-import { SettingsPage } from './SettingsPage'
-import ListingPage from './ListingPage'
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
+import { LoginForm } from './LoginForm';
+import { SettingsPage } from './SettingsPage';
+import ListingPage from './ListingPage';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 class App extends Component {
   // The following code is to test the api call of our back-end
@@ -15,9 +15,9 @@ class App extends Component {
       authTokens: ['String'],
       linkedIn: {
         toggleStatus: false,
-        access_token: 'String'
-      }
-    }
+        access_token: 'String',
+      },
+    },
   };
 
   componentDidMount() {
@@ -39,9 +39,15 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <p><Link to="/">Login</Link></p>
-          <p><Link to="/settings">Settings</Link></p>
-          <p><Link to="/listing">Listing</Link></p>
+          <p>
+            <Link to="/">Login</Link>
+          </p>
+          <p>
+            <Link to="/settings">Settings</Link>
+          </p>
+          <p>
+            <Link to="/listing">Listing</Link>
+          </p>
 
           <Switch>
             <Route exact path="/" component={LoginForm} />
