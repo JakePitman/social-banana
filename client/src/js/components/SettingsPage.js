@@ -5,14 +5,15 @@ import placeholder from '../../css/img/placeholder.png'
 class SettingsPage extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {
+      this.state = { 
         picture: this.props.picture,
         name: this.props.name,
         company: this.props.company,
         phone: this.props.phone,
         email: this.props.email,
         isOpen: false,
-      };
+      
+      }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -25,6 +26,7 @@ class SettingsPage extends React.Component {
   }
 
   handleSubmit (event) {
+    alert('Updated successfully!');
     event.preventDefault()
   }
 
@@ -40,14 +42,14 @@ class SettingsPage extends React.Component {
                         alt="profile-picture"
                         id="imageID"
                         />
-                    <label htmlFor='name'>
-                    Name
-                    </label>
-                    <input type='text' value={this.state.name} onChange={this.handleChange} name='name' />
-                    <label htmlFor='company'>
-                    Company
-                    </label>
-                    <input type='text' value={this.state.company} onChange={this.handleChange} name='company' />
+                      <label htmlFor='name'>
+                      Name   
+                      </label>
+                      <input type='text' value={this.state.name} onChange={this.handleChange} name='name' />
+                      <label htmlFor='company'>
+                      Company
+                      </label>
+                      <input type='text' value={this.state.company} onChange={this.handleChange} name='company' />
                     </div>
                  <form className="profile-form-input">
                     <label htmlFor='phone'>
@@ -66,8 +68,6 @@ class SettingsPage extends React.Component {
         </div>
         )
     }
-        
-
     
 }
 export { SettingsPage }
