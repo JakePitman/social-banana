@@ -1,7 +1,8 @@
 const request = require('supertest');
 
 const { app } = require('./../index');
-const { users, populateUsers } = require('./seed/seed');
+const { users, populateUsers } = require('./seed/seedTestUsers');
+const { margaret, populateConnectedUsers } = require('./../db/seed/seedConnectedUsers');
 const { User } = require('./../models/User');
 
 beforeAll(populateUsers);
@@ -20,7 +21,7 @@ describe('GET /api/linkedIn/authURL', () => {
   });
 });
 
-//http://localhost:3001/api/linkedIn/callback?userId=5b4eefd1432726b2449e1bdf&code=AQREbiec9FZS6ae7TUaTjyTIwD_69c_Na6AQXqNYai0J1H7YxsGi_KU04oS_aZzNngoapwS8jce_0ON1d0QPdP2ls62Y3svTwYOoB2b1Fz5pGGX0BWHxcmYGptLDPcymogUCO3avYZtwGOe4VTDbtTO8cwKibcN166Kxjpgz&state=tEAmBaNaNa
+/// callback?userId=5b4eefd1432726b2449e1bdf&code=asidjo&state=tEAmBaNaNa
 // - approved: <CALLBACK_URL>?code=<CODE>&state=<STATE>
 // - rejected: <CALLBACK_URL>?error=<ERROR>&error_description=<ERROR_DESCRIPTION>&state=<STATE>
 describe('GET /api/llinkedIn/callback', () => {
@@ -45,7 +46,6 @@ describe('GET /api/llinkedIn/callback', () => {
 
   test('should be unauthorized if state is changed', async (done) => {
     const { _id, email, authTokens } = users[0];
-
     const res = await request(app).get(`/api/linkedIn/callback?userId=${_id}`);
 
     expect(res.status).toBe(401);
@@ -53,7 +53,7 @@ describe('GET /api/llinkedIn/callback', () => {
     done();
   });
 
-  // FIXME: CORS problem, likely because using 3001 atm because 3000 is screwing up in browser
+  // FIXME: CORS problem! Likely because using 3001 atm because 3000 is screwing up in browser
   // test('should fail if auth code is incorrect', async (done) => {
   //   const { _id, email, authTokens } = users[0];
 
@@ -70,3 +70,17 @@ describe('GET /api/llinkedIn/callback', () => {
   //   done();
   // });
 });
+
+// FIXME: CORS PROBLEM! 'Error: Response for preflight has invalid HTTP status code 401'
+// describe('POST /api/linkedIn/share', () => {
+//   test('should post to linkedIn', async (done) => {
+//     const { authTokens } = margaret;
+//     const res = await request(app)
+//       .post('/api/linkedIn/share')
+//       .set('authorization', `Bearer ${authTokens[0]}`);
+
+//     expect(res.status).toBe(201);
+//     expect(res.body.updateUrl).toBeTruthy();
+//     done();
+//   });
+// });
