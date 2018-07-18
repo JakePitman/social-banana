@@ -1,5 +1,5 @@
 import React from 'react'
-import SocialLogin from './SocialLogin'
+import loginlink from '../../css/img/sign-in/Sign-In-Small---Default.png'
 import placeholder from '../../css/img/placeholder.png'
 
 
@@ -16,6 +16,8 @@ class SettingsPage extends React.Component {
       isOpen: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -23,6 +25,12 @@ class SettingsPage extends React.Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+  }
+
+  handleClick(event){
+    event.preventDefault();
+    alert('The link was clicked')
+    console.log('The link was clicked.');
   }
 
   handleSubmit(event) {
@@ -40,7 +48,7 @@ class SettingsPage extends React.Component {
               src={placeholder}
               width="200"
               height="200"
-              alt="profile-picture"
+              alt=""
               id="imageID"
             />
             <label htmlFor="name">Name</label>
@@ -74,10 +82,13 @@ class SettingsPage extends React.Component {
               name="email"
             />
           </form>
-          <form className="social-login">
-              <SocialLogin media='linkedIn' />
-          </form> 
-          
+          <div className="social-login">
+              <img className="linkedin-button" 
+                src={loginlink} 
+                onClick={this.handleClick} 
+                alt="" />
+                
+          </div>
           <button className="cta-primary" type="submit">
             Update
           </button>
@@ -86,4 +97,4 @@ class SettingsPage extends React.Component {
     );
   }
 }
-export { SettingsPage };
+export {SettingsPage}
