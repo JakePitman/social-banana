@@ -1,5 +1,8 @@
-import React from 'react';
-import placeholder from '../../css/img/placeholder.png';
+import React from 'react'
+import placeholder from '../../css/img/placeholder.png'
+import loginlinkedin from '../../css/img/sign-in/Sign-In-Small---Default.png'
+
+
 
 class SettingsPage extends React.Component {
   constructor(props) {
@@ -37,7 +40,6 @@ class SettingsPage extends React.Component {
               src={placeholder}
               width="200"
               height="200"
-              alt="logo"
               alt="profile-picture"
               id="imageID"
             />
