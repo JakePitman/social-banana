@@ -29,7 +29,7 @@ class SettingsPage extends React.Component {
 
   handleClick(event){
     event.preventDefault();
-    alert('The link was clicked')
+    alert('You have click the link')
     console.log('The link was clicked.');
   }
 
