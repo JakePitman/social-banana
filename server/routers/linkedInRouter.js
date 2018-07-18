@@ -1,27 +1,22 @@
 const express = require('express');
 const axios = require('axios');
 
+const { User } = require('./../models/User');
 const { authenticate } = require('./../middleware/authenticate');
 
 const linkedInRouter = express.Router();
 
-linkedInRouter.get('/hello', (req, res) => {
-  res.send({ msg: 'hello from linkedInRouter' });
-});
-
 linkedInRouter.get('/authURL', authenticate, (req, res) => {
+  const userId = req.user._id;
+
   try {
     const {
       LINKEDIN_CLIENT_ID,
       LINKEDIN_REDIRECT_URI,
       LINKEDIN_STATE
     } = process.env;
-
-    const userId = req.user._id;
     const redirect_uri = LINKEDIN_REDIRECT_URI + `%3FuserId%3D${userId}`;
-
     const url = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${LINKEDIN_CLIENT_ID}&redirect_uri=${redirect_uri}&state=${LINKEDIN_STATE}`;
-
     res.status(200).send({ url });
   } catch (error) {
     console.log(error.message);
@@ -30,14 +25,17 @@ linkedInRouter.get('/authURL', authenticate, (req, res) => {
 });
 
 linkedInRouter.get('/callback', async (req, res) => {
+  const { error, error_description, code, state, userId } = req.query;
+
   try {
-    // TODO: handle if error in query params
-    // TODO: get userID back as query param
-    console.log('HELLO FROM LINKEDIN CALLBACK!!');
-    const { code, state, userId } = req.query;
-    console.log(code);
-    console.log(state);
-    console.log(userId);
+    if (error) {
+      throw new Error(error_description);
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error('No user found');
+    }
 
     const {
       LINKEDIN_CLIENT_ID,
@@ -45,14 +43,9 @@ linkedInRouter.get('/callback', async (req, res) => {
       LINKEDIN_REDIRECT_URI,
       LINKEDIN_STATE
     } = process.env;
-
-    // TODO: may need to add userId query param again, but i think it ignores it when verifying
-    // LINKEDIN_REDIRECT_URI += '%3FuserId%3D${userId}'
     const redirect_uri = LINKEDIN_REDIRECT_URI + `%3FuserId%3D${userId}`;
-
     if (state !== LINKEDIN_STATE) {
-      console.log(`Invalid state. State recieved: ${state}`);
-      res.status(401).send('HACKZORS!!! >:(');
+      res.status(401).send({ error: 'HACKZORS!!! >:(' });
       return;
     }
 
@@ -62,23 +55,48 @@ linkedInRouter.get('/callback', async (req, res) => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: `grant_type=authorization_code&code=${code}&redirect_uri=${redirect_uri}&client_id=${LINKEDIN_CLIENT_ID}&client_secret=${LINKEDIN_CLIENT_SECRET}`
     });
+    // const response = await linkedin_bananas(
+    //   code,
+    //   redirect_uri,
+    //   LINKEDIN_CLIENT_ID,
+    //   LINKEDIN_CLIENT_SECRET
+    // );
 
     const { access_token, expires_in } = response.data;
-    console.log('access_token: ', access_token);
-    console.log('expires_in: ', expires_in);
-
-    // get access_token and expires_in from response, bcrypt and save to user
-    const user = await User.findbyId(userId);
-    // TODO: bcrypt access_token
-    user.linkedIn.access_token = access_token;
+    // TODO: bcrypt access_token (PRE SAVE!! :O)
     // user.linkedIn.expires_in = expires_in;
-
-    // FIXME: what to send back? redirect to other page? close window?
+    user.linkedIn.access_token = access_token;
+    await user.save();
+    // FIXME: what to send back? redirect to settings page? close window?
     res.status(200).send('WOOOOO! GOT ACCESS TOKEN!! :O');
   } catch (error) {
-    console.log(error);
+    // console.log(error.response.data); // for axios call, break into middleware
+    // console.log(error.message);
+    // console.log('hello! im in error');
+    // console.log(error);
     res.status(400).send({ error: error.message });
   }
 });
+
+// const linkedin_bananas = async (
+//   code,
+//   redirect_uri,
+//   LINKEDIN_CLIENT_ID,
+//   LINKEDIN_CLIENT_SECRET
+// ) => {
+//   try {
+//     const response = await axios({
+//       method: 'POST',
+//       url: 'https://www.linkedin.com/oauth/v2/accessToken',
+//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//       data: `grant_type=authorization_code&code=${code}&redirect_uri=${redirect_uri}&client_id=${LINKEDIN_CLIENT_ID}&client_secret=${LINKEDIN_CLIENT_SECRET}`
+//     });
+//     return response;
+//   } catch (error) {
+//     // console.log(error.response.data.error_description);
+//     // res.status(400).send({ error: error.response.data.error_description });
+//     return Promise.reject(error.response.data.error_description);
+//   }
+// };
 
 module.exports = { linkedInRouter };

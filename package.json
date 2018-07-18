@@ -8,8 +8,9 @@
     "client": "cd client && npm start",
     "server": "nodemon server/index.js",
     "setup": "npm install && cd client && npm install",
-    "test": "jest server/tests/usersRouter.test.js --forceExit",
-    "watch": "jest server/tests/usersRouter.test.js --forceExit --watch"
+    "test": "jest server/tests/usersRouter.test.js --forceExit && jest server/tests/linkedInRouter.test.js --forceExit",
+    "watch-users": "jest server/tests/usersRouter.test.js --forceExit --watch",
+    "watch-linkedIn": "jest server/tests/linkedInRouter.test.js --forceExit --watch"
   },
   "author": "barbs89, crushoncode, fycdev, JakePitman, marktice",
   "license": "ISC",
