@@ -1,11 +1,22 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
+
+const { mongoose } = require('./db/mongoose');
+const { usersRouter } = require('./routers/usersRouter');
 
 const app = express();
 const port = process.env.PORT || 3001;
 
+// MIDDLEWARE
+app.use(express.json());
+
+// ROUTES
+app.use('/api/users', usersRouter);
+
 // This is to test the proxy of the front end server for development
 app.get('/api/hello', (req, res) => {
+  console.log('hello from /api/hello');
   res.send({ express: 'Hello From Express' });
 });
 
@@ -18,3 +29,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+module.exports = { app };
