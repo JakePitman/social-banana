@@ -74,6 +74,10 @@ class SettingsPage extends React.Component {
               name="email"
             />
           </form>
+          <form className="social-login">
+              <SocialLogin media='linkedIn' />
+          </form> 
+          
           <button className="cta-primary" type="submit">
             Update
           </button>
