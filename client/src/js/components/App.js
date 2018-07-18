@@ -8,6 +8,15 @@ class App extends Component {
   // and the proxy we set in client/package.json
   state = {
     response: '',
+    currentUser: {
+      email: 'example@email.com',
+      password: '123456',
+      authTokens: ['String'],
+      linkedIn: {
+        toggleStatus: false,
+        access_token: 'String'
+      }
+    }
   };
 
   componentDidMount() {
@@ -30,7 +39,7 @@ class App extends Component {
       <div className="App">
         < LoginForm />
         < SettingsPage />
-        < ListingPage />
+        < ListingPage currentUser={this.state.currentUser}/>
       </div>
     );
   }
