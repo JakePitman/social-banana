@@ -6,8 +6,8 @@
 .form-toggle {
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
-  max-width: 24rem;
+  margin: 20px auto 0 auto;
+  max-width: 20rem;
   padding: 15px;
 }
 
@@ -29,7 +29,7 @@
 
 .form {
   margin: 0px auto;
-  max-width: 24rem;
+  max-width: 20rem;
   padding: 15px;
   font-family: 'Roboto', sans-serif;
 }
