@@ -9,6 +9,7 @@ const loginUser = async (email, password) => {
 
 const createUser = async (email, password) => {
   const res = await axios.post('/api/users/register', { email, password });
+  const { user } = res.data;
   const authToken = res.headers.authorization.split(' ')[1];
   return { user, authToken };
 };

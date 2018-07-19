@@ -1,8 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
 import logo from '../../css/img/logo.png';
-
-import usersAPI from './../api/usersAPI';
 
 const API_ENDPOINT_LOGIN = 'login';
 const API_ENDPOINT_REGISTER = 'register';
@@ -26,19 +23,11 @@ class LoginForm extends React.Component {
   // requires work for api
   handleSubmit = async (e) => {
     e.preventDefault();
-    // const userData = {
-    //   email: this.state.emailField,
-    //   password: this.state.passwordField
-    // };
     const email = this.state.emailField;
     const password = this.state.passwordField;
 
-    try {
-      const res = await usersAPI.loginUser(email, password);
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
+    this.props.handleLogin(email, password);
+    // need to handle error here
   };
 
   render() {

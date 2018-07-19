@@ -5,7 +5,7 @@ import ListingPage from './ListingPage';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { handleToggle } from './stateFunctions';
 
-import { loginUser } from './../api/usersAPI';
+import usersAPI from './../api/usersAPI';
 
 class App extends Component {
   // The following code is to test the api call of our back-end
@@ -44,14 +44,23 @@ class App extends Component {
     }
   }
 
-  handleLogin = (email, authToken, connectedToLinkedIn) => {
-    this.setState((prevState) => {
-      return {
-        loggedIn: true,
-        authToken,
-        connectedToLinkedIn
-      };
-    });
+  handleLogin = async (email, password) => {
+    try {
+      const res = await usersAPI.loginUser(email, password);
+      const { user, authToken } = res;
+      this.setState((prevState) => {
+        return {
+          loggedIn: true,
+          email: user.email,
+          authToken,
+          connectedToLinkedIn: true
+        };
+      });
+      localStorage.setItem('authorization', `Bearer ${authToken}`);
+    } catch (err) {
+      // handle here
+      console.log(err);
+    }
   };
 
   render() {
@@ -83,7 +92,11 @@ class App extends Component {
           </div>
 
           <Switch>
-            <Route exact path="/" component={LoginForm} />
+            <Route
+              exact
+              path="/"
+              render={() => <LoginForm handleLogin={this.handleLogin} />}
+            />
             <Route path="/settings" component={SettingsPage} />
             <Route
               path="/listing"
