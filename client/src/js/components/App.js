@@ -23,14 +23,14 @@ class App extends Component {
     this.callApi()
       .then((res) => this.setState({ response: res.express }))
       .catch((err) => console.log(err));
+
+    // check for authToken, if there is make call to API with it, if authorized set loggedIn to true
   }
 
   callApi = async () => {
     const response = await fetch('/api/hello');
     const body = await response.json();
-
     if (response.status !== 200) throw Error(body.message);
-
     return body;
   };
 
@@ -58,7 +58,7 @@ class App extends Component {
       });
       localStorage.setItem('authorization', `Bearer ${authToken}`);
     } catch (err) {
-      // handle here
+      // handle error
       console.log(err);
     }
   };
