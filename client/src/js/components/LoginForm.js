@@ -28,7 +28,6 @@ class LoginForm extends React.Component {
       email: this.state.emailField,
       password: this.state.passwordField,
     };
-    console.log(userData);
     try {
       const response = await axios.post('/api/users/login', userData);
       console.log(response);
