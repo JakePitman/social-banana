@@ -1,7 +1,6 @@
  import React from 'react'
-import loginlink from '../../css/img/sign-in/Sign-In-Small---Default.png'
 import placeholder from '../../css/img/placeholder.png'
-import { SigninControl } from './SigninLink';
+import { SigninControl } from './SocialLink';
 
 
 
@@ -42,7 +41,7 @@ class SettingsPage extends React.Component {
   render() {
     return (
       <div className="profile">
-        <form className="profile-form" onSubmit={this.handleSubmit}>
+        <form className="profile-form" onSubmit={this.handleSubmit} method="POST">
           <div className="profile-section">
             <img
               className="profile-picture"
@@ -94,4 +93,4 @@ class SettingsPage extends React.Component {
     );
   }
 }
-export default SettingsPage
+export {SettingsPage} 
