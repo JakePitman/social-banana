@@ -1,5 +1,5 @@
 import React from 'react';
-import original from '../../css/img/original.png';
+import original from '../css/img/original.png';
 
 class SigninControl extends React.Component {
   constructor(props) {
@@ -37,4 +37,4 @@ class SigninControl extends React.Component {
   }
 }
 
-export { SigninControl };
+export default SigninControl;

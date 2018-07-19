@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import LoginForm from './LoginForm';
-import { SettingsPage } from './SettingsPage';
-import ListingPage from './ListingPage';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import LoginForm from './LoginForm';
+import SettingsPage from './SettingsPage';
+import ListingPage from './ListingPage';
 import { handleToggle } from './stateFunctions';
 
 import usersAPI from './../api/usersAPI';
@@ -16,7 +16,7 @@ class App extends Component {
     email: 'example@email.com',
     authToken: 'String',
     linkedInToggleStatus: false,
-    connectedToLinkedIn: true
+    connectedToLinkedIn: true,
   };
 
   componentDidMount() {
@@ -34,13 +34,13 @@ class App extends Component {
     return body;
   };
 
-  //COMPONENT HANDLER METHODS
+  // COMPONENT HANDLER METHODS
   handleToggle(e) {
     const target = e.target.id;
     if (target === 'linkedInToggleButton') {
       this.setState({ linkedInToggleStatus: !this.state.linkedInToggleStatus });
     } else if (target === 'facebookToggleButton') {
-      //FB TOGGLE CODE CAN BE ADDED HERE
+      // FB TOGGLE CODE CAN BE ADDED HERE
     }
   }
 
@@ -53,7 +53,7 @@ class App extends Component {
           loggedIn: true,
           email: user.email,
           authToken,
-          connectedToLinkedIn: true
+          connectedToLinkedIn: true,
         };
       });
       localStorage.setItem('authorization', `Bearer ${authToken}`);

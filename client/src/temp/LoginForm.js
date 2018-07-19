@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../css/img/logo.png';
+import logo from '../css/img/logo.png';
 
 const API_ENDPOINT_LOGIN = 'login';
 const API_ENDPOINT_REGISTER = 'register';
