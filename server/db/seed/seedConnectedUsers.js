@@ -10,7 +10,9 @@ const margaret = {
   _id: margaretId,
   email: 'margaretbananadev@gmail.com',
   password: process.env.MARGARET_PASSWORD,
-  authTokens: [jwt.sign({ _id: margaretId }, process.env.JWT_SECRET).toString()],
+  authTokens: [
+    jwt.sign({ _id: margaretId }, process.env.JWT_SECRET).toString()
+  ],
   linkedIn: {
     access_token: process.env.MARGARET_LINKEDIN_ACCESS_TOKEN
   }

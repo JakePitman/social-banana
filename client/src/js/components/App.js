@@ -12,13 +12,13 @@ class App extends Component {
     email: 'example@email.com',
     authToken: 'String',
     linkedInToggleStatus: false,
-    connectedToLinkedIn: true 
+    connectedToLinkedIn: true
   };
 
   componentDidMount() {
     this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
+      .then((res) => this.setState({ response: res.express }))
+      .catch((err) => console.log(err));
   }
 
   callApi = async () => {
@@ -32,9 +32,9 @@ class App extends Component {
 
   //COMPONENT HANDLER METHODS
   handleToggle(e) {
-    const target = e.target.id
-    if(target === 'linkedInToggleButton') {
-      this.setState({linkedInToggleStatus: !this.state.linkedInToggleStatus})
+    const target = e.target.id;
+    if (target === 'linkedInToggleButton') {
+      this.setState({ linkedInToggleStatus: !this.state.linkedInToggleStatus });
     } else if (target === 'facebookToggleButton') {
       //FB TOGGLE CODE CAN BE ADDED HERE
     }
@@ -45,16 +45,40 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <div className="navbar">
-            <Link className="navlink" to="/" style={{ textDecoration: 'none', color: '#908F8F' }}>Login</Link>
-            <Link className="navlink" to="/settings" style={{ textDecoration: 'none', color: '#908F8F' }}>Settings</Link>
-            <Link className="navlink" to="/listing" style={{ textDecoration: 'none', color: '#908F8F' }}>Listing</Link>
+            <Link
+              className="navlink"
+              to="/"
+              style={{ textDecoration: 'none', color: '#908F8F' }}
+            >
+              Login
+            </Link>
+            <Link
+              className="navlink"
+              to="/settings"
+              style={{ textDecoration: 'none', color: '#908F8F' }}
+            >
+              Settings
+            </Link>
+            <Link
+              className="navlink"
+              to="/listing"
+              style={{ textDecoration: 'none', color: '#908F8F' }}
+            >
+              Listing
+            </Link>
           </div>
 
           <Switch>
             <Route exact path="/" component={LoginForm} />
             <Route path="/settings" component={SettingsPage} />
-            <Route path="/listing" render={() => 
-              <ListingPage stateCopy={this.state} handleToggle={this.handleToggle.bind(this)} />}  
+            <Route
+              path="/listing"
+              render={() => (
+                <ListingPage
+                  stateCopy={this.state}
+                  handleToggle={this.handleToggle.bind(this)}
+                />
+              )}
             />
           </Switch>
         </div>

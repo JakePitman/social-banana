@@ -1,8 +1,6 @@
- import React from 'react'
-import placeholder from '../../css/img/placeholder.png'
+import React from 'react';
+import placeholder from '../../css/img/placeholder.png';
 import { SigninControl } from './SocialLink';
-
-
 
 class SettingsPage extends React.Component {
   constructor(props) {
@@ -13,7 +11,7 @@ class SettingsPage extends React.Component {
       company: this.props.company,
       phone: this.props.phone,
       email: this.props.email,
-      isOpen: false,
+      isOpen: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleSubmit.bind(this);
@@ -23,13 +21,13 @@ class SettingsPage extends React.Component {
   handleChange(event) {
     event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   }
 
-  handleClick(event){
+  handleClick(event) {
     event.preventDefault();
-    alert('You have clicked the link')
+    alert('You have clicked the link');
     console.log('The link was clicked.');
   }
 
@@ -41,7 +39,11 @@ class SettingsPage extends React.Component {
   render() {
     return (
       <div className="profile">
-        <form className="profile-form" onSubmit={this.handleSubmit} method="POST">
+        <form
+          className="profile-form"
+          onSubmit={this.handleSubmit}
+          method="POST"
+        >
           <div className="profile-section">
             <img
               className="profile-picture"
@@ -83,7 +85,7 @@ class SettingsPage extends React.Component {
             />
           </form>
           <div className="social-login">
-                <SigninControl media='linkedIn' />          
+            <SigninControl media="linkedIn" />
           </div>
           <button className="cta-primary" type="submit">
             Update
@@ -93,4 +95,4 @@ class SettingsPage extends React.Component {
     );
   }
 }
-export {SettingsPage} 
+export { SettingsPage };
