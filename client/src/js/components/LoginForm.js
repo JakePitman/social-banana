@@ -8,7 +8,7 @@ class LoginForm extends React.Component {
   state = {
     formType: API_ENDPOINT_LOGIN,
     emailField: '',
-    passwordField: ''
+    passwordField: '',
   };
 
   handleFormToggleOnClick = (formType) => (e) => {
@@ -32,7 +32,7 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div class="welcome">
+      <div className="welcome">
         <div>
           <div id="logoWorks">
             <img src={logo} height="200" alt="logo" />
