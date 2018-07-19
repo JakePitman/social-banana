@@ -14,12 +14,16 @@ function ListingsPage(props) {
       <h1 className="listing-title">Share</h1>
       <p className="listing-description">This will post your listing onto the social media platforms you have selected</p>
       <form className="listing-media-form">
-        <MediaBox 
-          handleToggle={props.handleToggle}
-          mediaLogo='linkedin' 
-          mediaTitle="LinkedIn"
-          isChecked={toggleSettings.linkedIn}
-        />
+        {props.stateCopy.connectedToLinkedIn ? 
+          <MediaBox 
+            handleToggle={props.handleToggle}
+            mediaLogo='linkedin' 
+            mediaTitle="LinkedIn"
+            isChecked={toggleSettings.linkedIn}
+          />
+        :
+        ''
+        }
       </form> 
     </div>
 

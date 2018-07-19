@@ -12,7 +12,7 @@ class App extends Component {
     email: 'example@email.com',
     authToken: 'String',
     linkedInToggleStatus: false,
-    linkedInAccessToken: 'String'
+    connectedToLinkedIn: true 
   };
 
   componentDidMount() {
