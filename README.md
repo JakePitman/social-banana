@@ -56,9 +56,16 @@ We strive to design, build, test and deploy a microservice web application proto
 
 ### **TOOLS & RESOURCES**
 
-### **CLIENTOBJECTIVE**
+### **DIARY ENTRIES**
 
-### **OUR OBJECTIVE**
+**PROJECT TIMELINE**
+![PROJECT TIMELINE](https://docs.google.com/spreadsheets/d/1MWITXu66A347u9xMUXWBpSEvMRnZhnHQogPxvelMMBg/edit?usp=sharing)
+
+### **CLIENT INTERRACTION**
+
+## **PROJECT OUTLINE**
+
+---
 
 **4. Describe the project will you be conducting and how your App will address the client’s needs.**
 
