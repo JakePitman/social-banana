@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import LoginForm from './temp/LoginForm';
+import Login from './Login';
 import SettingsPage from './temp/SettingsPage';
 import ListingPage from './temp/ListingPage';
 import { handleToggle } from './services/stateFunctions';
@@ -96,7 +96,7 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={() => <LoginForm handleLogin={this.handleLogin} />}
+              render={() => <Login handleLogin={this.handleLogin} />}
             />
             <Route path="/settings" component={SettingsPage} />
             <Route
