@@ -5,11 +5,7 @@ function ListingsPage(props) {
   const toggleSettings = {
     //linkedIn: true,
     //facebook: false
-<<<<<<< HEAD
-    linkedIn: props.stateCopy.linkedInToggleStatus
-=======
     linkedIn: props.stateCopy.linkedInToggleStatus,
->>>>>>> prepare for rebase
   };
 
   return (
@@ -30,10 +26,7 @@ function ListingsPage(props) {
         ) : (
           ''
         )}
-<<<<<<< HEAD
-=======
         <input type="submit" />
->>>>>>> prepare for rebase
       </form>
     </div>
   );
