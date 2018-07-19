@@ -1,63 +1,95 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 import logo from '../../css/img/logo.png';
 
+const API_ENDPOINT_LOGIN = 'login';
+const API_ENDPOINT_REGISTER = 'register';
+
 class LoginForm extends React.Component {
+  state = {
+    formType: API_ENDPOINT_LOGIN,
+    emailField: '',
+    passwordField: '',
+  };
 
-    state = {
-        formTypeIsLogin: true
+  handleFormToggleOnClick = formType => e => {
+    e.preventDefault();
+    this.setState({ formType });
+  };
+
+  handleFieldChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  // requires work for api
+  handleSubmit = async e => {
+    e.preventDefault();
+    const userData = {
+      email: this.state.emailField,
+      password: this.state.passwordField,
     };
-
-    render() {
-
-        return (
-            <form className={this.state.formTypeIsLogin ? 'form form-loginType' : 'form form-registerType'}>
-
-                <div id="logoWorks">
-                    <img src={logo} width="200" height="200" alt="logo" />
-                </div>
-
-                <div className="form-toggle">
-                    <a className="login-toggle active"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            this.setState({
-                                formTypeIsLogin: true
-                            });
-                        }}
-                    >
-                        <p className={this.state.formTypeIsLogin ? "active" : ''}>
-                            Login
-                        </p>
-                    </a>
-
-                    <a className="register-toggle"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            this.setState({
-                                formTypeIsLogin: false
-                            });
-                        }}
-                    >
-                        <p className={this.state.formTypeIsLogin ? "" : "active"}>
-                            Register
-                        </p>
-                    </a>
-                </div>
-
-                <div className="form-content">
-                    <div className="form-input">
-                        <input type="text" placeholder="email" />
-                        <input type="text" placeholder="Password" />
-                    </div>
-                </div>
-
-                <button type="submit" >
-                    {this.state.formTypeIsLogin ? 'Login' : 'Register'}
-                </button>
-
-            </form >
-        );
+    try {
+      const response = await axios.post('/api/users/login', userData);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
     }
+  };
+
+  render() {
+    return (
+      <div>
+        <div id="logoWorks">
+          <img src={logo} height="200" alt="logo" />
+        </div>
+
+        <div className="form-toggle">
+          <button
+            className={
+              this.state.formType === API_ENDPOINT_LOGIN ? 'active' : ''
+            }
+            onClick={this.handleFormToggleOnClick('login')}
+          >
+            Login
+          </button>
+          <button
+            className={
+              this.state.formType === API_ENDPOINT_REGISTER ? 'active' : ''
+            }
+            onClick={this.handleFormToggleOnClick('register')}
+          >
+            Register
+          </button>
+        </div>
+
+        <form className="form" onSubmit={this.handleSubmit}>
+          <div className="form-content">
+            <div className="form-input">
+              <input
+                type="text"
+                placeholder="email"
+                name="emailField"
+                value={this.state.emailField}
+                onChange={this.handleFieldChange}
+              />
+              <input
+                type="password"
+                placeholder="password"
+                name="passwordField"
+                value={this.state.passwordField}
+                onChange={this.handleFieldChange}
+              />
+            </div>
+            <button type="submit">
+              {this.state.formType === API_ENDPOINT_LOGIN
+                ? 'Login'
+                : 'Register'}
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
 
-export { LoginForm }
+export default LoginForm;

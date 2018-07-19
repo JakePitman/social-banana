@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoginForm } from './LoginForm';
+import LoginForm from './LoginForm';
 import { SettingsPage } from './SettingsPage';
 import ListingPage from './ListingPage';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
