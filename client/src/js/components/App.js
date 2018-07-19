@@ -44,18 +44,12 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <div className="navBar">
-            <div>
-              <Link to="/" style={{ textDecoration: 'none', color: '#908F8F' }}>Login</Link>
-            </div>
-            <div>
-              <Link to="/settings" style={{ textDecoration: 'none', color: '#908F8F' }}>Settings</Link>
-            </div>
-            <div>
-              <Link to="/listing" style={{ textDecoration: 'none', color: '#908F8F' }}>Listing</Link>
-            </div>
+          <div className="navbar">
+            <Link className="navlink" to="/" style={{ textDecoration: 'none', color: '#908F8F' }}>Login</Link>
+            <Link className="navlink" to="/settings" style={{ textDecoration: 'none', color: '#908F8F' }}>Settings</Link>
+            <Link className="navlink" to="/listing" style={{ textDecoration: 'none', color: '#908F8F' }}>Listing</Link>
           </div>
-          
+
           <Switch>
             <Route exact path="/" component={LoginForm} />
             <Route path="/settings" component={SettingsPage} />
