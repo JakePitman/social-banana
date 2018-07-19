@@ -1,4 +1,4 @@
-import React from 'react'
+ import React from 'react'
 import loginlink from '../../css/img/sign-in/Sign-In-Small---Default.png'
 import placeholder from '../../css/img/placeholder.png'
 
