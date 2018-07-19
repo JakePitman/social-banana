@@ -1,5 +1,6 @@
 import React from 'react';
 import original from '../assets/img/original.png';
+import './socialLink.css';
 
 class SigninControl extends React.Component {
   constructor(props) {

@@ -4,6 +4,7 @@ import LoginForm from './temp/LoginForm';
 import SettingsPage from './temp/SettingsPage';
 import ListingPage from './temp/ListingPage';
 import { handleToggle } from './services/stateFunctions';
+import './app.css';
 
 import usersAPI from './services/usersAPI';
 
