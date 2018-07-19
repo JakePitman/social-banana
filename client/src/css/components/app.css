@@ -1,0 +1,9 @@
+.navBar {
+    display: flex;
+    float: right;
+}
+.navBar > div {
+    margin: -155px 65px 0px -20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
