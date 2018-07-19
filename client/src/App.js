@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Login from './Login';
 import SettingsPage from './temp/SettingsPage';
-import ListingPage from './temp/ListingPage';
+import Listing from './Listing';
 import { handleToggle } from './services/stateFunctions';
 import './app.css';
 
@@ -102,7 +102,7 @@ class App extends Component {
             <Route
               path="/listing"
               render={() => (
-                <ListingPage
+                <Listing
                   stateCopy={this.state}
                   handleToggle={handleToggle.bind(this)}
                 />

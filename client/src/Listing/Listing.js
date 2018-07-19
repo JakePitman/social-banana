@@ -1,6 +1,6 @@
 import React from 'react';
 import MediaBox from './MediaBox';
-import './listingPage.css';
+import './listing.css';
 
 function ListingsPage(props) {
   const toggleSettings = {
