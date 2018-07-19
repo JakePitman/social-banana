@@ -1,9 +1,10 @@
 .navbar {
     display: flex;
     justify-content: flex-end;
+    margin-top: 16px;
 }
 .navlink {
-    margin: 70px 30px;
+    margin: 4px 30px 4px 0px;
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
 }
