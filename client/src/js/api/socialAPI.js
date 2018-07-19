@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const getAuthURL = async (authToken) => {
+const getLinkedInURL = async (authToken) => {
   const res = await axios.get('/api/linkedIn/authURL', {
     headers: { authorization: `Bearer ${authToken}` }
   });
@@ -20,4 +20,4 @@ const shareListing = async (listing) => {
   return { updateUrl };
 };
 
-export default { getAuthURL, shareListing };
+export default { getLinkedInURL, shareListing };
