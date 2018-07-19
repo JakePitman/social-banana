@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import logo from '../../css/img/logo.png';
 
 const API_ENDPOINT_LOGIN = 'login';
@@ -21,9 +22,19 @@ class LoginForm extends React.Component {
   };
 
   // requires work for api
-  handleSubmit = e => {
-    console.log(this.state.emailField, this.state.passwordField);
+  handleSubmit = async e => {
     e.preventDefault();
+    const userData = {
+      email: this.state.emailField,
+      password: this.state.passwordField,
+    };
+    console.log(userData);
+    try {
+      const response = await axios.post('/api/users/login', userData);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {

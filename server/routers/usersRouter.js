@@ -19,7 +19,6 @@ usersRouter.post('/register', async (req, res) => {
 
 usersRouter.post('/login', async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await User.findByCredentials(email, password);
     const token = await user.generateAuthToken();
@@ -30,7 +29,7 @@ usersRouter.post('/login', async (req, res) => {
 });
 
 usersRouter.get('/me', authenticate, async (req, res) => {
-  const user = req.user;
+  const { user } = req.user;
 
   try {
     res.status(200).send({ user });
