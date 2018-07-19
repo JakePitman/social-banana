@@ -1,6 +1,6 @@
 import React from 'react'
-import original from '../../css/img/original.png'
-import socialLink from '../../css/components/socialLink.css'
+import original  from '../../css/img/original.png'
+
 
 
 class SigninControl extends React.Component {
@@ -12,7 +12,7 @@ class SigninControl extends React.Component {
       }
     
       handleLoginClick() {
-        alert('Yep..Margaret!')
+        alert('>> It\'s Margaret :) << ')
         this.setState({isLoggedIn: true});
       }
     
@@ -23,30 +23,16 @@ class SigninControl extends React.Component {
       render() {
         return (
           <div className='SocialLink'>
-
-            <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+             <script type="text/javascript" src="http://platform.linkedin.com/in.js">
                 api_key: Your App Key //add your linkedIn aap key here
                 authorize: true
               </script>    
-            <script type="in/Login"></script>
-            <a href="#" onClick={ this.handleLoginClick } type="button">
-              <span id="icon-bg"><i class="fa fa-linkedin"></i></span>
-              <span id="icon-label-bg">Login with LinkedIn</span>
-             </a>
-            <input type="button" 
-                    onclick="onLinkedInLoad()" 
-                    value="Sign in using LinkedIn account" 
-                    href="#"
-                    id="icon-label-bg"
-                     />
+              <script type="in/Login" data-onAuth="onLinkedInAuth" ></script>
+              <a href="#"><img src={original} onClick={this.handleLoginClick} /></a>
           </div>
         );
       }
 }
 
-<a href="#" onclick="onLinkedInLoad();">
-              <span id="icon-bg"><i class="fa fa-linkedin"></i></span>
-              <span id="icon-label-bg">Login with LinkedIn</span>
-             </a>
 
 export { SigninControl } 
