@@ -9,15 +9,10 @@ class App extends Component {
   // and the proxy we set in client/package.json
   state = {
     response: '',
-    currentUser: {
-      email: 'example@email.com',
-      password: '123456',
-      authTokens: ['String'],
-      linkedIn: {
-        toggleStatus: false,
-        access_token: 'String',
-      },
-    },
+    email: 'example@email.com',
+    authToken: 'String',
+    linkedInToggleStatus: false,
+    linkedInAccessToken: 'String'
   };
 
   componentDidMount() {
@@ -34,6 +29,16 @@ class App extends Component {
 
     return body;
   };
+
+  //COMPONENT HANDLER METHODS
+  handleToggle(e) {
+    const target = e.target.id
+    if(target === 'linkedInToggleButton') {
+      this.setState({linkedInToggleStatus: !this.state.linkedInToggleStatus})
+    } else if (target === 'facebookToggleButton') {
+      //FB TOGGLE CODE CAN BE ADDED HERE
+    }
+  }
 
   render() {
     return (
@@ -52,7 +57,9 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={LoginForm} />
             <Route path="/settings" component={SettingsPage} />
-            <Route path="/listing" render={() => <ListingPage currentUser={this.state.currentUser} />}  />
+            <Route path="/listing" render={() => 
+              <ListingPage stateCopy={this.state} handleToggle={this.handleToggle.bind(this)} />}  
+            />
           </Switch>
         </div>
       </BrowserRouter>

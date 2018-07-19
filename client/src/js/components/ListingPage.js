@@ -2,10 +2,11 @@ import React from 'react'
 import MediaBox from './MediaBox'
 
 function ListingsPage(props) {
+
   const toggleSettings = {
     //linkedIn: true,
     //facebook: false
-    linkedIn: props.currentUser.linkedIn.toggleStatus
+    linkedIn: props.stateCopy.linkedInToggleStatus
   }
 
   return(
@@ -14,7 +15,7 @@ function ListingsPage(props) {
       <p className="listing-description">This will post your listing onto the social media platforms you have selected</p>
       <form className="listing-media-form">
         <MediaBox 
-          currentUser={props.currentUser} 
+          handleToggle={props.handleToggle}
           mediaLogo='linkedin' 
           mediaTitle="LinkedIn"
           isChecked={toggleSettings.linkedIn}

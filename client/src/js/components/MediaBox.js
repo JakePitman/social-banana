@@ -10,7 +10,8 @@ function MediaBox(props) {
         </div>
         <div className="listing-media-switch-container">
           <label className="listing-media-switch">
-            <input type="checkbox" checked={props.isChecked ? 'checked' : ''}/>
+            {/* changes state in App.js */}
+            <input id="linkedInToggleButton" onChange={props.handleToggle} type="checkbox" checked={props.isChecked ? 'checked' : ''}/>
             <span className="slider-round"></span>
           </label>
         </div>
