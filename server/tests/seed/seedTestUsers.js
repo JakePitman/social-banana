@@ -9,24 +9,20 @@ const userTwoId = new ObjectId();
 const users = [
   {
     _id: userOneId,
-    email: 'margaretbananadev@gmail.com',
+    email: 'jimbobananadev@gmail.com',
     password: 'userOnePass',
-    authTokens: [
-      jwt.sign({ _id: userOneId }, process.env.JWT_SECRET).toString()
-    ]
+    authTokens: [jwt.sign({ _id: userOneId }, process.env.JWT_SECRET).toString()]
   },
   {
     _id: userTwoId,
     email: 'janetbananadev@outlook.com',
     password: 'userOnePass',
-    authTokens: [
-      jwt.sign({ _id: userTwoId }, process.env.JWT_SECRET).toString()
-    ]
+    authTokens: [jwt.sign({ _id: userTwoId }, process.env.JWT_SECRET).toString()]
   }
 ];
 
 const populateUsers = async () => {
-  await User.remove({});
+  await User.remove({ email: { $ne: 'margaretbananadev@gmail.com' } });
   const newUsers = await User.create(users);
   return Promise.resolve(newUsers);
 };

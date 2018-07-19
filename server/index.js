@@ -4,6 +4,7 @@ const path = require('path');
 
 const { mongoose } = require('./db/mongoose');
 const { usersRouter } = require('./routers/usersRouter');
+const { linkedInRouter } = require('./routers/linkedInRouter');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // ROUTES
 app.use('/api/users', usersRouter);
+app.use('/api/linkedIn', linkedInRouter);
 
 // This is to test the proxy of the front end server for development
 app.get('/api/hello', (req, res) => {
