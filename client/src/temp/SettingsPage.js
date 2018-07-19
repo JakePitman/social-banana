@@ -1,5 +1,5 @@
 import React from 'react';
-import placeholder from '../css/img/placeholder.png';
+import placeholder from '../assets/img/placeholder.png';
 import SigninControl from './SocialLink';
 
 class SettingsPage extends React.Component {
