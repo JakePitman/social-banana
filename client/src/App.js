@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import LoginForm from './temp/LoginForm';
 import SettingsPage from './temp/SettingsPage';
 import ListingPage from './temp/ListingPage';
-import { handleToggle } from './temp/stateFunctions';
+import { handleToggle } from './services/stateFunctions';
 
 import usersAPI from './services/usersAPI';
 
