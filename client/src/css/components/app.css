@@ -1,9 +1,10 @@
-.navBar {
+.navbar {
     display: flex;
-    float: right;
+    justify-content: flex-end;
+    margin-top: 16px;
 }
-.navBar > div {
-    margin: -155px 65px 0px -20px;
+.navlink {
+    margin: 4px 30px 4px 0px;
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
 }

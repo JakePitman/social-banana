@@ -38,6 +38,7 @@ class LoginForm extends React.Component {
 
   render() {
     return (
+    <div class="welcome">
       <div>
         <div id="logoWorks">
           <img src={logo} height="200" alt="logo" />
@@ -88,6 +89,7 @@ class LoginForm extends React.Component {
           </div>
         </form>
       </div>
+  </div>
     );
   }
 }
