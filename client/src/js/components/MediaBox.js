@@ -1,7 +1,7 @@
 import React from 'react'
-import linkedIn from '../../css/img/linkedin.png'
 
 function MediaBox(props) {
+
   return (
     <div className="listing-media-box">
         <img className="listing-media-logo" src={require('../../css/img/' + props.mediaLogo + '.png')} alt="linkedin_logo" />
@@ -10,7 +10,7 @@ function MediaBox(props) {
         </div>
         <div className="listing-media-switch-container">
           <label className="listing-media-switch">
-            <input type="checkbox" />
+            <input type="checkbox" checked={props.isChecked ? 'checked' : ''}/>
             <span className="slider-round"></span>
           </label>
         </div>

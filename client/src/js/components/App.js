@@ -52,7 +52,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={LoginForm} />
             <Route path="/settings" component={SettingsPage} />
-            <Route path="/listing" component={ListingPage} />
+            <Route path="/listing" render={() => <ListingPage currentUser={this.state.currentUser} />}  />
           </Switch>
         </div>
       </BrowserRouter>
