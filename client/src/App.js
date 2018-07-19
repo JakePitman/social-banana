@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import LoginForm from './LoginForm';
-import SettingsPage from './SettingsPage';
-import ListingPage from './ListingPage';
-import { handleToggle } from './stateFunctions';
+import LoginForm from './temp/LoginForm';
+import SettingsPage from './temp/SettingsPage';
+import ListingPage from './temp/ListingPage';
+import { handleToggle } from './temp/stateFunctions';
 
-import usersAPI from '../services/usersAPI';
+import usersAPI from './services/usersAPI';
 
 class App extends Component {
   // The following code is to test the api call of our back-end
