@@ -5,7 +5,7 @@ import SettingsPage from './SettingsPage';
 import ListingPage from './ListingPage';
 import { handleToggle } from './stateFunctions';
 
-import usersAPI from './../api/usersAPI';
+import usersAPI from '../services/usersAPI';
 
 class App extends Component {
   // The following code is to test the api call of our back-end
