@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Login from './Login';
-import SettingsPage from './temp/SettingsPage';
+import Settings from './Settings';
 import Listing from './Listing';
 import { handleToggle } from './services/stateFunctions';
 import './app.css';
@@ -98,7 +98,7 @@ class App extends Component {
               path="/"
               render={() => <Login handleLogin={this.handleLogin} />}
             />
-            <Route path="/settings" component={SettingsPage} />
+            <Route path="/settings" component={Settings} />
             <Route
               path="/listing"
               render={() => (
