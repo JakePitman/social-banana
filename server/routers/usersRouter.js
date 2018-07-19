@@ -29,7 +29,7 @@ usersRouter.post('/login', async (req, res) => {
 });
 
 usersRouter.get('/me', authenticate, async (req, res) => {
-  const { user } = req.user;
+  const user = req.user;
 
   try {
     res.status(200).send({ user });
