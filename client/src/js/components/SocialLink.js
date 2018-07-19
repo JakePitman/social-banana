@@ -26,7 +26,11 @@ class SigninControl extends React.Component {
         </script>
         <script type="in/Login" data-onAuth="onLinkedInAuth" />
         <a href="#">
-          <img src={original} onClick={this.handleLoginClick} />
+          <img
+            src={original}
+            alt="linkedinbtn"
+            onClick={this.handleLoginClick}
+          />
         </a>
       </div>
     );
