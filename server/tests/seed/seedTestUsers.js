@@ -11,13 +11,17 @@ const users = [
     _id: userOneId,
     email: 'jimbobananadev@gmail.com',
     password: 'userOnePass',
-    authTokens: [jwt.sign({ _id: userOneId }, process.env.JWT_SECRET).toString()]
+    authTokens: [
+      jwt.sign({ _id: userOneId }, process.env.JWT_SECRET).toString()
+    ]
   },
   {
     _id: userTwoId,
     email: 'janetbananadev@outlook.com',
     password: 'userOnePass',
-    authTokens: [jwt.sign({ _id: userTwoId }, process.env.JWT_SECRET).toString()]
+    authTokens: [
+      jwt.sign({ _id: userTwoId }, process.env.JWT_SECRET).toString()
+    ]
   }
 ];
 
