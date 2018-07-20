@@ -21,7 +21,7 @@ class SigninControl extends React.Component {
 
   render() {
     return (
-      <div className="SocialLink">
+      <div className="sociallink">
         <script type="text/javascript" src="http://platform.linkedin.com/in.js">
           api_key: Your App Key //add your linkedIn aap key here authorize: true
         </script>

@@ -1,10 +1,9 @@
-.Account {
+.profile {
   margin: 200px auto;
   max-width: 40rem;
-  box-shadow: 3px 10px 10px #908f8f;
 }
 
-.Account-section {
+.profile-section {
   margin: 70px 10px 30px 10px;
   max-width: 30rem;
   border-radius: 3px;
@@ -15,7 +14,7 @@
   text-align: center;
 }
 
-.Account-section img {
+.profile-section img {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -23,7 +22,7 @@
   padding: 10px;
 }
 
-.Account-section input {
+.profile-section input {
   color: #cccccc;
   font-size: 10px;
   margin-top: 5px;
@@ -34,25 +33,51 @@
   outline: 0;
 }
 
-.Account-form {
-  margin: 200px auto 50px auto;
+.profile-form {
+  margin: 200px auto 30px auto;
   max-width: 30rem;
   border-radius: 3px;
   padding: 15px;
   font-family: 'Roboto', sans-serif;
 }
 
-.cta-primary {
+.profile-form button {
   width: 50%;
   padding: 10px;
   background: #6c92ff;
   color: #ffffff;
   border-radius: 8px;
   margin-left: 25%;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
-.cta-primary:hover {
-  background: #908f8f;
+.profile-form button:hover {
+  background: #2196f3;
+}
+
+.profile-form-input {
+  margin-bottom: 15px;
+}
+
+.profile-form-input input {
+  color: #cccccc;
+  font-size: 14px;
+  margin-top: 5px;
+  width: 100%;
+  padding: 0.25rem;
+  border: 0;
+  border-bottom: 1px solid #908f8f;
+  outline: 0;
+}
+
+.profile-form-toggle {
+  display: flex;
+  justify-content: space-evenly;
+}
+.profile-form-toggle a {
+  color: #908f8f;
+  font-size: 1.25rem;
+  cursor: pointer;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
 }
