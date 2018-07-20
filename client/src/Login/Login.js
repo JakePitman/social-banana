@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../assets/img/logo.png';
 import './login.css';
+import './register.css';
 
 const API_ENDPOINT_LOGIN = 'login';
 const API_ENDPOINT_REGISTER = 'register';
@@ -10,6 +11,9 @@ class LoginForm extends React.Component {
     formType: API_ENDPOINT_LOGIN,
     emailField: '',
     passwordField: '',
+    nameField: '',
+    companyField: '',
+    phoneField: '',
     error: null
   };
 
@@ -26,6 +30,9 @@ class LoginForm extends React.Component {
     e.preventDefault();
     const email = this.state.emailField;
     const password = this.state.passwordField;
+    const name = this.state.nameField;
+    const company = this.state.companyField;
+    const phoneField = this.state.phoneField;
 
     const error = await this.props.handleLogin(email, password);
     if (error) {
@@ -81,6 +88,30 @@ class LoginForm extends React.Component {
                   value={this.state.passwordField}
                   onChange={this.handleFieldChange}
                 />
+                {this.state.formType === API_ENDPOINT_LOGIN ? (
+                  ''
+                ) : (
+                  <div className="register">
+                    <input
+                      type="name"
+                      placeholder="name"
+                      value={this.state.nameField}
+                      onChange={this.handleFieldChange}
+                    />
+                    <input
+                      type="company"
+                      placeholder="company"
+                      value={this.state.companyField}
+                      onChange={this.handleFieldChange}
+                    />
+                    <input
+                      type="phone"
+                      placeholder="phone"
+                      value={this.state.phoneField}
+                      onChange={this.handleFieldChange}
+                    />
+                  </div>
+                )}
               </div>
               {this.state.error && <p>{this.state.error}</p>}
               <button type="submit">

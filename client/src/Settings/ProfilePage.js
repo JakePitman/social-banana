@@ -35,21 +35,21 @@ class ProfilePage extends React.Component {
             <label htmlFor="name">Name</label>
             <input
               type="text"
-              value=""
+              value={this.props.stateCopy.name}
               onChange={this.handleChange}
               name="name"
             />
             <label htmlFor="company">Company</label>
             <input
               type="text"
-              value=""
+              value={this.props.stateCopy.company}
               onChange={this.handleChange}
               name="company"
             />
             <label htmlFor="phone">Phone</label>
             <input
               type="text"
-              value=""
+              value={this.props.stateCopy.phone}
               onChange={this.handleChange}
               name="phone"
             />
