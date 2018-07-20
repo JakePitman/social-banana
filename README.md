@@ -142,7 +142,6 @@ Our app is made up of many components.
 In order to connect the agents Realista account to social media we will need to go through each social medias API to gain an access token for that service. When we want to share a listing to that social media we will again use the API with the access token to post to the agents feed.
 
 - **Linkedin REST API**
-
 - **Twitter API**
 
 - **Facebook SDK**
