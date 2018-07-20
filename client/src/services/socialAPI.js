@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const getLinkedInURL = async (authToken) => {
-  const res = await axios.get('/api/linkedIn/authURL', {
+  const res = await axios.get('/api/linkedin/authURL', {
     headers: { authorization: `Bearer ${authToken}` }
   });
   const { url } = res.data;

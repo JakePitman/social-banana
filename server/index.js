@@ -14,7 +14,7 @@ app.use(express.json());
 
 // ROUTES
 app.use('/api/users', usersRouter);
-app.use('/api/linkedIn', linkedInRouter);
+app.use('/api/linkedin', linkedInRouter);
 
 // This is to test the proxy of the front end server for development
 app.get('/api/hello', (req, res) => {

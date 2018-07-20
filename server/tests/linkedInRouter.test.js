@@ -7,12 +7,12 @@ const { User } = require('./../models/User');
 
 beforeAll(populateUsers);
 
-describe('GET /api/linkedIn/authURL', () => {
+describe('GET /api/linkedin/authURL', () => {
   test('should return url', async (done) => {
     const { _id, email, authTokens } = users[0];
 
     const res = await request(app)
-      .get('/api/linkedIn/authURL')
+      .get('/api/linkedin/authURL')
       .set('authorization', `Bearer ${authTokens[0]}`);
 
     expect(res.status).toBe(200);
@@ -24,10 +24,10 @@ describe('GET /api/linkedIn/authURL', () => {
 /// callback?userId=5b4eefd1432726b2449e1bdf&code=asidjo&state=tEAmBaNaNa
 // - approved: <CALLBACK_URL>?code=<CODE>&state=<STATE>
 // - rejected: <CALLBACK_URL>?error=<ERROR>&error_description=<ERROR_DESCRIPTION>&state=<STATE>
-describe('GET /api/llinkedIn/callback', () => {
+describe('GET /api/linkedin/callback', () => {
   test('should respond with error from callback', async (done) => {
     const res = await request(app).get(
-      '/api/linkedIn/callback?error=awwNo&error_description=icanteven'
+      '/api/linkedin/callback?error=awwNo&error_description=icanteven'
     );
 
     expect(res.status).toBe(400);
@@ -37,7 +37,7 @@ describe('GET /api/llinkedIn/callback', () => {
 
   test('should not find user which doesnot exist', async (done) => {
     const _id = '5b4eefd1432726b2449e1bdf';
-    const res = await request(app).get(`/api/linkedIn/callback?userId=${_id}`);
+    const res = await request(app).get(`/api/linkedin/callback?userId=${_id}`);
 
     expect(res.status).toBe(400);
     expect(res.body.error).toBe('No user found');
@@ -46,7 +46,7 @@ describe('GET /api/llinkedIn/callback', () => {
 
   test('should be unauthorized if state is changed', async (done) => {
     const { _id, email, authTokens } = users[0];
-    const res = await request(app).get(`/api/linkedIn/callback?userId=${_id}`);
+    const res = await request(app).get(`/api/linkedin/callback?userId=${_id}`);
 
     expect(res.status).toBe(401);
     expect(res.body.error).toBe('HACKZORS!!! >:(');

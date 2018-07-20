@@ -9,8 +9,6 @@ import './app.css';
 import usersAPI from '../services/usersAPI';
 
 class App extends Component {
-  // The following code is to test the api call of our back-end
-  // and the proxy we set in client/package.json
   state = {
     loaded: false,
     loggedIn: false,
