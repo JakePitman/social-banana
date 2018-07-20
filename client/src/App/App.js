@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { handleToggle } from '../services/stateFunctions';
-import Navbar from '../core/Navbar';
+import Navbar from './../core/Navbar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from '../Login';
 import Settings from '../Settings';
