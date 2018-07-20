@@ -6,12 +6,28 @@ class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.name,
-      email: this.props.email,
-      company: this.props.company,
-      phone: this.props.phone
+      user: []
     };
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
+    let self = this;
+    fetch('/user', {
+      method: 'GET'
+    })
+      .then(function(response) {
+        if (response.status >= 400) {
+          throw new Error('Bad response from server');
+        }
+        return response.json();
+      })
+      .then(function(data) {
+        self.setState({ user: data });
+      })
+      .catch((err) => {
+        console.log('caught it!', err);
+      });
   }
 
   handleChange(event) {
@@ -37,7 +53,7 @@ class ProfilePage extends React.Component {
             <label htmlFor="email">Email</label>
             <span
               type="text"
-              value={this.state.email}
+              value={this.state.user.email}
               onChange={this.handleChange}
               name="email"
             />

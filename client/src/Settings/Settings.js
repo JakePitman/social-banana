@@ -36,7 +36,7 @@ class SettingsPage extends React.Component {
         <ProfilePage media="linkedin" />
         <SigninControl media="linkedIn" />
         <button className="cta-primary" type="submit">
-          Update
+          Edit
         </button>
       </div>
     );
