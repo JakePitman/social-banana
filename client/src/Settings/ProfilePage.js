@@ -20,16 +20,10 @@ class ProfilePage extends React.Component {
               src={margaret}
               width="200"
               height="200"
-              alt=""
+              alt="user profile picture"
               id="imageID"
             />
             <label htmlFor="email">{this.props.stateCopy.email}</label>
-            <span
-              type="text"
-              value={this.props.stateCopy.email}
-              onChange={this.handleChange}
-              name="email"
-            />
           </div>
           <form className="profile-form-input">
             <label htmlFor="name">Name</label>
