@@ -100,7 +100,10 @@ class App extends Component {
               path="/"
               render={() => <Login handleLogin={this.handleLogin} />}
             />
-            <Route path="/settings" component={Settings} />
+            <Route
+              path="/settings"
+              render={() => <Settings stateCopy={this.state} />}
+            />
             <Route
               path="/listing"
               render={() => (

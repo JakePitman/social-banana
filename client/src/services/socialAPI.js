@@ -9,7 +9,7 @@ const getLinkedInURL = async (authToken) => {
 };
 
 const shareListing = async (listing, authToken) => {
-  const res = await axios.post('/api/linkedIn/share', listing, {
+  const res = await axios.post('/api/linkedin/share', listing, {
     headers: { authorization: `Bearer ${authToken}` }
   });
   const { updateUrl } = res.data;
