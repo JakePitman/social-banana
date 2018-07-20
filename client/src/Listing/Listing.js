@@ -1,20 +1,26 @@
 import React from 'react';
 import MediaBox from './MediaBox';
 import './listing.css';
+import socialAPI from '../services/socialAPI';
 
 function ListingsPage(props) {
   const toggleSettings = {
-    linkedIn: props.stateCopy.linkedInToggleStatus,
+    linkedIn: props.stateCopy.linkedInToggleStatus
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = {};
-    const children = e.target.children;
-    for (let i = 0; i < children.length; i++) {
-      formData[`${children[i].name}`] = children[i].value;
+    if (!toggleSettings.linkedIn) {
+      console.log('toggle dat shit MARGARET');
+    } else {
+      const formData = {};
+      const children = e.target.children;
+      for (let i = 0; i < children.length; i++) {
+        formData[`${children[i].name}`] = children[i].value;
+      }
+      console.log(formData);
+      socialAPI.shareListing(formData, props.stateCopy.authToken);
     }
-    console.log(formData);
   };
 
   return (
