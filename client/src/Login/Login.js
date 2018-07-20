@@ -10,6 +10,7 @@ class LoginForm extends React.Component {
     formType: API_ENDPOINT_LOGIN,
     emailField: '',
     passwordField: '',
+    error: null
   };
 
   handleFormToggleOnClick = (formType) => (e) => {
@@ -27,8 +28,14 @@ class LoginForm extends React.Component {
     const email = this.state.emailField;
     const password = this.state.passwordField;
 
-    this.props.handleLogin(email, password);
-    // need to handle error here
+    const error = await this.props.handleLogin(email, password);
+    if (error) {
+      this.setState((prevState) => {
+        return {
+          error
+        };
+      });
+    }
   };
 
   render() {
@@ -76,6 +83,7 @@ class LoginForm extends React.Component {
                   onChange={this.handleFieldChange}
                 />
               </div>
+              {this.state.error && <p>{this.state.error}</p>}
               <button type="submit">
                 {this.state.formType === API_ENDPOINT_LOGIN
                   ? 'Login'

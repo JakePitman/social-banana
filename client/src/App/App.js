@@ -12,28 +12,32 @@ class App extends Component {
   // The following code is to test the api call of our back-end
   // and the proxy we set in client/package.json
   state = {
-    response: '',
+    loaded: false,
     loggedIn: false,
-    email: 'example@email.com',
-    authToken: 'String',
+    email: null,
+    authToken: null,
     linkedInToggleStatus: false,
-    connectedToLinkedIn: true,
+    connectedToLinkedIn: true
   };
 
-  componentDidMount() {
-    this.callApi()
-      .then((res) => this.setState({ response: res.express }))
-      .catch((err) => console.log(err));
-
-    // check for authToken, if there is make call to API with it, if authorized set loggedIn to true
+  async componentDidMount() {
+    const authHeader = localStorage.getItem('authorization');
+    if (authHeader) {
+      try {
+        const authToken = authHeader.split(' ')[1];
+        const res = await usersAPI.getUser(authToken);
+        const { user } = res;
+        this.setState(() => ({
+          loggedIn: true,
+          authToken,
+          email: user.email
+        }));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    this.setState(() => ({ loaded: true }));
   }
-
-  callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
 
   // COMPONENT HANDLER METHODS
   handleToggle(e) {
@@ -49,18 +53,18 @@ class App extends Component {
     try {
       const res = await usersAPI.loginUser(email, password);
       const { user, authToken } = res;
-      this.setState((prevState) => {
+      this.setState(() => {
         return {
           loggedIn: true,
           email: user.email,
           authToken,
-          connectedToLinkedIn: true,
+          connectedToLinkedIn: true
         };
       });
       localStorage.setItem('authorization', `Bearer ${authToken}`);
-    } catch (err) {
-      // handle error
-      console.log(err);
+    } catch (error) {
+      console.log(error);
+      return 'Invalid combination';
     }
   };
 
