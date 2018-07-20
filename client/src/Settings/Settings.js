@@ -33,7 +33,7 @@ class SettingsPage extends React.Component {
   render() {
     return (
       <div className="Account">
-        <ProfilePage media="linkedin" />
+        <ProfilePage media="linkedin" stateCopy={this.props.stateCopy} />
         <SigninControl media="linkedIn" />
         <button className="cta-primary" type="submit">
           Edit

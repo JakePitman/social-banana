@@ -1,35 +1,8 @@
 import React from 'react';
-import placeholder from '../assets/img/placeholder.png';
+import margaret from '../assets/img/margaret.png';
 import './profilePage.css';
 
 class ProfilePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: []
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentDidMount() {
-    let self = this;
-    fetch('/user', {
-      method: 'GET'
-    })
-      .then(function(response) {
-        if (response.status >= 400) {
-          throw new Error('Bad response from server');
-        }
-        return response.json();
-      })
-      .then(function(data) {
-        self.setState({ user: data });
-      })
-      .catch((err) => {
-        console.log('caught it!', err);
-      });
-  }
-
   handleChange(event) {
     event.preventDefault();
     this.setState({
@@ -44,16 +17,16 @@ class ProfilePage extends React.Component {
           <div className="profile-section">
             <img
               className="profile-picture"
-              src={placeholder}
+              src={margaret}
               width="200"
               height="200"
               alt=""
               id="imageID"
             />
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{this.props.stateCopy.email}</label>
             <span
               type="text"
-              value={this.state.user.email}
+              value={this.props.stateCopy.email}
               onChange={this.handleChange}
               name="email"
             />
@@ -62,21 +35,21 @@ class ProfilePage extends React.Component {
             <label htmlFor="name">Name</label>
             <input
               type="text"
-              value={this.state.name}
+              value=""
               onChange={this.handleChange}
               name="name"
             />
             <label htmlFor="company">Company</label>
             <input
               type="text"
-              value={this.state.company}
+              value=""
               onChange={this.handleChange}
               name="company"
             />
             <label htmlFor="phone">Phone</label>
             <input
               type="text"
-              value={this.state.phone}
+              value=""
               onChange={this.handleChange}
               name="phone"
             />
