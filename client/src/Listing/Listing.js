@@ -11,7 +11,7 @@ function ListingsPage(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!toggleSettings.linkedIn) {
-      console.log('toggle dat shit MARGARET');
+      console.log('LinkedIn not toggled');
     } else {
       const formData = {};
       const children = e.target.children;
