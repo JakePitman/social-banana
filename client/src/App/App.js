@@ -67,11 +67,23 @@ class App extends Component {
     }
   };
 
+  handleLogout = () => {
+    localStorage.removeItem('authorization');
+    this.setState(() => {
+      return {
+        loggedIn: false
+      };
+    });
+  };
+
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar loggedIn={this.state.loggedIn} />
+          <Navbar
+            loggedIn={this.state.loggedIn}
+            handleLogout={this.handleLogout}
+          />
 
           <Switch>
             <Route

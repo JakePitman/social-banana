@@ -5,6 +5,7 @@ import './navbar.css';
 const Navbar = (props) => {
   const logoutLink = (
     <button
+      onClick={props.handleLogout}
       className="logoutButton"
       style={{ textDecoration: 'none', color: '#908F8F' }}
     >
