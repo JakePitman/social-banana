@@ -1,14 +1,98 @@
 .listing-title {
+  color: #908f8f;
+  font-family: helvetica;
+  font-weight: lighter;
+  margin-top: 80px;
 }
 
 .listing-description {
+  color: #cccccc;
+  font-family: helvetica;
+  font-weight: lighter;
+  font-size: 15px;
+  margin-bottom: 50px;
 }
 
 .listing-media-form {
+  margin: 0 auto;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  justify-content: center;
+}
+
+.listing-media-form .form-label {
+  margin-top: 20px;
+  color: #cccccc;
+  font-family: helvetica;
+  font-weight: lighter;
+  font-size: 25px;
+}
+
+.listing-media-form input,
+textarea,
+select {
+  background-color: white;
+  margin: 10px 0;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.inspection-time {
+  display: flex;
+}
+
+.inspection-time input {
+  margin-right: 30px;
+  width: 300px;
+  text-align: center;
+}
+
+.amenities {
+  display: flex;
+}
+
+.amenity {
+  display: flex;
+  flex-direction: column;
+  margin: 0 30px 0 0;
+}
+
+.amenity-label {
+  font-size: 15px;
+  font-weight: lighter;
+  color: #cccccc;
+  font-family: helvetica;
+  margin: 15px 0 0 0;
+}
+
+.amenity input {
+  width: 100px;
+  font-size: 20px;
+}
+
+.upload-listing-button {
+  margin: 50px 0;
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+  color: white;
+  font-family: helvetica;
+  font-weight: lighter;
+  font-size: 15px;
+  background-color: #6c92ff;
+  cursor: pointer;
+}
+
+/*-------------------------MEDIA-BOX--------------------------*/
+
+.media-boxes {
+  width: inherit;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .listing-media-box {
@@ -16,7 +100,7 @@
   height: 40px;
   border: 1px solid #cccccc;
   border-radius: 8px;
-  /*overflow: hidden;*/
+  width: 200px;
 }
 
 .listing-media-logo {
@@ -55,6 +139,7 @@
   display: inline-block;
   width: 45px;
   height: 20px;
+  margin: 0;
 }
 
 .listing-media-switch input {
