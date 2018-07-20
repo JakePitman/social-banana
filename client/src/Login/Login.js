@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from '../../css/img/logo.png';
+import logo from '../assets/img/logo.png';
+import './login.css';
 
 const API_ENDPOINT_LOGIN = 'login';
 const API_ENDPOINT_REGISTER = 'register';
@@ -8,7 +9,7 @@ class LoginForm extends React.Component {
   state = {
     formType: API_ENDPOINT_LOGIN,
     emailField: '',
-    passwordField: ''
+    passwordField: '',
   };
 
   handleFormToggleOnClick = (formType) => (e) => {
@@ -32,7 +33,7 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div class="welcome">
+      <div className="welcome">
         <div>
           <div id="logoWorks">
             <img src={logo} height="200" alt="logo" />

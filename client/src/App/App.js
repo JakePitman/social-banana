@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import LoginForm from './LoginForm';
-import { SettingsPage } from './SettingsPage';
-import ListingPage from './ListingPage';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import { handleToggle } from './stateFunctions';
+import Login from '../Login';
+import Settings from '../Settings';
+import Listing from '../Listing';
+import { handleToggle } from '../services/stateFunctions';
+import './app.css';
 
-import usersAPI from './../api/usersAPI';
+import usersAPI from '../services/usersAPI';
 
 class App extends Component {
   // The following code is to test the api call of our back-end
@@ -16,7 +17,7 @@ class App extends Component {
     email: 'example@email.com',
     authToken: 'String',
     linkedInToggleStatus: false,
-    connectedToLinkedIn: true
+    connectedToLinkedIn: true,
   };
 
   componentDidMount() {
@@ -34,13 +35,13 @@ class App extends Component {
     return body;
   };
 
-  //COMPONENT HANDLER METHODS
+  // COMPONENT HANDLER METHODS
   handleToggle(e) {
     const target = e.target.id;
     if (target === 'linkedInToggleButton') {
       this.setState({ linkedInToggleStatus: !this.state.linkedInToggleStatus });
     } else if (target === 'facebookToggleButton') {
-      //FB TOGGLE CODE CAN BE ADDED HERE
+      // FB TOGGLE CODE CAN BE ADDED HERE
     }
   }
 
@@ -53,7 +54,7 @@ class App extends Component {
           loggedIn: true,
           email: user.email,
           authToken,
-          connectedToLinkedIn: true
+          connectedToLinkedIn: true,
         };
       });
       localStorage.setItem('authorization', `Bearer ${authToken}`);
@@ -95,13 +96,13 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={() => <LoginForm handleLogin={this.handleLogin} />}
+              render={() => <Login handleLogin={this.handleLogin} />}
             />
-            <Route path="/settings" component={SettingsPage} />
+            <Route path="/settings" component={Settings} />
             <Route
               path="/listing"
               render={() => (
-                <ListingPage
+                <Listing
                   stateCopy={this.state}
                   handleToggle={handleToggle.bind(this)}
                 />

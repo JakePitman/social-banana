@@ -1,9 +1,10 @@
 import React from 'react';
 import MediaBox from './MediaBox';
+import './listing.css';
 
 function ListingsPage(props) {
   const toggleSettings = {
-    linkedIn: props.stateCopy.linkedInToggleStatus
+    linkedIn: props.stateCopy.linkedInToggleStatus,
   };
 
   const handleSubmit = (e) => {

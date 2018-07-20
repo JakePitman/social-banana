@@ -5,7 +5,7 @@ function MediaBox(props) {
     <div className="listing-media-box">
       <img
         className="listing-media-logo"
-        src={require('../../css/img/' + props.mediaLogo + '.png')}
+        src={require('../assets/img/' + props.mediaLogo + '.png')}
         alt="linkedin_logo"
       />
       <div className="listing-media-title-container">

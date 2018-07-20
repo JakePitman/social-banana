@@ -1,6 +1,7 @@
 import React from 'react';
-import placeholder from '../../css/img/placeholder.png';
-import { SigninControl } from './SocialLink';
+import placeholder from '../assets/img/placeholder.png';
+import SigninControl from './SocialLink';
+import './settings.css';
 
 class SettingsPage extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class SettingsPage extends React.Component {
       company: this.props.company,
       phone: this.props.phone,
       email: this.props.email,
-      isOpen: false
+      isOpen: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleSubmit.bind(this);
@@ -21,7 +22,7 @@ class SettingsPage extends React.Component {
   handleChange(event) {
     event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   }
 
@@ -95,4 +96,4 @@ class SettingsPage extends React.Component {
     );
   }
 }
-export { SettingsPage };
+export default SettingsPage;
