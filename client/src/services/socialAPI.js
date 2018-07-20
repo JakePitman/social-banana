@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const getLinkedInURL = async (authToken) => {
-  const res = await axios.get('/api/linkedIn/authURL', {
+  const res = await axios.get('/api/linkedin/authURL', {
     headers: { authorization: `Bearer ${authToken}` }
   });
   const { url } = res.data;
@@ -9,7 +9,7 @@ const getLinkedInURL = async (authToken) => {
 };
 
 const shareListing = async (listing, authToken) => {
-  const res = await axios.post('/api/linkedIn/share', listing, {
+  const res = await axios.post('/api/linkedin/share', listing, {
     headers: { authorization: `Bearer ${authToken}` }
   });
   const { updateUrl } = res.data;

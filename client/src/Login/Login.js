@@ -22,7 +22,6 @@ class LoginForm extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  // requires work for api
   handleSubmit = async (e) => {
     e.preventDefault();
     const email = this.state.emailField;
@@ -30,7 +29,7 @@ class LoginForm extends React.Component {
 
     const error = await this.props.handleLogin(email, password);
     if (error) {
-      this.setState((prevState) => {
+      this.setState(() => {
         return {
           error
         };
