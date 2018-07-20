@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { handleToggle } from '../services/stateFunctions';
+import Navbar from '../core/Navbar';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from '../Login';
 import Settings from '../Settings';
 import Listing from '../Listing';
-import { handleToggle } from '../services/stateFunctions';
 import './app.css';
 
 import usersAPI from '../services/usersAPI';
@@ -66,33 +67,23 @@ class App extends Component {
     }
   };
 
+  handleLogout = () => {
+    localStorage.removeItem('authorization');
+    this.setState(() => {
+      return {
+        loggedIn: false
+      };
+    });
+  };
+
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          <div className="navbar">
-            <Link
-              className="navlink"
-              to="/"
-              style={{ textDecoration: 'none', color: '#908F8F' }}
-            >
-              Login
-            </Link>
-            <Link
-              className="navlink"
-              to="/settings"
-              style={{ textDecoration: 'none', color: '#908F8F' }}
-            >
-              Settings
-            </Link>
-            <Link
-              className="navlink"
-              to="/listing"
-              style={{ textDecoration: 'none', color: '#908F8F' }}
-            >
-              Listing
-            </Link>
-          </div>
+          <Navbar
+            loggedIn={this.state.loggedIn}
+            handleLogout={this.handleLogout}
+          />
 
           <Switch>
             <Route
