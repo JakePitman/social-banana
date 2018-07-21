@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-// Components
-import Navbar from '../core/Navbar';
+import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 import Login from '../Login';
 import Settings from '../Settings';
 import Listing from '../Listing';
+import {
+  handleToggle,
+  resetRedirectHome,
+  useRedirectHome
+} from '../services/stateFunctions';
 import './app.css';
 
 // Helper Services
@@ -23,8 +25,9 @@ class App extends Component {
     email: null,
     authToken: null,
     linkedInToggleStatus: false,
-    linkedInConnected: false,
-    linkedInURL: null
+    linkedInConnected: true,
+    linkedInURL: null,
+    redirectHome: false
   };
 
   // TODO: same code used twice in didMount and login, need to break down into helper function!
@@ -191,6 +194,8 @@ class App extends Component {
                 <Listing
                   stateCopy={this.state}
                   handleToggle={handleToggle.bind(this)}
+                  resetRedirectHome={resetRedirectHome.bind(this)}
+                  useRedirectHome={useRedirectHome.bind(this)}
                 />
               )}
             />

@@ -4,11 +4,14 @@ import MediaBox from './MediaBox';
 import './listing.css';
 
 import socialAPI from '../services/socialAPI';
+import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 
 function ListingsPage(props) {
   const toggleSettings = {
     linkedIn: props.stateCopy.linkedInToggleStatus
   };
+
+  const redirectHome = props.stateCopy.redirectHome;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,8 +41,16 @@ function ListingsPage(props) {
         props.stateCopy.authToken
       );
       console.log(res.updateUrl);
+      //sets redirectHome to true in App.js
+      props.useRedirectHome();
     }
   };
+
+  if (props.stateCopy.redirectHome) {
+    //reset redirectHome to false in App.js before redirecting to home
+    props.resetRedirectHome();
+    return <Redirect to="/" />;
+  }
 
   return (
     <div>
