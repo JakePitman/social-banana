@@ -42,7 +42,9 @@ linkedInRouter.get(
 
       res.redirect('/settings');
     } catch (error) {
-      res.redirect('/settings').send({ error: error.message });
+      // FIXME: Cannot send error in body when redirect
+      console.log(error.message);
+      res.redirect('/settings');
     }
   }
 );

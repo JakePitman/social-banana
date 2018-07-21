@@ -17,7 +17,9 @@ const getAccessToken = async (req, res, next) => {
     req.access_token = response.data.access_token;
     next();
   } catch (error) {
-    res.redirect('/settings').send({ error: error.message });
+    // FIXME: Cannot send error in body when redirect
+    console.log(error.message);
+    res.redirect('/settings');
   }
 };
 
