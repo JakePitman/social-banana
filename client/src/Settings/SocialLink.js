@@ -1,54 +1,30 @@
 import React from 'react';
+
 import original from '../assets/img/original.png';
 import facebook from '../assets/img/facebook.png';
 import './socialLink.css';
 
-// TODO: change name to SocialLinks
-class SigninControl extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.handleLoginClick = this.handleLoginClick.bind(this);
-  //   this.handleLogoutClick = this.handleLogoutClick.bind(this);
-  //   this.state = { isLoggedIn: false };
-  // }
-
-  // handleLoginClick() {
-  //   alert(">> It's Margaret :) << ");
-  //   this.setState({ isLoggedIn: true });
-  // }
-
-  // handleLogoutClick() {
-  //   this.setState({ isLoggedIn: false });
-  // }
-
+class SocialLink extends React.Component {
+  // on mount just for testing atm
   async componentDidMount() {
     try {
-      // TODO: dont get url if connected already
       console.log('hello from componentDidMount in SocialLink');
-      console.log(this.state);
-      // FIXME: MOVED TO APP.js
-      // const res = await socialAPI.getLinkedInURL(
-      //   this.props.stateCopy.authToken
-      // );
-      // console.log(res);
-      // const { url } = res;
-      // this.setState(() => {
-      //   return {
-      //     linkedInURL: url
-      //   };
-      // });
+      console.log(this.props);
     } catch (error) {
       console.log(error);
     }
   }
 
-  // TODO: check if connected to linkedIn, no if url exists
+  // TODO: make disconnect button
   // TODO: same for twitter, fb wont need one as cant use oauth with fb
   render() {
+    const { linkedInConnected, linkedInURL } = this.props;
     return (
       <div className="sociallink">
-        {this.props.stateCopy.linkedInURL ? (
-          <a href={this.props.stateCopy.linkedInURL}>
+        {linkedInConnected ? (
+          <p>Disconnect LinkedIn button</p>
+        ) : (
+          <a href={linkedInURL}>
             <img
               src={original}
               alt="linkedinbtn"
@@ -57,8 +33,6 @@ class SigninControl extends React.Component {
               onClick={this.handleLoginClick}
             />
           </a>
-        ) : (
-          <p>Disconnect LinkedIn button</p>
         )}
 
         <a href="https://www.facebook.com/login">
@@ -69,4 +43,4 @@ class SigninControl extends React.Component {
   }
 }
 
-export default SigninControl;
+export default SocialLink;

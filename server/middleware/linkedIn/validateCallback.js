@@ -16,7 +16,7 @@ const validateCallback = async (req, res, next) => {
     const { LINKEDIN_REDIRECT_URI, LINKEDIN_STATE } = process.env;
     const redirect_uri = LINKEDIN_REDIRECT_URI + `%3FuserId%3D${userId}`;
     if (state !== LINKEDIN_STATE) {
-      res.status(401).send({ error: 'HACKZORS!!! >:(' });
+      res.redirect('/settings').send({ error: 'HACKZORS!!! >:(' });
       return;
     }
 
@@ -25,7 +25,7 @@ const validateCallback = async (req, res, next) => {
     req.redirect_uri = redirect_uri;
     next();
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    res.redirect('/settings').send({ error: error.message });
   }
 };
 

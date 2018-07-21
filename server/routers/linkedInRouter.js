@@ -39,10 +39,10 @@ linkedInRouter.get(
       // TODO: bcrypt access_token (PRE SAVE!! :O)
       user.linkedIn.access_token = access_token;
       await user.save();
-      // FIXME: what to send back? redirect to settings page? close window?
-      res.status(200).send('WOOOOO! GOT ACCESS TOKEN!! :O');
+
+      res.redirect('/settings');
     } catch (error) {
-      res.status(400).send({ error: error.message });
+      res.redirect('/settings').send({ error: error.message });
     }
   }
 );

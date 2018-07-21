@@ -1,9 +1,10 @@
 import React from 'react';
-import SigninControl from './SocialLink';
-import ProfilePage from './ProfilePage';
+
+import SocialLink from './SocialLink';
+import Profile from './Profile';
 import './settings.css';
 
-class SettingsPage extends React.Component {
+class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,20 +26,15 @@ class SettingsPage extends React.Component {
   };
 
   handleSubmit = (event) => {
-    alert('Updated successfully!');
     event.preventDefault();
+    alert('Updated successfully!');
   };
-
-  // componentDidMount() {
-  //   console.log(this.match);
-  //   console.log(this.state);
-  // }
 
   render() {
     return (
       <div className="Account">
-        <ProfilePage media="linkedin" stateCopy={this.props.stateCopy} />
-        <SigninControl media="linkedIn" stateCopy={this.props.stateCopy} />
+        <Profile media="linkedin" {...this.props} />
+        <SocialLink media="linkedIn" {...this.props} />
         <button className="cta-primary" type="submit">
           Edit
         </button>
@@ -46,4 +42,4 @@ class SettingsPage extends React.Component {
     );
   }
 }
-export default SettingsPage;
+export default Settings;
