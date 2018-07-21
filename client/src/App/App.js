@@ -13,7 +13,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Navbar isLoggedIn={this.state.isLoggedIn} />
-        Realista
+        <h1> Home </h1>
       </React.Fragment>
     );
   }
