@@ -8,6 +8,7 @@ import Listing from '../Listing';
 import './app.css';
 
 import usersAPI from '../services/usersAPI';
+import socialAPI from '../services/socialAPI';
 
 class App extends Component {
   state = {
@@ -16,7 +17,8 @@ class App extends Component {
     email: null,
     authToken: null,
     linkedInToggleStatus: false,
-    connectedToLinkedIn: true
+    connectedToLinkedIn: true,
+    linkedInURL: null
   };
 
   async componentDidMount() {
@@ -34,7 +36,20 @@ class App extends Component {
       } catch (error) {
         console.log(error);
       }
+      // GET LINKEDIN URL
+      try {
+        const res = await socialAPI.getLinkedInURL(this.state.authToken);
+        const { url } = res;
+        this.setState(() => {
+          return {
+            linkedInURL: url
+          };
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
+    // page loaded
     this.setState(() => ({ loaded: true }));
   }
 

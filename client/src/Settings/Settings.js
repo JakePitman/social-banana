@@ -11,8 +11,7 @@ class SettingsPage extends React.Component {
       name: this.props.name,
       company: this.props.company,
       phone: this.props.phone,
-      email: this.props.email,
-      isOpen: false
+      email: this.props.email
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleSubmit.bind(this);
@@ -30,11 +29,16 @@ class SettingsPage extends React.Component {
     event.preventDefault();
   }
 
+  // componentDidMount() {
+  //   console.log(this.match);
+  //   console.log(this.state);
+  // }
+
   render() {
     return (
       <div className="Account">
         <ProfilePage media="linkedin" stateCopy={this.props.stateCopy} />
-        <SigninControl media="linkedIn" />
+        <SigninControl media="linkedIn" stateCopy={this.props.stateCopy} />
         <button className="cta-primary" type="submit">
           Edit
         </button>
