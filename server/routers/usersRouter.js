@@ -19,6 +19,7 @@ usersRouter.post('/register', async (req, res) => {
 
 usersRouter.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
   try {
     const user = await User.findByCredentials(email, password);
     const token = await user.generateAuthToken();

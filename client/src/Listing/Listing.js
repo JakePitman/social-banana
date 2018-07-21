@@ -1,6 +1,8 @@
 import React from 'react';
+
 import MediaBox from './MediaBox';
 import './listing.css';
+
 import socialAPI from '../services/socialAPI';
 
 function ListingsPage(props) {
@@ -8,7 +10,7 @@ function ListingsPage(props) {
     linkedIn: props.stateCopy.linkedInToggleStatus
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!toggleSettings.linkedIn) {
       console.log('LinkedIn not toggled');
@@ -31,7 +33,11 @@ function ListingsPage(props) {
           amenitiesValues[i].children[1].value;
       }
       console.log(formData);
-      socialAPI.shareListing(formData, props.stateCopy.authToken);
+      const res = await socialAPI.shareListing(
+        formData,
+        props.stateCopy.authToken
+      );
+      console.log(res.updateUrl);
     }
   };
 
@@ -101,7 +107,7 @@ function ListingsPage(props) {
           selected
         </p>
         <div className="media-boxes">
-          {props.stateCopy.connectedToLinkedIn ? (
+          {props.stateCopy.linkedInConnected ? (
             <MediaBox
               handleToggle={props.handleToggle}
               mediaLogo="linkedin"
