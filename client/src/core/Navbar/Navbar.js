@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './navbar.css';
 
 const Navbar = (props) => {
   const logoutLink = (
-    <button
+    <Link
       onClick={props.handleLogout}
-      className="logoutButton"
+      className="navlink"
+      to="/"
       style={{ textDecoration: 'none', color: '#908F8F' }}
     >
       Logout
-    </button>
+    </Link>
   );
 
   const loginLink = (
