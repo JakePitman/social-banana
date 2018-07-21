@@ -8,33 +8,44 @@ beforeAll(populateUsers);
 
 // USER REGISTER
 describe('POST /api/users/register', () => {
-  test('should create a user', async (done) => {
-    const email = 'example@example.com';
-    const password = 'password123';
+  test('should create a user and return just params wanted', async (done) => {
+    const inputParams = {
+      email: 'example@example.com',
+      password: 'password123',
+      name: 'bill',
+      company: 'Box Factory',
+      phone: '123123123'
+    };
 
     const res = await request(app)
       .post('/api/users/register')
-      .send({ email, password });
+      .send(inputParams);
 
     expect(res.status).toBe(200);
-    expect(res.body.user._id).toBeTruthy();
-    expect(res.body.user.email).toBe(email);
-
+    expect(res.body.user.email).toBe(inputParams.email);
+    expect(res.body.user._id).toBeFalsy();
+    expect(res.body.user.password).toBeFalsy();
+    expect(res.body.user.authTokens).toBeFalsy();
+    expect(res.body.user.access_token).toBeFalsy();
+    expect(res.body.user.name).toBeTruthy();
+    expect(res.body.user.company).toBeTruthy();
+    expect(res.body.user.phone).toBeTruthy();
+    expect(res.body.user.linkedInConnected).toBe(false);
+    expect(res.body.user.linkedInToggleStatus).toBe(false);
     expect(res.headers.authorization).toBeTruthy();
     const token = res.headers.authorization.split(' ')[1];
-    const user = await User.findOne({ email });
+
+    const user = await User.findOne({ email: inputParams.email });
     expect(user).toBeTruthy();
-    expect(user.password).not.toBe(password);
+    expect(user.password).not.toBe(inputParams.password);
     expect(user.authTokens).toContain(token);
     done();
   });
 
   test('should NOT create a user if email already used', async (done) => {
-    const { email, password } = users[0];
-
     const res = await request(app)
       .post('/api/users/register')
-      .send({ email, password });
+      .send(users[0]);
 
     expect(res.status).toBe(400);
     done();
@@ -89,14 +100,13 @@ describe('POST /api/users/login', () => {
 // USER PROFILE
 describe('GET /api/users/me', () => {
   test('should return user if authenticated', async (done) => {
-    const { _id, email, authTokens } = users[0];
+    const { email, authTokens } = users[0];
 
     const res = await request(app)
       .get('/api/users/me')
       .set('authorization', `Bearer ${authTokens[0]}`);
 
     expect(res.status).toBe(200);
-    expect(res.body.user._id).toBe(_id.toHexString());
     expect(res.body.user.email).toBe(email);
     done();
   });

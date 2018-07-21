@@ -2,7 +2,6 @@ const request = require('supertest');
 
 const { app } = require('./../index');
 const { users, populateUsers } = require('./seed/seedTestUsers');
-const { margaret } = require('./../db/seed/seedConnectedUsers');
 const { User } = require('./../models/User');
 
 beforeAll(populateUsers);
