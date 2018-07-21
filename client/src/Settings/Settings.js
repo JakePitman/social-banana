@@ -1,6 +1,6 @@
 import React from 'react';
-import placeholder from '../assets/img/placeholder.png';
 import SigninControl from './SocialLink';
+import ProfilePage from './ProfilePage';
 import './settings.css';
 
 class SettingsPage extends React.Component {
@@ -12,18 +12,11 @@ class SettingsPage extends React.Component {
       company: this.props.company,
       phone: this.props.phone,
       email: this.props.email,
-      isOpen: false,
+      isOpen: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleChange(event) {
-    event.preventDefault();
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
   }
 
   handleClick(event) {
@@ -39,59 +32,12 @@ class SettingsPage extends React.Component {
 
   render() {
     return (
-      <div className="profile">
-        <form
-          className="profile-form"
-          onSubmit={this.handleSubmit}
-          method="POST"
-        >
-          <div className="profile-section">
-            <img
-              className="profile-picture"
-              src={placeholder}
-              width="200"
-              height="200"
-              alt=""
-              id="imageID"
-            />
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              value={this.state.name}
-              onChange={this.handleChange}
-              name="name"
-            />
-            <label htmlFor="company">Company</label>
-            <input
-              type="text"
-              value={this.state.company}
-              onChange={this.handleChange}
-              name="company"
-            />
-          </div>
-          <form className="profile-form-input">
-            <label htmlFor="phone">Phone</label>
-            <input
-              type="text"
-              value={this.state.phone}
-              onChange={this.handleChange}
-              name="phone"
-            />
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              value={this.state.email}
-              onChange={this.handleChange}
-              name="email"
-            />
-          </form>
-          <div className="social-login">
-            <SigninControl media="linkedIn" />
-          </div>
-          <button className="cta-primary" type="submit">
-            Update
-          </button>
-        </form>
+      <div className="Account">
+        <ProfilePage media="linkedin" stateCopy={this.props.stateCopy} />
+        <SigninControl media="linkedIn" />
+        <button className="cta-primary" type="submit">
+          Edit
+        </button>
       </div>
     );
   }

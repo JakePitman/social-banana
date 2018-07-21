@@ -75,6 +75,26 @@ class App extends Component {
       };
     });
   };
+  handleEdit(event) {
+    //Edit functionality
+    event.preventDefault();
+    var data = {
+      name: this.state.name,
+      email: this.state.email,
+      id: this.state.id
+    }
+      .then(function(data) {
+        console.log(data);
+        if (data === 'success') {
+          this.setState({
+            msg: 'User has been edited.'
+          });
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  }
 
   render() {
     return (

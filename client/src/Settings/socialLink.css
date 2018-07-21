@@ -1,5 +1,4 @@
-.SocialLink a {
- 
-   
-    
+.sociallink a {
+  margin-left: 20px;
+  justify-content: baseline;
 }
