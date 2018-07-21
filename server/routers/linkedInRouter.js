@@ -54,18 +54,31 @@ linkedInRouter.post('/share', authenticate, async (req, res) => {
       throw new Error('Forbidden, linkedIn account not connected');
     }
 
-    // FIXME: construct postBody from req.body, hardcoded atm
-    // const { address, price, type, bedrooms, bathrooms, garages } = req.body;
+    const { address, price, description } = req.body;
+    const propertyType = req.body['property-type'];
+    const landSize = req.body['land-size'];
+    const inspectionDate = req.body['inspection-date'];
+    const inspectionTime = req.body['inspection-time'];
+
+    if (
+      !address ||
+      !price ||
+      !description ||
+      !propertyType ||
+      !landSize ||
+      !inspectionTime ||
+      !inspectionDate
+    ) {
+      throw new Error('Denied. Not all listing fields given.');
+    }
 
     const postBody = {
-      comment:
-        'MARGARETS GOT A BARGAIN! 3 Bedrooms, 2 Bathrooms, 2 garages #bargain (<= 700chars)',
+      comment: `${description}\n${propertyType} - ${landSize}m2 \nInspection: ${inspectionDate} : ${inspectionTime} \n#teambanana #property`,
       content: {
-        title: '$750,000! 123 Fake St, Cranbourne, Melbourne (<= 200chars)',
-        description: 'This doesnt even show! (<= 256chars)',
-        'submitted-url': 'https://bananadev.com.au/property/listingId',
-        'submitted-image-url':
-          'https://bananadev.com/property/listingId/image.png'
+        title: `$${price} - \n${address}`,
+        description: `This doesnt even show! (<= 256chars)`,
+        'submitted-url': `https://www.realista.com.au/`,
+        'submitted-image-url': `http://3.bp.blogspot.com/-6kABIu06PfM/UqX3w2XZZ6I/AAAAAAAAB8E/dBnFmfebuIc/s1600/Banana-Cottage.jpg`
       },
       visibility: {
         code: 'anyone'
