@@ -6,10 +6,10 @@ const { User } = require('./../models/User');
 const usersRouter = express.Router();
 
 usersRouter.post('/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name, company, phone } = req.body;
 
   try {
-    const user = await User.create({ email, password });
+    const user = await User.create({ email, password, name, company, phone });
     const token = await user.generateAuthToken();
     res.header('authorization', `Bearer ${token}`).send({ user });
   } catch (error) {
