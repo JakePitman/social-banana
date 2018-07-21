@@ -2,6 +2,7 @@ import React from 'react';
 import margaret from '../assets/img/margaret.png';
 import './profilePage.css';
 
+// TODO: change name to just Profile
 class ProfilePage extends React.Component {
   handleChange(event) {
     event.preventDefault();
@@ -13,19 +14,19 @@ class ProfilePage extends React.Component {
   render() {
     return (
       <div className="Profile">
-        <form className="profile-form" action="/" method="POST">
+        <form className="profile-form">
           <div className="profile-section">
             <img
               className="profile-picture"
               src={margaret}
               width="200"
-              height="200"
+              // height="200"
               alt="user profile picture"
               id="imageID"
             />
             <label htmlFor="email">{this.props.stateCopy.email}</label>
           </div>
-          <form className="profile-form-input">
+          <div className="profile-form-input">
             <label htmlFor="name">Name</label>
             <input
               type="text"
@@ -47,7 +48,7 @@ class ProfilePage extends React.Component {
               onChange={this.handleChange}
               name="phone"
             />
-          </form>
+          </div>
         </form>
       </div>
     );

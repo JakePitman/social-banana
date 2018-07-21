@@ -18,16 +18,16 @@ class SettingsPage extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(event) {
+  handleClick = (event) => {
     event.preventDefault();
     alert('You have clicked the link');
     console.log('The link was clicked.');
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     alert('Updated successfully!');
     event.preventDefault();
-  }
+  };
 
   // componentDidMount() {
   //   console.log(this.match);

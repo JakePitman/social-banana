@@ -3,8 +3,7 @@ import original from '../assets/img/original.png';
 import facebook from '../assets/img/facebook.png';
 import './socialLink.css';
 
-// import socialAPI from './../services/socialAPI';
-
+// TODO: change name to SocialLinks
 class SigninControl extends React.Component {
   // constructor(props) {
   //   super(props);
@@ -12,8 +11,6 @@ class SigninControl extends React.Component {
   //   this.handleLogoutClick = this.handleLogoutClick.bind(this);
   //   this.state = { isLoggedIn: false };
   // }
-
-  //TODO: Create function to connect to Linkedin API
 
   // handleLoginClick() {
   //   alert(">> It's Margaret :) << ");
@@ -23,12 +20,6 @@ class SigninControl extends React.Component {
   // handleLogoutClick() {
   //   this.setState({ isLoggedIn: false });
   // }
-
-  // state = {
-  //   authToken: this.props.stateCopy.authToken,
-  //   connectedToLinkedIn: this.props.stateCopy.connectedToLinkedIn,
-  //   linkedInURL: null
-  // };
 
   async componentDidMount() {
     try {
@@ -51,6 +42,8 @@ class SigninControl extends React.Component {
     }
   }
 
+  // TODO: check if connected to linkedIn, no if url exists
+  // TODO: same for twitter, fb wont need one as cant use oauth with fb
   render() {
     return (
       <div className="sociallink">
@@ -65,7 +58,7 @@ class SigninControl extends React.Component {
             />
           </a>
         ) : (
-          <p>Loading url...</p>
+          <p>Disconnect LinkedIn button</p>
         )}
 
         <a href="https://www.facebook.com/login">

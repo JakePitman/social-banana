@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { handleToggle } from '../services/stateFunctions';
-import Navbar from '../core/Navbar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+// Components
+import Navbar from '../core/Navbar';
 import Login from '../Login';
 import Settings from '../Settings';
 import Listing from '../Listing';
 import './app.css';
 
+// Helper Functions
+import { handleToggle } from '../services/stateFunctions';
 import usersAPI from '../services/usersAPI';
 import socialAPI from '../services/socialAPI';
 
@@ -76,6 +79,18 @@ class App extends Component {
         };
       });
       localStorage.setItem('authorization', `Bearer ${authToken}`);
+      // TODO: copyed from above, need to break done into one function
+      try {
+        const res = await socialAPI.getLinkedInURL(this.state.authToken);
+        const { url } = res;
+        this.setState(() => {
+          return {
+            linkedInURL: url
+          };
+        });
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error);
       return 'Invalid combination';
@@ -90,8 +105,9 @@ class App extends Component {
       };
     });
   };
+
+  // TODO: hook up to settings page
   handleEdit(event) {
-    //Edit functionality
     event.preventDefault();
     var data = {
       name: this.state.name,
@@ -119,7 +135,6 @@ class App extends Component {
             loggedIn={this.state.loggedIn}
             handleLogout={this.handleLogout}
           />
-
           <Switch>
             <Route
               exact
