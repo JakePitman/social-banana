@@ -4,7 +4,7 @@ import MediaBox from './MediaBox';
 import './listing.css';
 
 import socialAPI from '../services/socialAPI';
-import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 function ListingsPage(props) {
   const toggleSettings = {

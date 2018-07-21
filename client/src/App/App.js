@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 import Login from '../Login';
 import Settings from '../Settings';
 import Listing from '../Listing';
+import Navbar from '../core/Navbar';
 import {
   handleToggle,
   resetRedirectHome,
@@ -13,7 +14,6 @@ import './app.css';
 // Helper Services
 import usersAPI from '../services/usersAPI';
 import socialAPI from '../services/socialAPI';
-import { handleToggle } from '../services/stateFunctions';
 
 class App extends Component {
   state = {
@@ -76,6 +76,7 @@ class App extends Component {
     this.setState(() => ({ loaded: true }));
   }
 
+<<<<<<< HEAD
   // COMPONENT HANDLER METHODS
   handleToggle(e) {
     const target = e.target.id;
@@ -88,6 +89,9 @@ class App extends Component {
 
   // TODO: same code used twice in didMount and login, need to break down into helper function!
   handleLogin = async (inputEmail, inputPassword) => {
+=======
+  handleLogin = async (email, password) => {
+>>>>>>> ugh
     try {
       // GET USER DATA
       const res = await usersAPI.loginUser(inputEmail, inputPassword);
