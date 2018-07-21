@@ -1,5 +1,9 @@
 import React from 'react';
 import Navbar from '../core/Navbar';
+import Home from '../Home';
+import Listing from '../Listing';
+import Settings from '../Settings';
+import User from '../User';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +17,10 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Navbar isLoggedIn={this.state.isLoggedIn} />
-        <h1> Home </h1>
+        <Home />
+        <Listing />
+        <Settings />
+        <User />
       </React.Fragment>
     );
   }
