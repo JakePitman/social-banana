@@ -1,23 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function Navbar(props) {
-  const { isLoggedIn } = props;
+  const { isLoggedIn, handleLoginChange } = props;
   let links;
 
+  // Function to handle logged in status of a user
+  const handleLogout = () => {
+    // e.preventDefault();
+    handleLoginChange(false);
+    // Other than changing the isLoggedIn state,
+    // handling of backend due to logout should be addressed.
+  };
+
+  // Display a certain set of links depending on login state
+  // MAYBE TODO: Split navbar into more components depending on login state
   if (!isLoggedIn) {
     links = (
       <React.Fragment>
-        <span> Register </span>
-        <span> Login </span>
+        <span>
+          <Link to="/register"> Register </Link>
+        </span>
+        <span>
+          <Link to="/login"> Login </Link>
+        </span>
       </React.Fragment>
     );
   } else {
     links = (
       <React.Fragment>
-        <span> Listing </span>
-        <span> Settings </span>
-        <span> Logout </span>
+        <span>
+          <Link to="/listing"> Listing </Link>
+        </span>
+        <span>
+          <Link to="/settings"> Settings </Link>
+        </span>
+        <span>
+          <Link to="/" onClick={handleLogout}>
+            Logout
+          </Link>
+        </span>
       </React.Fragment>
     );
   }
@@ -27,10 +50,12 @@ function Navbar(props) {
 
 Navbar.propTypes = {
   isLoggedIn: PropTypes.bool,
+  handleLoginChange: PropTypes.func,
 };
 
 Navbar.defaultProps = {
   isLoggedIn: false,
+  handleLoginChange: null,
 };
 
 export default Navbar;
