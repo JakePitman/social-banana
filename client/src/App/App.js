@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Navbar from '../core/Navbar';
 import Home from '../Home';
 import Listing from '../Listing';
@@ -28,13 +28,15 @@ class App extends React.Component {
           isLoggedIn={this.state.isLoggedIn}
           handleLoginChange={this.handleLoginChange}
         />
-        <Route exact path="/" component={Home} />
-        <Route path="/listing" component={Listing} />
-        <Route path="/settings" component={Settings} />
-        <Route
-          path="/(login|register)/"
-          render={() => <User handleLoginChange={this.handleLoginChange} />}
-        />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/listing" component={Listing} />
+          <Route path="/settings" component={Settings} />
+          <Route
+            path="/(login|register)/"
+            render={() => <User handleLoginChange={this.handleLoginChange} />}
+          />
+        </Switch>
       </React.Fragment>
     );
   }
