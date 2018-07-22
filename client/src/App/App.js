@@ -10,17 +10,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: true,
+      isLoggedIn: false,
     };
   }
 
+  // All login/logout backend logic to be here
   handleLoginChange = (value) => {
     this.setState({ isLoggedIn: value });
   };
 
   // Route will ONLY render if the route matches
   // React.Fragment mitigates unnecessary containing <div> tags
-  // TODO: Make protected routes based on isLoggedIn
+  // TODO: Make protected routes and redirect if not logged in
+  // TODO: Persist state on refresh and from loading page using URL bar
   render() {
     return (
       <React.Fragment>

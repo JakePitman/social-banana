@@ -17,33 +17,40 @@ function Navbar(props) {
   if (!isLoggedIn) {
     links = (
       <React.Fragment>
-        <span>
+        <li>
           <Link to="/register"> Register </Link>
-        </span>
-        <span>
+        </li>
+        <li>
           <Link to="/login"> Login </Link>
-        </span>
+        </li>
       </React.Fragment>
     );
   } else {
     links = (
       <React.Fragment>
-        <span>
+        <li>
           <Link to="/listing"> Listing </Link>
-        </span>
-        <span>
+        </li>
+        <li>
           <Link to="/settings"> Settings </Link>
-        </span>
-        <span>
+        </li>
+        <li>
           <Link to="/" onClick={handleLogout}>
             Logout
           </Link>
-        </span>
+        </li>
       </React.Fragment>
     );
   }
 
-  return <nav>{links}</nav>;
+  return (
+    <nav>
+      <span>
+        <Link to="/"> Home </Link>
+      </span>
+      <ul>{links}</ul>
+    </nav>
+  );
 }
 
 Navbar.propTypes = {
