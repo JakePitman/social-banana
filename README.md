@@ -40,8 +40,8 @@ https://www.realista.com.au/
 
 ### **SPECIFICATIONS**
 
-### **CLIENTOBJECTIVE**
-
+### **CLIENT OBJECTIVE**
+- To allow cl
 ### **OUR OBJECTIVE**
 
 To create a service that allows the automation of sharing listings to an agent’s connected social media channels will generate additional exposure of the Realista brand, increase faith and loyalty in the brand, and drive signups for new agents and potential buyers and sellers.
