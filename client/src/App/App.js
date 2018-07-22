@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Navbar from '../core/Navbar';
 import Home from '../Home';
 import Listing from '../Listing';
@@ -38,6 +38,7 @@ class App extends React.Component {
             path="/(login|register)/"
             render={() => <User handleLoginChange={this.handleLoginChange} />}
           />
+          <Route render={() => <Redirect to="/" />} />
         </Switch>
       </React.Fragment>
     );
