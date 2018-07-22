@@ -40,11 +40,25 @@ https://www.realista.com.au/
 
 ### **SPECIFICATIONS**
 
+Following CA's assignment guidelines and specifications, aswell as implementing our client's specifications:
+
+### Tech stack:
+
+    Front-end
+    - Pure css styling
+    - React
+    - Javascript
+
+    Back-end
+    - Express
+    - MongoDB/Mongoose
+    - Node JS
+
 ### **CLIENT OBJECTIVE**
-- To allow cl
-### **OUR OBJECTIVE**
 
 To create a service that allows the automation of sharing listings to an agent’s connected social media channels will generate additional exposure of the Realista brand, increase faith and loyalty in the brand, and drive signups for new agents and potential buyers and sellers.
+
+### **OUR OBJECTIVE**
 
 We strive to design, build, test and deploy a microservice web application prototype in order to assist Realista’s business objectives.
 
@@ -56,12 +70,46 @@ We strive to design, build, test and deploy a microservice web application proto
 
 ### **TOOLS & RESOURCES**
 
+Documenting
+
+- Google Sheets
+- Adobe InDesign
+- Trello
+- Dropbox
+
+Resources
+
+- Linked in Docs
+  - [Developers guide](https://developer.linkedin.com/)
+- React
+  - [React docs](https://reactjs.org/docs/getting-started.html)
+  - [Alligator - _'Index.js for Interfaces'_](https://alligator.io/react/index-js-public-interfaces/)
+  - [Medium - _'React App with Webpack'_](https://medium.freecodecamp.org/part-1-react-app-from-scratch-using-webpack-4-562b1d231e75?source=userActivityShare-771256f05c68-1531790077)
+- OAuth
+  - [OAuth 2.0 docs](https://oauth.net/2/)
+  - [Youtube - _'OAuth all things!'_](https://www.youtube.com/watch?v=wA4kqKFua2Q)
+- Authentication
+  - [Dzone - _'Cookies vs Tokens'_](https://dzone.com/articles/cookies-vs-tokens-the-definitive-guide)
+  - [Pony foo - _'Cookies vs Tokens'_](https://ponyfoo.com/articles/json-web-tokens-vs-session-cookies)
+  - [Okta - _'JWT tokens'_](https://developer.okta.com/blog/2017/08/17/why-jwts-suck-as-session-tokens)
+- GitHub
+  - [Atlassian Blog - _'Gitflow guide'_](https://www.atlassian.com/blog/git/simple-git-workflow-simple)
+- Heroku
+  - [Medium - _'Deploying MERN stack to Heroku'_](https://medium.freecodecamp.org/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0)
+  - [Dave Ceddia - _'Deploy React & Express to Heroku'_](https://daveceddia.com/deploy-react-express-app-heroku/)
+  - [Heroku - _'Review Apps'_](https://devcenter.heroku.com/articles/github-integration-review-apps)
+  - [Heroku - _'Node.js Support'_](https://devcenter.heroku.com/articles/nodejs-support)
+  - [Heroku - _'Configuration & Config Vars'_](https://devcenter.heroku.com/articles/nodejs-support)
+
 ### **DIARY ENTRIES**
 
-**PROJECT TIMELINE**
-![PROJECT TIMELINE](https://docs.google.com/spreadsheets/d/1MWITXu66A347u9xMUXWBpSEvMRnZhnHQogPxvelMMBg/edit?usp=sharing)
+[PROJECT TIMELINE](https://docs.google.com/spreadsheets/d/1MWITXu66A347u9xMUXWBpSEvMRnZhnHQogPxvelMMBg/edit?usp=sharing)
 
 ### **CLIENT INTERRACTION**
+
+Client interraction consisted of instant messaging services such as Facebook Messenger.
+
+Some
 
 ## **PROJECT OUTLINE**
 
@@ -261,13 +309,13 @@ const UserSchema = new mongoose.Schema({
 **14. Provide User stories for your App.**
 
 https://trello.com/b/OMLvE5IV/user-stories
-![img](assets/user-stories.png)
+![img](readme_assets/user-stories.png)
 
 **15. Provide Wireframes for your App.**
 https://www.figma.com/file/WDdu8FSBSO1juNfeJpUYcniA/Realista?node-id=0%3A1
 
-![img](assets/user-flow.png)
-![img](assets/realista-wireframes.png)
+![img](readme_assets/user-flow.png)
+![img](readme_assets/realista-wireframes.png)
 
 **16. Describe the way Tasks are being allocated and tracked in your project.**
 
@@ -281,7 +329,7 @@ Using Trello, we have marked what tasks are individually pending, ongoing and co
 
 We’ve also decided to do daily standups based on the below project timeline sheet Barbara made for the team.
 
-![img](assets/project-timeline.png)
+![img](readme_assets/project-timeline.png)
 
 We have had a 15 minute team meeting every morning with the following topics and shared some feedback for any ongoing tasks or matters. When there are new things to work on for everyone, pairing up to work on the shared parts has been helpful.
 
