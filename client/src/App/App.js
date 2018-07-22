@@ -31,14 +31,16 @@ class App extends React.Component {
           handleLoginChange={this.handleLoginChange}
         />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/listing" component={Listing} />
-          <Route path="/settings" render={() => <Listing />} />
+          <Route exact path="/" render={() => <Home />} />
+          <Route path="/listing" render={() => <Listing />} />
+          <Route path="/settings" render={() => <Settings />} />
           <Route
             exact
             path="/(login|register)/"
             render={() => <User handleLoginChange={this.handleLoginChange} />}
           />
+          <Redirect from="/Listing/*" to="/Listing" />
+          <Redirect from="/Settings/*" to="/Settings" />
           <Redirect from="/login/*" to="/login" />
           <Redirect from="/register/*" to="/register" />
           <Redirect to="/" />
