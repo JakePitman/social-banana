@@ -33,12 +33,15 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/listing" component={Listing} />
-          <Route path="/settings" component={Settings} />
+          <Route path="/settings" render={() => <Listing />} />
           <Route
+            exact
             path="/(login|register)/"
             render={() => <User handleLoginChange={this.handleLoginChange} />}
           />
-          <Route render={() => <Redirect to="/" />} />
+          <Redirect from="/login/*" to="/login" />
+          <Redirect from="/register/*" to="/register" />
+          <Redirect to="/" />
         </Switch>
       </React.Fragment>
     );
