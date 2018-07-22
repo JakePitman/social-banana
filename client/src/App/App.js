@@ -32,11 +32,7 @@ class App extends React.Component {
         <Route path="/listing" component={Listing} />
         <Route path="/settings" component={Settings} />
         <Route
-          path="/login"
-          render={() => <User handleLoginChange={this.handleLoginChange} />}
-        />
-        <Route
-          path="/register"
+          path="/(login|register)/"
           render={() => <User handleLoginChange={this.handleLoginChange} />}
         />
       </React.Fragment>

@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 
 function Login(props) {
   const { handleLoginChange } = props;
+
+  // Function to handle login
+  // Backend handling of login will be done in App component
   const handleLogin = () => {
     handleLoginChange(true);
   };
+
   // Created a temporary button to login by setting isLoggedIn state
   return (
     <React.Fragment>

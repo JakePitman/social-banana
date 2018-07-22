@@ -7,11 +7,9 @@ function Navbar(props) {
   let links;
 
   // Function to handle logged in status of a user
+  // Backend handling will handled in App component
   const handleLogout = () => {
-    // e.preventDefault();
     handleLoginChange(false);
-    // Other than changing the isLoggedIn state,
-    // handling of backend due to logout should be addressed.
   };
 
   // Display a certain set of links depending on login state
