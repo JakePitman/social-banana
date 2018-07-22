@@ -14,12 +14,54 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 6
   },
+  name: {
+    type: String,
+    required: true
+  },
+  company: {
+    type: String,
+    required: true
+  },
+  phone: {
+    type: String,
+    required: true
+  },
   authTokens: [String],
   linkedIn: {
     toggleStatus: Boolean,
     access_token: String
   }
 });
+
+// Overrides default method so dont send whole user object with sensitive data
+UserSchema.methods.toJSON = function() {
+  const user = this;
+  const userObject = user.toObject();
+
+  const { email, name, company, phone } = userObject;
+
+  let linkedInToggleStatus = false;
+  let linkedInConnected = false;
+  if (userObject.linkedIn) {
+    if (userObject.linkedIn.toggleStatus === true) {
+      linkedInToggleStatus = true;
+    }
+    if (userObject.linkedIn.access_token) {
+      linkedInConnected = true;
+    }
+  }
+
+  const sentUser = {
+    email,
+    name,
+    company,
+    phone,
+    linkedInConnected,
+    linkedInToggleStatus
+  };
+
+  return sentUser;
+};
 
 // Instance methods (user)
 UserSchema.methods.generateAuthToken = async function() {
@@ -62,7 +104,6 @@ UserSchema.statics.findByToken = async function(token) {
 
 UserSchema.statics.findByCredentials = async function(email, password) {
   const User = this;
-
   try {
     const user = await User.findOne({ email });
     if (!user) {

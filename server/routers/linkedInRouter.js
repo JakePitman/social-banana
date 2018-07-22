@@ -79,7 +79,7 @@ linkedInRouter.post('/share', authenticate, async (req, res) => {
       content: {
         title: `$${price} - \n${address}`,
         description: `This doesnt even show! (<= 256chars)`,
-        'submitted-url': `https://www.realista.com.au/`,
+        'submitted-url': `https://www.teambanana.com.au/`,
         'submitted-image-url': `http://3.bp.blogspot.com/-6kABIu06PfM/UqX3w2XZZ6I/AAAAAAAAB8E/dBnFmfebuIc/s1600/Banana-Cottage.jpg`
       },
       visibility: {
@@ -99,6 +99,20 @@ linkedInRouter.post('/share', authenticate, async (req, res) => {
     });
     const { updateUrl } = response.data;
     res.status(201).send({ updateUrl });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ error: error.message });
+  }
+});
+
+linkedInRouter.delete('/disconnect', authenticate, (req, res) => {
+  const { user } = req;
+
+  try {
+    user.linkedIn.access_token = null;
+    user.save();
+
+    res.status(200).send();
   } catch (error) {
     console.log(error);
     res.status(400).send({ error: error.message });

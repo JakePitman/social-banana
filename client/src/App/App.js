@@ -17,16 +17,17 @@ class App extends Component {
   state = {
     loaded: false,
     loggedIn: false,
-    name: 'margaret',
-    company: 'bananaDeveloper',
-    phone: '0412342123123',
+    name: null,
+    company: null,
+    phone: null,
     email: null,
     authToken: null,
     linkedInToggleStatus: false,
-    linkedInConnected: true,
+    linkedInConnected: false,
     linkedInURL: null
   };
 
+  // TODO: same code used twice in didMount and login, need to break down into helper function!
   async componentDidMount() {
     const authHeader = localStorage.getItem('authorization');
     if (authHeader) {
@@ -34,11 +35,23 @@ class App extends Component {
       try {
         const authToken = authHeader.split(' ')[1];
         const res = await usersAPI.getUser(authToken);
-        const { email } = res.user;
+        const {
+          email,
+          name,
+          company,
+          phone,
+          linkedInToggleStatus,
+          linkedInConnected
+        } = res.user;
         this.setState(() => ({
           loggedIn: true,
+          email,
+          name,
+          company,
+          phone,
           authToken,
-          email
+          linkedInToggleStatus,
+          linkedInConnected
         }));
       } catch (error) {
         console.log(error);
@@ -70,21 +83,35 @@ class App extends Component {
     }
   }
 
-  handleLogin = async (email, password) => {
+  // TODO: same code used twice in didMount and login, need to break down into helper function!
+  handleLogin = async (inputEmail, inputPassword) => {
     try {
-      const res = await usersAPI.loginUser(email, password);
+      // GET USER DATA
+      const res = await usersAPI.loginUser(inputEmail, inputPassword);
       const { user, authToken } = res;
+      const {
+        email,
+        name,
+        company,
+        phone,
+        linkedInToggleStatus,
+        linkedInConnected
+      } = user;
       this.setState(() => {
         return {
           loggedIn: true,
-          email: user.email,
+          email,
+          name,
+          company,
+          phone,
           authToken,
-          connectedToLinkedIn: true
+          linkedInToggleStatus,
+          linkedInConnected
         };
       });
       localStorage.setItem('authorization', `Bearer ${authToken}`);
-      // TODO: same code used twice, break done into helper function
       try {
+        // GET LINKEDIN URL
         const res = await socialAPI.getLinkedInURL(this.state.authToken);
         const { url } = res;
         this.setState(() => {
