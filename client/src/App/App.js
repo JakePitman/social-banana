@@ -142,12 +142,13 @@ class App extends Component {
   };
 
   // TODO: hook up profile editing ong settings page
-  // handleEdit(event) {
-  //   event.preventDefault();
-  //   var data = {
+  // handleEdit = () => {
+  //   e.preventDefault();
+  //   const { user } = {
   //     name: this.state.name,
   //     email: this.state.email,
-  //     id: this.state.id
+  //     company: this.state.company,
+  //     phone: this.state.phone
   //   }
   //     .then(function(data) {
   //       console.log(data);
@@ -160,7 +161,7 @@ class App extends Component {
   //     .catch(function(err) {
   //       console.log(err);
   //     });
-  // }
+  // };
 
   render() {
     return (
