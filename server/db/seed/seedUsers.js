@@ -19,22 +19,22 @@ const users = [
     ],
     linkedIn: {
       toggleStatus: true,
-      access_token: process.env.MARGARET_LINKEDIN_ACCESS_TOKEN
+      accessToken: process.env.MARGARET_LINKEDIN_ACCESS_TOKEN
     }
   },
   {
-    email: 'janetbananadev@outlook.com',
+    email: 'maybananadev@outlook.com',
     name: 'Janet',
     company: 'Banana Factory',
     phone: '042512341234',
-    password: 'teambanana7'
+    password: process.env.MARGARET_PASSWORD
   },
   {
     email: 'june@email.com',
     name: 'June',
     company: 'Banana Factory',
     phone: '042598769876',
-    password: 'teambanana7'
+    password: process.env.MARGARET_PASSWORD
   }
 ];
 
