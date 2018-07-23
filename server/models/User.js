@@ -30,6 +30,14 @@ const UserSchema = new mongoose.Schema({
   linkedIn: {
     toggleStatus: Boolean,
     access_token: String
+  },
+  twitter: {
+    toggleStatus: Boolean,
+    oauth_access_token: String,
+    oauth_access_token_secret: String,
+    temp: {
+      oauth_token_secret: String
+    }
   }
 });
 
@@ -37,9 +45,9 @@ const UserSchema = new mongoose.Schema({
 UserSchema.methods.toJSON = function() {
   const user = this;
   const userObject = user.toObject();
-
   const { email, name, company, phone } = userObject;
 
+  // LinkedIn
   let linkedInToggleStatus = false;
   let linkedInConnected = false;
   if (userObject.linkedIn) {
@@ -51,13 +59,27 @@ UserSchema.methods.toJSON = function() {
     }
   }
 
+  // Twitter
+  let twitterToggleStatus = false;
+  let twitterConnected = false;
+  if (userObject.twitter) {
+    if (userObject.twitter.toggleStatus === true) {
+      twitterToggleStatus = true;
+    }
+    if (userObject.twitter.access_token) {
+      twitterConnected = true;
+    }
+  }
+
   const sentUser = {
     email,
     name,
     company,
     phone,
     linkedInConnected,
-    linkedInToggleStatus
+    twitterConnected,
+    linkedInToggleStatus,
+    twitterToggleStatus
   };
 
   return sentUser;
