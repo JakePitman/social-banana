@@ -21,11 +21,16 @@
   outline: none;
   font-size: 14px;
   background: none;
+  cursor: pointer;
   /* font-size: 1.25rem; */
   /* cursor: pointer; */
   /* width: 100%; */
   /* padding: 1rem; */
   /* text-align: center; */
+}
+
+.form-toggle button:hover {
+  color: #908f8f;
 }
 
 .form-toggle .active {
@@ -34,8 +39,9 @@
 
 .form {
   margin: 0px auto;
-  max-width: 20rem;
+  max-width: 25rem;
   padding: 15px;
+  box-shadow: 0px 8px 0.12px #cccccc;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -64,10 +70,23 @@
   display: flex;
   justify-content: center;
   font-size: 14px;
-  width: 20%;
+  width: 40%;
   padding: 0.5rem 0;
   background: #6c92ff;
   color: #ffffff;
   border-radius: 8px;
   margin: auto;
+}
+
+.form button:hover {
+  cursor: pointer;
+  background: #2196f3;
+  -webkit-transition: 0.1s;
+  color: azure;
+}
+
+.form button:active {
+  background: #908f8f;
+  -webkit-transition: -0.5s;
+  color: azure;
 }

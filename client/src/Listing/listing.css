@@ -86,6 +86,18 @@ select {
   cursor: pointer;
 }
 
+.upload-listing-button:hover {
+  background: #2196f3;
+  -webkit-transition: 0.1s;
+  color: azure;
+}
+
+.upload-listing-button:active {
+  background: #908f8f;
+  -webkit-transition: -0.5s;
+  color: azure;
+}
+
 /*-------------------------MEDIA-BOX--------------------------*/
 
 .media-boxes {
