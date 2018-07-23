@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-// Components
-import Navbar from '../core/Navbar';
+import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
 import Login from '../Login';
 import Settings from '../Settings';
 import Listing from '../Listing';
+import Navbar from '../core/Navbar';
+import {
+  handleToggle,
+  resetRedirectHome,
+  useRedirectHome
+} from '../services/stateFunctions';
 import './app.css';
 
 // Helper Services
 import usersAPI from '../services/usersAPI';
 import socialAPI from '../services/socialAPI';
-import { handleToggle } from '../services/stateFunctions';
 
 class App extends Component {
   state = {
@@ -23,8 +25,9 @@ class App extends Component {
     email: null,
     authToken: null,
     linkedInToggleStatus: false,
-    linkedInConnected: false,
-    linkedInURL: null
+    linkedInConnected: true,
+    linkedInURL: null,
+    redirectHome: false
   };
 
   // TODO: same code used twice in didMount and login, need to break down into helper function!
@@ -179,7 +182,12 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={() => <Login handleLogin={this.handleLogin} />}
+              render={() => (
+                <Login
+                  handleLogin={this.handleLogin}
+                  resetRedirectHome={resetRedirectHome.bind(this)}
+                />
+              )}
             />
             <Route
               path="/settings"
@@ -191,6 +199,8 @@ class App extends Component {
                 <Listing
                   stateCopy={this.state}
                   handleToggle={handleToggle.bind(this)}
+                  resetRedirectHome={resetRedirectHome.bind(this)}
+                  useRedirectHome={useRedirectHome.bind(this)}
                 />
               )}
             />

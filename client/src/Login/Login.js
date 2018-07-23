@@ -44,6 +44,10 @@ class LoginForm extends React.Component {
     }
   };
 
+  componentDidMount() {
+    this.props.resetRedirectHome();
+  }
+
   render() {
     return (
       <div className="welcome">

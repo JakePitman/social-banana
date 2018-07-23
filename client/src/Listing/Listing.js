@@ -4,16 +4,20 @@ import MediaBox from './MediaBox';
 import './listing.css';
 
 import socialAPI from '../services/socialAPI';
+import { Redirect } from 'react-router-dom';
 
 function ListingsPage(props) {
   const toggleSettings = {
     linkedIn: props.stateCopy.linkedInToggleStatus
   };
 
+  const redirectHome = props.stateCopy.redirectHome;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!toggleSettings.linkedIn) {
       console.log('LinkedIn not toggled');
+      props.useRedirectHome();
     } else {
       const formData = {};
       const children = e.target.children;
@@ -33,13 +37,23 @@ function ListingsPage(props) {
           amenitiesValues[i].children[1].value;
       }
       console.log(formData);
+
       const res = await socialAPI.shareListing(
         formData,
         props.stateCopy.authToken
       );
-      console.log(res.updateUrl);
+      //console.log(res.updateUrl);
+
+      //sets redirectHome to true in App.js
+      props.useRedirectHome();
     }
   };
+
+  if (props.stateCopy.redirectHome) {
+    //reset redirectHome to false in App.js before redirecting to home
+    //props.resetRedirectHome();
+    return <Redirect to="/" />;
+  }
 
   return (
     <div>
