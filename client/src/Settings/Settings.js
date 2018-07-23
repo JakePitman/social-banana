@@ -17,7 +17,6 @@ class Settings extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleClick = (event) => {
@@ -29,13 +28,8 @@ class Settings extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     alert('Updated successfully!');
-  };
-
-  handleEdit(e) {
-    e.preventDefault();
-    const { user } = {
+    const user = {
       name: this.state.name,
-      email: this.state.email,
       company: this.state.company,
       phone: this.state.phone
     }
@@ -50,14 +44,40 @@ class Settings extends React.Component {
       .catch(function(err) {
         console.log(err);
       });
-  }
+  };
+
+  // handleEdit(e) {
+  //   e.preventDefault();
+  //   alert('this passes');
+  //   const { user } = {
+  //     name: this.props.name,
+  //     email: this.props.email,
+  //     company: this.props.company,
+  //     phone: this.props.phone
+  //   }
+  //     .then(function(data) {
+  //       console.log(data);
+  //       if (data === 'success') {
+  //         this.setState({
+  //           msg: 'User has been edited.'
+  //         });
+  //       }
+  //     })
+  //     .catch(function(err) {
+  //       console.log(err);
+  //     });
+  // }
 
   render() {
     return (
       <div className="Account">
         <Profile media="linkedin" {...this.props} />
         <SocialLink media="linkedIn" {...this.props} />
-        <button className="cta-primary" type="submit" onClick={this.handleEdit}>
+        <button
+          className="cta-primary"
+          type="submit"
+          onClick={this.handleSubmit}
+        >
           Edit
         </button>
       </div>
