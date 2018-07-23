@@ -186,7 +186,12 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={() => <Login handleLogin={this.handleLogin} />}
+              render={() => (
+                <Login
+                  handleLogin={this.handleLogin}
+                  resetRedirectHome={resetRedirectHome.bind(this)}
+                />
+              )}
             />
             <Route
               path="/settings"

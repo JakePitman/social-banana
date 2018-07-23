@@ -17,6 +17,7 @@ function ListingsPage(props) {
     e.preventDefault();
     if (!toggleSettings.linkedIn) {
       console.log('LinkedIn not toggled');
+      props.useRedirectHome();
     } else {
       const formData = {};
       const children = e.target.children;
@@ -36,11 +37,13 @@ function ListingsPage(props) {
           amenitiesValues[i].children[1].value;
       }
       console.log(formData);
+
       const res = await socialAPI.shareListing(
         formData,
         props.stateCopy.authToken
       );
-      console.log(res.updateUrl);
+      //console.log(res.updateUrl);
+
       //sets redirectHome to true in App.js
       props.useRedirectHome();
     }
@@ -48,7 +51,7 @@ function ListingsPage(props) {
 
   if (props.stateCopy.redirectHome) {
     //reset redirectHome to false in App.js before redirecting to home
-    props.resetRedirectHome();
+    //props.resetRedirectHome();
     return <Redirect to="/" />;
   }
 
