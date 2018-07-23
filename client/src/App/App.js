@@ -21,6 +21,7 @@ class App extends React.Component {
 
   // Route will ONLY render if the route matches
   // React.Fragment mitigates unnecessary containing <div> tags
+  // TODO: Handle logged in status from external source
   // TODO: Make protected routes and redirect if not logged in
   // TODO: Persist state on refresh and from loading page using URL bar
   render() {
