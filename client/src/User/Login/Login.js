@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import auth from '../../services/auth';
 
-function Login(props) {
-  const { handleLoginChange } = props;
+function Login() {
+  // const { handleLoggedIn } = props;
 
-  // Function to handle login
-  // Backend handling of login will be done in App component
-  const handleLogin = () => {
-    handleLoginChange(true);
+  const handleLogin = async () => {
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    await auth.login();
+    console.log('authenticated:', auth.isAuthenticated());
+    // handleLoggedIn(auth.isAuthenticated());
   };
-
   // Created a temporary button to login by setting isLoggedIn state
   return (
     <React.Fragment>
@@ -22,12 +23,12 @@ function Login(props) {
   );
 }
 
-Login.propTypes = {
-  handleLoginChange: PropTypes.func,
-};
+// Login.propTypes = {
+//   handleLoggedIn: PropTypes.func,
+// };
 
-Login.defaultProps = {
-  handleLoginChange: null,
-};
+// Login.defaultProps = {
+//   handleLoggedIn: null,
+// };
 
 export default Login;

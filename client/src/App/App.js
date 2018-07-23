@@ -5,18 +5,19 @@ import Home from '../Home';
 import Listing from '../Listing';
 import Settings from '../Settings';
 import User from '../User';
+import auth from '../services/auth';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
+      loggedIn: false,
     };
   }
 
   // All login/logout backend logic to be here
-  handleLoginChange = (value) => {
-    this.setState({ isLoggedIn: value });
+  handleLoggedIn = (value) => {
+    this.setState({ loggedIn: value });
   };
 
   // Route will ONLY render if the route matches
@@ -27,19 +28,13 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar
-          isLoggedIn={this.state.isLoggedIn}
-          handleLoginChange={this.handleLoginChange}
-        />
+        <h2> user: {auth.isAuthenticated() ? 'logged in' : 'logged out'} </h2>
+        <Navbar />
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route path="/listing" render={() => <Listing />} />
           <Route path="/settings" render={() => <Settings />} />
-          <Route
-            exact
-            path="/(login|register)/"
-            render={() => <User handleLoginChange={this.handleLoginChange} />}
-          />
+          <Route exact path="/(login|register)/" render={() => <User />} />
           <Redirect from="/Listing/*" to="/Listing" />
           <Redirect from="/Settings/*" to="/Settings" />
           <Redirect from="/login/*" to="/login" />
