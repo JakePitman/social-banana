@@ -1,6 +1,6 @@
 # WELCOME TO THE SOCIAL BANANA APPLICATION
 
-## PART B - PROJECT
+## **PART B - PROJECT**
 
 ~ _a group project designed, created and developed by Coder Academy students_ ~
 
@@ -11,6 +11,8 @@ https://www.realista.com.au/
 **Group Prototype:**
 
 [ INSERT FINAL WEBSITE HERE] <<---
+
+---
 
 ## **CONTENTS**
 
@@ -28,11 +30,14 @@ https://www.realista.com.au/
 - **[Workflow](#Workflow)**
 - **[ERD](#ERD)**
 - **[Wireframes](#Wireframes)**
-  - [Mobile](#Mobile)
-  - [Desktop](#Desktop)
+  - [Proposed Wireframes from Client](#Proposed_Wireframes_from_Client)
+  - [Initial Whiteboard Wireframes](#Initial_Whiteboard_Wireframes)
+  - [Our Wireframes](#Our_Wireframes)
 - **[Problems & Solutions](#Problems_and_Solutions)**
 - **[Improvements](#Improvements)**
 - **[Final Review](#Final_review)**
+
+---
 
 ## **PROJECT OUTLINE**
 
@@ -52,9 +57,12 @@ Following CA's assignment guidelines and specifications, aswell as implementing 
     Back-end
     - Express
     - MongoDB/Mongoose
-    - Node JS
+    - Node.js
+    - Jest.js
 
 ### **CLIENT OBJECTIVE**
+
+![img](./readme_assets/realista-logo.svg)
 
 To create a service that allows the automation of sharing listings to an agent’s connected social media channels will generate additional exposure of the Realista brand, increase faith and loyalty in the brand, and drive signups for new agents and potential buyers and sellers.
 
@@ -62,7 +70,7 @@ To create a service that allows the automation of sharing listings to an agent�
 
 We strive to design, build, test and deploy a microservice web application prototype in order to assist Realista’s business objectives.
 
-![img](./assets/realista-logo.svg)
+---
 
 ## **PROJECT MANAGEMENT**
 
@@ -72,9 +80,10 @@ We strive to design, build, test and deploy a microservice web application proto
 
 Documenting
 
-- Google Sheets
+- Agile - Google Sheets
 - Adobe InDesign
 - Trello
+  - [Development Board](https://trello.com/b/LNKpuZFz/development#)
 - Dropbox
 
 Resources
@@ -103,155 +112,69 @@ Resources
 
 ### **DIARY ENTRIES**
 
-[PROJECT TIMELINE](https://docs.google.com/spreadsheets/d/1MWITXu66A347u9xMUXWBpSEvMRnZhnHQogPxvelMMBg/edit?usp=sharing)
+We are using the Scrum Framework to implement the Agile Methodology. The product owner role will be shared with each group member so we can have group discussions on the priorities required for the application and have group conversations with the client. One person will be assigned a scrum master role to control the flow of the sprints.
+
+Using Trello, we have marked what tasks are individually pending, ongoing and completed. We have created planning and development scrum boards in order to implement agile practices. Within the limited timeframes, we’ve set the specific timeline and kept tracking the progress. It’s been a very useful tool to find if we’ve been doing alright and how far we are from acheiving our team goals.
+
+In addition to Trello, we created a diary entry spreadsheet using [Google Sheets](https://www.google.com.au/sheets/about/) to make record keeping more personalized and easier for the group to have an overview of each student's progress.
+
+This makes it easier to view, instead of going through each card to view each students current working schedule.
+
+Link to our [Project Timeline Spreasheet.](https://docs.google.com/spreadsheets/d/1MWITXu66A347u9xMUXWBpSEvMRnZhnHQogPxvelMMBg/edit?usp=sharing)
+
+We’ve also decided to do daily standups based on the project timeline sheet Barbara made for the team.
+
+We have had a 15 minute team meeting every morning with the following topics and shared some feedback for any ongoing tasks or matters. When there are new things to work on for everyone, pairing up to work on the shared parts has been helpful.
+
+- what we accomplished since the last standup
+- what we’ll accomplish between now and the next standup
+- anything that’s holding up our progress
 
 ### **CLIENT INTERRACTION**
 
-Client interraction consisted of instant messaging services such as Facebook Messenger.
+We've communicated with our client - Realista - via Facebook Messenger, in which the group was added to a group chat for access to some of their resources and proposed wireframes.
 
-Some
+During our initial meeting, we presented a brief to the client to ensure they are aware of our project guidelines and timeframe.
 
-## **PROJECT OUTLINE**
+A breakdown of what was presented on the client brief is as below:
+
+- Who we are
+- Client Goal
+- What to expect
+- Timeline
+- Handoff/Feedback
+- Questions
+
+Client meeting notes:
+
+- ![img](readme_assets/client2.jpg)
+- ![img2](readme_assets/clientJuly7.jpg)
 
 ---
 
-**4. Describe the project will you be conducting and how your App will address the client’s needs.**
+## **USER STORIES**
 
-Our project will be to add the ability for agents to automatically share their property listings to their social media accounts as soon as a property listing is created. We will achieve this by creating a system to link their Realista account with their social media accounts then when creating a property listing the agent has the option to post this listing to their linked accounts.
+---
 
-By providing a service that allows the automation of sharing listings to an agent’s connected social media channels will generate additional exposure of the Realista brand, increase faith and loyalty in the brand, and drive signups for new agents and potential buyers and sellers.
+**[Trello - User Stories Board](https://trello.com/b/OMLvE5IV/user-stories#)**
 
-**5. Identify and describe the software (including databases) to be used in your App.**
+![img](readme_assets/user-stories.png)
 
-As this will be a prototype microservice application that can be bolted on or refactored into the client's existing platform, there is flexibility in choosing our tech stack.
+---
 
-React will be used as the frontend and showcase the functionality of the app. Node, Express and MongoDB will consist the backend.
+## **WORKFLOW**
 
-It is paramount that the implementation and commenting of the code is verbose and well documented to allow ease of use and refactoring.
+---
 
-**6. Identify and describe the network setup you will use in your development.**
+**[Figma - Workflow](https://www.figma.com/file/WDdu8FSBSO1juNfeJpUYcniA/Realista?node-id=0%3A1)**
 
-Our application will be deployed across the internet. At this point in time our app will be deployed onto Heroku’s hosting platform. Heroku can slot in well with our GitHub flow by helping with our deployment test during a pull request.
+![img](readme_assets/user-flow.png)
 
-AWS is an option if we have time to research and implement it because of its prevalence in the industry, and learning it will be beneficial.
+---
 
-Additionally there will be ample server and client communication between the application and the social media platforms.
+## **ERD**
 
-**7. Identify and describe the infrastructure (i.e. hardware) that your App will run on.**
-
-The application will be a serverless application as it is deployed on Heroku (or AWS). The application can be accessed on any hardware device which has access to a web browser.
-
-**8. Describe the architecture of your App.**
-
-Our frontend is built on React and provides three main user interfaces:
-
-1.  A settings component - responsible for connecting the user's account to social media, and toggling whether or not those social media are used.
-2.  A listings component - responsible for displaying to the user which social media will be posted to, and allowing the user to toggle them on and off.
-3.  A login, signup and authentication component. This will allow the frontend to send and receive user cookies to create user sessions
-
-Our backend functionality is largely built around OAuth protocol, and is more complicated.
-
-1.  Linking to Social Media
-
-    - Our application's server will create a request to the form page of whichever social media is selected, with a client_id, and a redirect url (to our application).
-    - After filling in the authorization form (hosted by the social media), the social media server will use the redirect url to send an authorization token back to our server.
-    - Our server then sends the authorization token to the social media server, with our client_id, and client_secret (to authenticate that we own our server)
-    - Once the social media server checks these three things, it will send back the actual access token, which we will store in the user's account (in the database), to make posts in the future.
-
-2.  Posting to Social Media
-
-    - Our server takes the listing posted to Realista and posts it to the social media server, with the user's access token and the client id of our social media app.
-    - Our server then checks the response of that POST request and informs the user that the listing has been successfully/unsuccessfully posted to that social media in the browser.
-
-3.  Since we need to emulate user sessions for our app to function, we will have an authentication and login service for the app. This will work alongside our react front end for logging in and persisting user sessions.
-
-**9. Explain the different high-level components (abstractions) in your App.**
-
-Our app is made up of many components.
-
-1.  We will have a separate component for each social media platform. This will handle the OAuth and posting logic.
-
-2.  There will be a router component which will direct the endpoints to the appropriate logic.
-
-3.  Authentication component for emulating users.
-
-4.  User model component for interacting with user data in MongoDB.
-
-5.  Access token model to allow the secure storage of user access tokens. This will contain logic that will keep the access tokens secure
-
-6.  A server component to run the server.
-
-7.  In the front end we will have a login/signup page, a menu page for choosing one of the two main actions, a post listings page, and a social media settings page.
-
-**10. Detail any third party services that your App will use.**
-
-### Social Media
-
-In order to connect the agents Realista account to social media we will need to go through each social medias API to gain an access token for that service. When we want to share a listing to that social media we will again use the API with the access token to post to the agents feed.
-
-- **Linkedin REST API**
-- **Twitter API**
-
-- **Facebook SDK**
-  - Since facebook no longer allows 3rd party apps to automatically post to users feed we will be using the Facebook SDK to provide a ‘share to facebook’ popup after the listing is created.
-
-**11. Identify the database to be used in your app and provide a justification for your choice.**
-
-We will be using MongoDB for our database. Our client is set up with SQL, but we have chosen to use MongoDB as it is more flexible. As we are rapidly attempting to develop a new schema for an app based around technology we have not covered in the course, we cannot be sure about how our schema will need to be structured. It is likely that we will need to reassess our schema design throughout development, and doing so is much easier in MongoDB.
-
-**12. Discuss the database relations to be implemented.**
-
-Our plan is to create a schema that will be attached to one user, that will contain that user's settings for our component. For example, this schema will include tokens, and preferences for which social media are posted to. We have decided to construct it this way, because Realista already has tables in SQL that hold user data, and by containing our settings for this app within a single schema, it will be easier for them to integrate it into their database.
-
-**13. Provide your database schema design.**
-
-Our database will have a users model with many fields. This may change in the future depending on the information required for the app to function efficiently.
-
-### User profile
-
-_firstName, lastName, mobileNumber, agency, bioDescription, officeAddress, operatingLocations_
-
-- Realista currently stores this information for user profiles. These will all be stored as strings.
-
-### User details
-
-_ObjectId_
-
-- mongoDB will create a unique id for each user
-
-_email_
-
-- agents email, stored as string and validated as an email. Will also double as their username to login. This must be unique so that multiple users have the same email.
-
-_password_
-
-- a hashed version of their password using bcrypt to compare password entered. This is done to assure security in the case of data loss.
-
-_authTokens_
-
-- Users will be given an authToken for sessions which is saved on the client side. This is so they dont have to repeat logging in for every private route on our app. If they don't have an authToken stored in their client, one will be given when they login or signup with a valid email and password combination.
-
-### Socials:
-
-For each social media we will store several fields:
-
-_username_
-
-- the username or name on the social media, this will be then shown on the setting page when connected.
-
-_linked_
-
-- boolean value for if they have linked the social media account or not.
-
-_toggleStatus_
-
-- boolean value for if they toggle to share to that social media on listing, this value will be saved after a listing has been made.
-
-_socialTokens_
-
-- when linking the agents account with social media sites using oAuth we will recieve the users `access_token`, this is then used in each request to post to that users social media feed. For sites using oAuth 1.0/1.0a we will also store the users `access_token_secret` as that is also required when posting. These will be hashed using bcrypt for security reasons.
-
-### UserSchema Design
+---
 
 ```javascript
 const UserSchema = new mongoose.Schema({
@@ -306,36 +229,33 @@ const UserSchema = new mongoose.Schema({
 });
 ```
 
-**14. Provide User stories for your App.**
+---
 
-https://trello.com/b/OMLvE5IV/user-stories
-![img](readme_assets/user-stories.png)
+## **WIREFRAMES**
 
-**15. Provide Wireframes for your App.**
-https://www.figma.com/file/WDdu8FSBSO1juNfeJpUYcniA/Realista?node-id=0%3A1
+---
 
-![img](readme_assets/user-flow.png)
+### **PROPOSED WIREFRAMES FROM CLIENT**
+
+**Social Media Linking Page**
+
+![client-smlink](readme_assets/client_linksm.jpg)
+![client-modal](readme_assets/client_modal.jpg)
+![client-connected](readme_assets/client_connected.jpg)
+
+**Sharing Listing Page**
+
+![client-link](readme_assets/client_profilelink.jpg)
+
+![client-listing](readme_assets/client_listshare.jpg)
+
+### **INITIAL WHITEBOARD WIREFRAMES**
+
+![DRAWING-WIRFRAMES](readme_assets/drawingForWireframes.jpg)
+
+### **OUR WIREFRAMES**
+
 ![img](readme_assets/realista-wireframes.png)
-
-**16. Describe the way Tasks are being allocated and tracked in your project.**
-
-We are using Trello for our task management and allocation. We are using two boards to organise: the planning board is used for overall project tasks, the development board is used for development and feature tasks. For project management we have the lists: Timeline, Resources, Backlog, To Do, In Progress, Completed. For development we have lists: Backlog, Sprint, In Progress, Testing, Review, Deployed. Each task is tagged and assigned accordingly.
-
-**17. Discuss how Agile methodology is being implemented in your App.**
-
-We are using the Scrum Framework to implement the Agile Methodology. The product owner role will be shared with each group member so we can have group discussions on the priorities required for the application and have group conversations with the client. One person will be assigned a scrum master role to control the flow of the sprints.
-
-Using Trello, we have marked what tasks are individually pending, ongoing and completed. We have created planning and development scrum boards in order to implement agile practices. Within the limited timeframes, we’ve set the specific timeline and kept tracking the progress. It’s been a very useful tool to find if we’ve been doing alright and how far we are from acheiving our team goals.
-
-We’ve also decided to do daily standups based on the below project timeline sheet Barbara made for the team.
-
-![img](readme_assets/project-timeline.png)
-
-We have had a 15 minute team meeting every morning with the following topics and shared some feedback for any ongoing tasks or matters. When there are new things to work on for everyone, pairing up to work on the shared parts has been helpful.
-
-- what we accomplished since the last standup
-- what we’ll accomplish between now and the next standup
-- anything that’s holding up our progress
 
 **18. Provide an overview and description of your Source control process.**
 
