@@ -33,7 +33,8 @@ https://www.realista.com.au/
   - [Proposed Wireframes from Client](#Proposed_Wireframes_from_Client)
   - [Initial Whiteboard Wireframes](#Initial_Whiteboard_Wireframes)
   - [Our Wireframes](#Our_Wireframes)
-- **[Problems & Solutions](#Problems_and_Solutions)**
+- **[Challenges](#Challenges)**
+- **[Code Reviews](#Code_Reviews)**
 - **[Improvements](#Improvements)**
 - **[Final Review](#Final_review)**
 
@@ -257,32 +258,56 @@ const UserSchema = new mongoose.Schema({
 
 ![img](readme_assets/realista-wireframes.png)
 
-**18. Provide an overview and description of your Source control process.**
+---
 
-We will be using Git and GitHub for our source control process. We will be implementing the GitHub Flow for collaboration. The master branch will always be deployable and production ready. It is also a protected branch on GitHub thus the only way to merge a feature branch into the master branch is via a pull request. A feature branch works in tandem with our sprints where all development, testing and review will happen on the feature branch before merging into master. For items outside of development, we will be using Dropbox to keep items centralised and in sync.
+## **CHALLENGES**
 
-**19. Provide an overview and description of your Testing process.**
+---
 
-We have decided to use Jest for our front-end development. Our front end is quite simple, and will not require many tests. We will likely write front end tests, but will not be doing test-driven development for the front end, as the design may need to change over time.
+| Student     |                                                       Issue/s                                                       | Resolved? (Y/N) |
+| ----------- | :-----------------------------------------------------------------------------------------------------------------: | --------------: |
+| **Mark**    |                            - setting up http testing. Doesn't close server when finished                            |                 |
+|             |                                       - conditional rendering the login page                                        |                 |
+|             |                                           - redirecting from the backend                                            |                 |
+| **Serina**  | - network error: login window is frozen or displays invalid combination with correct input data when connected with |                 |
+| **Jake**    |                  - Images can't be imported into React components if they have any capital letters                  |                 |
+| **Barbara** |                        - Issues rebasing branch with conflicting files in components and css                        |                 |
+|             |                              - unable to deploy successfully on heroku-test-deployment                              |                 |
+| **Franky**  |                                                          -                                                          |                 |
 
-For the backend, we will use Supertest, which makes HTTP request testing simple.
-We are not yet familiar with writing tests for OAuth protocol, so we intend to make a successful post to a social media first, then write a test that passes. This is to avoid any mistakes we may make in creating tests. After the test has been successfully written, it will be useful after each change we make to our application, so that we will not have to log in and out of user profiles, and make posts to fake accounts.
+---
 
-**20. Discuss and analyse requirements related to information system security.**
+## **CODE REVIEWS**
 
-Information security is one of the main concerns that needs to be addressed. The app acts on the users behalf to post on their social media platform. In order to accomplish that it requires an access token generated from an authentication protocol, in this case OAuth, that is used to permit the app to post on the social media platform. This access token is essentially like a password and must require strict security and protection standards to store it.
+---
 
-Additionally, the application can only be run once the user has signed into Realista's platform. Thus, requiring a secure system to handle user sessions. Although, we are not require to implement a fully featured login and user session system, we must be able to emulate a logged in user and be aware of the security concerns that come with a user session.
+Prior to initializing our first pull request on Github, our app was optimized to work as a 'Review App' - which is a disposable Heroku App with a unique URL.
 
-**21. Discuss methods you will use to protect information and data.**
+Our app was set to refresh on Heroku automatically for each pull request, thus allowing us to propose, test, and merge changes to our code base.
 
-To handle the obtaining and exchanging of the access token, all HTTP requests and responses will be done over the HTTPS protocol. The social media platforms all implement OAuth for their application authorisation process. This requires us to store our client secret key as a secure enviromental variable in our server. We will be using bcrypt to store the access tokens securely in the database.
+More information can be found be clicking [here.](https://devcenter.heroku.com/articles/github-integration-review-apps)
 
-Since we also have to emulate a signed in user, we will be using passport.js, jws and secure cookies to manage that. Environment variables will be used to hide variables we do not wish the public to be able to see in our code. We will also be using `.gitignore` to assure these are not uploaded to Github.
+Furthermore, code reviews on Github were conducted by all members of the group. This was a great learning experience, as it provides the student an insight on how to evaluate another developers code when working in future group/team projects.
 
-**22. Research what your legal obligations are in relation to handling user data.**
+Insights to our merges, commits, PR's and overall project flow can be found at
+**[Social-Banana - Github Insights.](https://github.com/fycdev/social-banana/pulse)**
 
-We are making a prototype and not intended for production use. It is up to the client's discretion and responsibility to implement the prototype app into their platform. We are not liable for any issues that go wrong after the handoff of the prototype as we cannot fully consider the company's privacy policy when building the application. During development we are permitted to create test accounts solely for development testing purposes and that the accounts do not interact with real accounts on the social media platforms.
+![sb-insights](readme_assets/sb-insights.png)
+_Screenshot taken on 23 July 2018_
+
+---
+
+## **IMPROVEMENTS**
+
+---
+
+    [ NEEDS TO BE COMPLETED ]
+
+## **FINAL REVIEW**
+
+---
+
+    [ NEEDS TO BE COMPLETED ]
 
 ## **CONTRIBUTERS**
 
