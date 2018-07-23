@@ -46,7 +46,9 @@ class App extends Component {
           company,
           phone,
           linkedInToggleStatus,
-          linkedInConnected
+          linkedInConnected,
+          twitterToggleStatus,
+          twitterConnected
         } = res.user;
         this.setState(() => ({
           loggedIn: true,
@@ -56,7 +58,9 @@ class App extends Component {
           phone,
           authToken,
           linkedInToggleStatus,
-          linkedInConnected
+          linkedInConnected,
+          twitterToggleStatus,
+          twitterConnected
         }));
       } catch (error) {
         console.log(error);
@@ -90,7 +94,9 @@ class App extends Component {
         company,
         phone,
         linkedInToggleStatus,
-        linkedInConnected
+        linkedInConnected,
+        twitterToggleStatus,
+        twitterConnected
       } = user;
       this.setState(() => {
         return {
@@ -101,7 +107,9 @@ class App extends Component {
           phone,
           authToken,
           linkedInToggleStatus,
-          linkedInConnected
+          linkedInConnected,
+          twitterToggleStatus,
+          twitterConnected
         };
       });
       localStorage.setItem('authorization', `Bearer ${authToken}`);
@@ -136,6 +144,8 @@ class App extends Component {
         authToken: null,
         linkedInToggleStatus: false,
         linkedInConnected: false,
+        twitterToggleStatus: false,
+        twitterConnected: false,
         linkedInURL: null
       };
     });
