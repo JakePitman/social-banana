@@ -22,7 +22,11 @@ class SocialLink extends React.Component {
     return (
       <div className="sociallink">
         {linkedInConnected ? (
-          <p>Disconnect LinkedIn button</p>
+          <input
+            type="button"
+            onclick="onLinkedInLoad()"
+            value="Sign out of LinkedIn account"
+          />
         ) : (
           <a href={linkedInURL}>
             <img
