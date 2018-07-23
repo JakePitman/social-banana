@@ -82,6 +82,7 @@ class Settings extends React.Component {
           className="cta-primary"
           type="submit"
           onClick={this.handleSubmit}
+          onChange={this.handleChange}
         >
           Edit
         </button>
