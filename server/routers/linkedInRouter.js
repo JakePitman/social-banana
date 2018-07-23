@@ -71,7 +71,7 @@ linkedInRouter.post('/share', authenticate, async (req, res) => {
       !inspectionTime ||
       !inspectionDate
     ) {
-      throw new Error('Denied. Not all listing fields given.');
+      throw new Error('Denied. Not all required listing fields given.');
     }
 
     const postBody = {

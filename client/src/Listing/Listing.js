@@ -41,6 +41,7 @@ function ListingsPage(props) {
       toggleSettings
     );
     console.log(res.linkedInUrl);
+    console.log(res.twitterUrl);
 
     //sets redirectHome to true in App.js
     props.useRedirectHome();
