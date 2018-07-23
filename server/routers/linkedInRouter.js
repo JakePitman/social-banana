@@ -34,10 +34,10 @@ linkedInRouter.get(
   validateCallback,
   getAccessToken,
   async (req, res) => {
-    const { user, access_token } = req;
+    const { user, accessToken } = req;
     try {
-      // TODO: bcrypt access_token (PRE SAVE!! :O)
-      user.linkedIn.access_token = access_token;
+      // TODO: bcrypt accessToken (PRE SAVE!! :O)
+      user.linkedIn.accessToken = accessToken;
       await user.save();
 
       res.redirect('/settings');
@@ -51,8 +51,8 @@ linkedInRouter.get(
 
 linkedInRouter.post('/share', authenticate, async (req, res) => {
   try {
-    const { access_token } = req.user.linkedIn;
-    if (!access_token) {
+    const { accessToken } = req.user.linkedIn;
+    if (!accessToken) {
       throw new Error('Forbidden, linkedIn account not connected');
     }
 
@@ -93,7 +93,7 @@ linkedInRouter.post('/share', authenticate, async (req, res) => {
       headers: {
         'Content-Type': 'application/json',
         'x-li-format': 'json',
-        Authorization: `Bearer ${access_token}`
+        Authorization: `Bearer ${accessToken}`
       },
       data: postBody
     });
@@ -109,7 +109,7 @@ linkedInRouter.delete('/disconnect', authenticate, (req, res) => {
   const { user } = req;
 
   try {
-    user.linkedIn.access_token = null;
+    user.linkedIn.accessToken = null;
     user.save();
 
     res.status(200).send();

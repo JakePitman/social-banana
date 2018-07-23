@@ -1,5 +1,4 @@
 const express = require('express');
-const axios = require('axios');
 const OAuth = require('oauth');
 
 const { User } = require('./../models/User');
@@ -10,13 +9,14 @@ const { authenticate } = require('./../middleware/authenticate');
 // Twitter Routes
 const twitterRouter = express.Router();
 
+// TODO: change to async await
 twitterRouter.get('/authURL', authenticate, async (req, res) => {
   console.log('hello from api/twitter/authURL');
   const { user } = req;
   const userId = user._id;
 
   try {
-    // TODO: middleware - Contruct twitter OAuth object
+    // Contruct oauth
     const oauth = new OAuth.OAuth(
       'https://api.twitter.com/oauth/request_token',
       'https://api.twitter.com/oauth/access_token',
@@ -26,23 +26,21 @@ twitterRouter.get('/authURL', authenticate, async (req, res) => {
       `${process.env.TWITTER_CALLBACK_URL}?userId=${userId}`,
       'HMAC-SHA1'
     );
-
+    // Get oauth token and secret, construct url to send user
     await oauth.getOAuthRequestToken(function(
       error,
       oauth_token,
       oauth_token_secret,
       results
     ) {
-      console.log('error: ', error);
-      console.log('oauth_token:', oauth_token);
-      console.log('oauth_token_secret:', oauth_token_secret);
-      console.log('results', results);
-
+      if (error) {
+        console.log(error);
+        res.send(error);
+        return;
+      }
       // Save to user
-      // user.twitter.temp.oauth_token = oauth_token; // dont need to save this
-      user.twitter.temp.oauth_token_secret = oauth_token_secret;
+      user.twitter.temp.tokenSecret = oauth_token_secret;
       user.save();
-
       // Construct URL
       const authURL = `https://api.twitter.com/oauth/authenticate?oauth_token=${oauth_token}`;
       res.send({ url: authURL });
@@ -53,6 +51,7 @@ twitterRouter.get('/authURL', authenticate, async (req, res) => {
   }
 });
 
+// TODO: change to async await
 twitterRouter.get('/callback', async (req, res) => {
   console.log('hello from /api/twitter/callback');
   // TODO: middlware - verify callback
@@ -63,9 +62,9 @@ twitterRouter.get('/callback', async (req, res) => {
     if (!user) {
       throw new Error('No user found');
     }
-    const { oauth_token_secret } = user.twitter.temp;
+    const { tokenSecret } = user.twitter.temp;
 
-    // TODO: middleware - construct oauth AGAIN
+    // Construct oauth
     const oauth = new OAuth.OAuth(
       'https://api.twitter.com/oauth/request_token',
       'https://api.twitter.com/oauth/access_token',
@@ -76,24 +75,26 @@ twitterRouter.get('/callback', async (req, res) => {
       'HMAC-SHA1'
     );
 
-    // Get access token
+    // Check token with usersTokenSecret, trade verifier for access token
     oauth.getOAuthAccessToken(
       oauth_token,
-      oauth_token_secret,
+      tokenSecret,
       oauth_verifier,
       function(error, oauth_access_token, oauth_access_token_secret, results) {
-        console.log('error: ', error);
-        console.log('oauth_access_token: ', oauth_access_token);
-        console.log('oauth_access_token_secret: ', oauth_access_token_secret);
-        console.log('results: ', results);
-
+        if (error) {
+          console.log(error);
+          res.redirect(
+            `/settings?twitter_connected=false&error_message=${error.data}`
+          );
+          return;
+        }
         // Save to user
-        user.twitter.oauth_access_token = oauth_access_token;
-        user.twitter.oauth_access_token_secret = oauth_access_token_secret;
+        user.twitter.accessToken = oauth_access_token;
+        user.twitter.accessTokenSecret = oauth_access_token_secret;
         user.save();
+        res.redirect(`/settings?twitter_connected=true`);
       }
     );
-    res.redirect(`/settings?twitter_connected=true`);
   } catch (error) {
     console.log(error);
     res.redirect(
@@ -102,10 +103,57 @@ twitterRouter.get('/callback', async (req, res) => {
   }
 });
 
-twitterRouter.post('/share', (req, res) => {
+// TODO: split into middleware
+// TODO: change to async await
+twitterRouter.post('/share', authenticate, (req, res) => {
+  console.log('hello from api/twitter/share');
+  const { user } = req;
+  const { accessToken, accessTokenSecret } = user.twitter;
+
+  console.log(req.body);
+  const { address, price, description } = req.body;
+  const propertyType = req.body['property-type'];
+  const landSize = req.body['land-size'];
+  const inspectionDate = req.body['inspection-date'];
+  const inspectionTime = req.body['inspection-time'];
+  const tweetStatus = `$${price} - ${address} - ${description} #teambanana`;
+
   try {
-    console.log('hello from api/twitter/callback');
-    res.send();
+    // Contruct oauth
+    const oauth = new OAuth.OAuth(
+      'https://api.twitter.com/oauth/request_token',
+      'https://api.twitter.com/oauth/access_token',
+      process.env.TWITTER_CONSUMER_KEY,
+      process.env.TWITTER_CONSUMER_SECRET,
+      '1.0A',
+      `${process.env.TWITTER_CALLBACK_URL}`,
+      'HMAC-SHA1'
+    );
+
+    // Post to twitter
+    oauth.post(
+      'https://api.twitter.com/1.1/statuses/update.json',
+      accessToken,
+      accessTokenSecret,
+      { status: tweetStatus },
+      function(error, data) {
+        if (error) {
+          let message = 'Oops, something went wrong';
+          if (error.statusCode === 403) {
+            message = 'Duplicate Status';
+          }
+          res.status(400).send(message);
+        } else {
+          // construct Status link
+          const jsonData = JSON.parse(data);
+          console.log(jsonData);
+          const { id_str } = jsonData;
+          const { screen_name } = jsonData.user;
+          const twitterUrl = `https://twitter.com/${screen_name}/status/${id_str}`;
+          res.send({ twitterUrl });
+        }
+      }
+    );
   } catch (error) {
     console.log(error);
     res.status(400).send({ error: error.message });

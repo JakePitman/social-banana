@@ -29,14 +29,14 @@ const UserSchema = new mongoose.Schema({
   authTokens: [String],
   linkedIn: {
     toggleStatus: Boolean,
-    access_token: String
+    accessToken: String
   },
   twitter: {
     toggleStatus: Boolean,
-    oauth_access_token: String,
-    oauth_access_token_secret: String,
+    accessToken: String,
+    accessTokenSecret: String,
     temp: {
-      oauth_token_secret: String
+      tokenSecret: String
     }
   }
 });
@@ -54,7 +54,7 @@ UserSchema.methods.toJSON = function() {
     if (userObject.linkedIn.toggleStatus === true) {
       linkedInToggleStatus = true;
     }
-    if (userObject.linkedIn.access_token) {
+    if (userObject.linkedIn.accessToken) {
       linkedInConnected = true;
     }
   }
@@ -66,7 +66,7 @@ UserSchema.methods.toJSON = function() {
     if (userObject.twitter.toggleStatus === true) {
       twitterToggleStatus = true;
     }
-    if (userObject.twitter.access_token) {
+    if (userObject.twitter.accessToken) {
       twitterConnected = true;
     }
   }

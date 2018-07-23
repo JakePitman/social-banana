@@ -13,8 +13,8 @@ const getAccessToken = async (req, res, next) => {
     });
 
     console.log(response.data.access_token);
-    req.expires_in = response.data.expires_in;
-    req.access_token = response.data.access_token;
+    req.expiresIn = response.data.expiresIn;
+    req.accessToken = response.data.accessToken;
     next();
   } catch (error) {
     // FIXME: Cannot send error in body when redirect

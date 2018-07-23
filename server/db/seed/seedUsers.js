@@ -19,7 +19,7 @@ const users = [
     ],
     linkedIn: {
       toggleStatus: true,
-      access_token: process.env.MARGARET_LINKEDIN_ACCESS_TOKEN
+      accessToken: process.env.MARGARET_LINKEDIN_ACCESS_TOKEN
     }
   },
   {
