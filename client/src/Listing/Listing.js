@@ -8,7 +8,8 @@ import { Redirect } from 'react-router-dom';
 
 function ListingsPage(props) {
   const toggleSettings = {
-    linkedIn: props.stateCopy.linkedInToggleStatus
+    linkedIn: props.stateCopy.linkedInToggleStatus,
+    twitter: props.stateCopy.twitterToggleStatus
   };
 
   const redirectHome = props.stateCopy.redirectHome;
@@ -121,12 +122,24 @@ function ListingsPage(props) {
           selected
         </p>
         <div className="media-boxes">
+          {/*Render linked in*/}
           {props.stateCopy.linkedInConnected ? (
             <MediaBox
               handleToggle={props.handleToggle}
               mediaLogo="linkedin"
               mediaTitle="LinkedIn"
               isChecked={toggleSettings.linkedIn}
+            />
+          ) : (
+            ''
+          )}
+          {/*Render Twitter*/}
+          {props.stateCopy.twitterConnected ? (
+            <MediaBox
+              handleToggle={props.handleToggle}
+              mediaLogo="twitter"
+              mediaTitle="Twitter"
+              isChecked={toggleSettings.twitter}
             />
           ) : (
             ''

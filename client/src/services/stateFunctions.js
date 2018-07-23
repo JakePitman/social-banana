@@ -1,9 +1,9 @@
 export function handleToggle(e) {
   const target = e.target.id;
-  if (target === 'linkedInToggleButton') {
+  if (target === 'LinkedInToggleButton') {
     this.setState({ linkedInToggleStatus: !this.state.linkedInToggleStatus });
-  } else if (target === 'facebookToggleButton') {
-    //FB TOGGLE CODE CAN BE ADDED HERE
+  } else if (target === 'TwitterToggleButton') {
+    this.setState({ twitterToggleStatus: !this.state.twitterToggleStatus });
   }
 }
 
