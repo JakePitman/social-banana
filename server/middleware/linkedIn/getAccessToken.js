@@ -11,15 +11,14 @@ const getAccessToken = async (req, res, next) => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       data: `grant_type=authorization_code&code=${code}&redirect_uri=${redirect_uri}&client_id=${LINKEDIN_CLIENT_ID}&client_secret=${LINKEDIN_CLIENT_SECRET}`
     });
-
-    console.log(response.data.access_token);
-    req.expiresIn = response.data.expiresIn;
-    req.accessToken = response.data.accessToken;
+    req.expiresIn = response.data.expires_in;
+    req.accessToken = response.data.access_token;
     next();
   } catch (error) {
-    // FIXME: Cannot send error in body when redirect
     console.log(error.message);
-    res.redirect('/settings');
+    res.redirect(
+      `/settings?linkedIn_connected=false&error_message=${error.message}`
+    );
   }
 };
 

@@ -5,43 +5,55 @@ import facebook from '../assets/img/facebook.png';
 import './socialLink.css';
 
 class SocialLink extends React.Component {
-  // on mount just for testing atm
+  // on mount refresh social links, hack fix for now
   async componentDidMount() {
+    console.log('hello from componentDidMount in SocialLink');
     try {
-      console.log('hello from componentDidMount in SocialLink');
-      console.log(this.props);
+      await this.props.getSocialAuthUrls();
     } catch (error) {
       console.log(error);
     }
   }
 
-  // TODO: make disconnect button
-  // TODO: same for twitter, fb wont need one as cant use oauth with fb
   render() {
-    const { linkedInConnected, linkedInURL } = this.props;
+    const {
+      linkedInURL,
+      twitterURL,
+      linkedInConnected,
+      twitterConnected,
+      handleDisconnectSocial
+    } = this.props;
     return (
       <div className="sociallink">
         {linkedInConnected ? (
           <input
             type="button"
-            onClick={this.handleLogout}
-            value="Sign out of LinkedIn account"
+            onClick={() => {
+              handleDisconnectSocial('linkedIn');
+            }}
+            value="Disconnect LinkedIn"
           />
         ) : (
           <a href={linkedInURL}>
-            <img
-              src={original}
-              alt="linkedinbtn"
-              width="180"
-              height="32"
-              onClick={this.handleLoginClick}
-            />
+            <img src={original} alt="linkedinbtn" width="180" height="32" />
           </a>
         )}
 
-        <a href="https://www.facebook.com/login">
+        {twitterConnected ? (
+          <input
+            type="button"
+            value="Disconnect Twitter"
+            onClick={() => {
+              handleDisconnectSocial('twitter');
+            }}
+          />
+        ) : (
+          <a href={twitterURL}>Connect to Twitter</a>
+        )}
+
+        {/* <a href="https://www.facebook.com/login">
           <img src={facebook} alt="facebook button" width="180" height="38" />
-        </a>
+        </a> */}
       </div>
     );
   }

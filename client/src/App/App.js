@@ -25,10 +25,11 @@ class App extends Component {
     email: null,
     authToken: null,
     linkedInToggleStatus: false,
-    linkedInConnected: true,
+    linkedInConnected: false,
     twitterToggleStatus: false,
-    twitterConnected: true,
+    twitterConnected: false,
     linkedInURL: null,
+    twitterURL: null,
     redirectHome: false
   };
 
@@ -62,18 +63,8 @@ class App extends Component {
           twitterToggleStatus,
           twitterConnected
         }));
-      } catch (error) {
-        console.log(error);
-      }
-      // GET LINKEDIN URL
-      try {
-        const res = await socialAPI.getLinkedInURL(this.state.authToken);
-        const { url } = res;
-        this.setState(() => {
-          return {
-            linkedInURL: url
-          };
-        });
+
+        await this.getSocialAuthUrls();
       } catch (error) {
         console.log(error);
       }
@@ -113,18 +104,7 @@ class App extends Component {
         };
       });
       localStorage.setItem('authorization', `Bearer ${authToken}`);
-      try {
-        // GET LINKEDIN URL
-        const res = await socialAPI.getLinkedInURL(this.state.authToken);
-        const { url } = res;
-        this.setState(() => {
-          return {
-            linkedInURL: url
-          };
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      await this.getSocialAuthUrls();
     } catch (error) {
       console.log(error);
       return 'Invalid combination';
@@ -146,9 +126,57 @@ class App extends Component {
         linkedInConnected: false,
         twitterToggleStatus: false,
         twitterConnected: false,
+        linkedInURL: null,
         linkedInURL: null
       };
     });
+  };
+
+  handleDisconnectSocial = async (socialMedia) => {
+    console.log('hello from handleDisconnectSocial');
+    if (socialMedia === 'linkedIn') {
+      await socialAPI.disconnectLinkedIn(this.state.authToken);
+      this.setState(() => {
+        return {
+          linkedInConnected: false
+        };
+      });
+    } else if (socialMedia === 'twitter') {
+      await socialAPI.disconnectTwitter(this.state.authToken);
+      this.setState(() => {
+        return {
+          twitterConnected: false
+        };
+      });
+    }
+  };
+
+  getSocialAuthUrls = async () => {
+    let twitterURL;
+    let linkedInURL;
+    try {
+      const res = await socialAPI.getTwitterURL(this.state.authToken);
+      twitterURL = res.url;
+    } catch (error) {
+      console.log(error);
+      return Promise.reject(error);
+    }
+    try {
+      const res = await socialAPI.getLinkedInURL(this.state.authToken);
+      linkedInURL = res.url;
+    } catch (error) {
+      console.log(error);
+      return Promise.reject(error);
+    }
+
+    this.setState(() => {
+      return {
+        twitterURL,
+        linkedInURL
+      };
+    });
+
+    return Promise.resolve({ twitterURL, linkedInURL });
   };
 
   // TODO: hook up profile editing ong settings page
@@ -194,7 +222,13 @@ class App extends Component {
             />
             <Route
               path="/settings"
-              render={() => <Settings {...this.state} />}
+              render={() => (
+                <Settings
+                  {...this.state}
+                  handleDisconnectSocial={this.handleDisconnectSocial}
+                  getSocialAuthUrls={this.getSocialAuthUrls}
+                />
+              )}
             />
             <Route
               path="/listing"

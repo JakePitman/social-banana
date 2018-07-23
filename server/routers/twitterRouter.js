@@ -160,4 +160,18 @@ twitterRouter.post('/share', authenticate, (req, res) => {
   }
 });
 
+twitterRouter.delete('/disconnect', authenticate, (req, res) => {
+  const { user } = req;
+
+  try {
+    user.twitter.accessToken = null;
+    user.save();
+
+    res.status(200).send();
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ error: error.message });
+  }
+});
+
 module.exports = { twitterRouter };

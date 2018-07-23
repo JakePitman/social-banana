@@ -39,12 +39,13 @@ linkedInRouter.get(
       // TODO: bcrypt accessToken (PRE SAVE!! :O)
       user.linkedIn.accessToken = accessToken;
       await user.save();
-
-      res.redirect('/settings');
+      res.redirect('/settings?linkedIn_connected=true');
     } catch (error) {
       // FIXME: Cannot send error in body when redirect
       console.log(error.message);
-      res.redirect('/settings');
+      res.redirect(
+        `/settings?linkedIn_connected=false&error_message=${error.message}`
+      );
     }
   }
 );
