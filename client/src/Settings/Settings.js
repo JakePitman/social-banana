@@ -17,6 +17,7 @@ class Settings extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleClick = (event) => {
@@ -30,12 +31,33 @@ class Settings extends React.Component {
     alert('Updated successfully!');
   };
 
+  handleEdit(e) {
+    e.preventDefault();
+    const { user } = {
+      name: this.state.name,
+      email: this.state.email,
+      company: this.state.company,
+      phone: this.state.phone
+    }
+      .then(function(data) {
+        console.log(data);
+        if (data === 'success') {
+          this.setState({
+            msg: 'User has been edited.'
+          });
+        }
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div className="Account">
         <Profile media="linkedin" {...this.props} />
         <SocialLink media="linkedIn" {...this.props} />
-        <button className="cta-primary" type="submit">
+        <button className="cta-primary" type="submit" onClick={this.handleEdit}>
           Edit
         </button>
       </div>

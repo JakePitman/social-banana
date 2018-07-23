@@ -24,7 +24,7 @@ class SocialLink extends React.Component {
         {linkedInConnected ? (
           <input
             type="button"
-            onclick="onLinkedInLoad()"
+            onClick={this.handleLogout}
             value="Sign out of LinkedIn account"
           />
         ) : (
