@@ -127,7 +127,7 @@ class App extends Component {
         twitterToggleStatus: false,
         twitterConnected: false,
         linkedInURL: null,
-        linkedInURL: null
+        twitterURL: null
       };
     });
   };
