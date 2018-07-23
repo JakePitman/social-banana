@@ -15,7 +15,7 @@ function MediaBox(props) {
         <label className="listing-media-switch">
           {/* changes state in App.js */}
           <input
-            id="linkedInToggleButton"
+            id={props.mediaTitle + 'ToggleButton'}
             onChange={props.handleToggle}
             type="checkbox"
             checked={props.isChecked ? 'checked' : ''}

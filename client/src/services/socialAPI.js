@@ -8,12 +8,18 @@ const getLinkedInURL = async (authToken) => {
   return { url };
 };
 
-const shareListing = async (listing, authToken) => {
-  const res = await axios.post('/api/linkedin/share', listing, {
-    headers: { authorization: `Bearer ${authToken}` }
-  });
-  const { updateUrl } = res.data;
-  return { updateUrl };
+const shareListing = async (listing, authToken, toggleSettings) => {
+  let linkedInUrl = '';
+  if (toggleSettings.linkedIn) {
+    const res = await axios.post('/api/linkedin/share', listing, {
+      headers: { authorization: `Bearer ${authToken}` }
+    });
+    linkedInUrl = res.data.updateUrl;
+  }
+  if (toggleSettings.twitter) {
+    console.log('post made to Twitter');
+  }
+  return { linkedInUrl };
 };
 
 export default { getLinkedInURL, shareListing };

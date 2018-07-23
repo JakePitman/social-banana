@@ -8,45 +8,42 @@ import { Redirect } from 'react-router-dom';
 
 function ListingsPage(props) {
   const toggleSettings = {
-    linkedIn: props.stateCopy.linkedInToggleStatus
+    linkedIn: props.stateCopy.linkedInToggleStatus,
+    twitter: props.stateCopy.twitterToggleStatus
   };
 
   const redirectHome = props.stateCopy.redirectHome;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!toggleSettings.linkedIn) {
-      console.log('LinkedIn not toggled');
-      props.useRedirectHome();
-    } else {
-      const formData = {};
-      const children = e.target.children;
-      for (let i = 0; i < children.length; i++) {
-        formData[`${children[i].name}`] = children[i].value;
-      }
-      //to get inspectiontime values (nested in div)
-      const inspectionTimeValues = children[12].children;
-      for (let i = 0; i < inspectionTimeValues.length; i++) {
-        formData[`${inspectionTimeValues[i].name}`] =
-          inspectionTimeValues[i].value;
-      }
-      //to get amenities values (nested in divs within a div)
-      const amenitiesValues = children[14].children;
-      for (let i = 0; i < amenitiesValues.length; i++) {
-        formData[`${amenitiesValues[i].children[1].name}`] =
-          amenitiesValues[i].children[1].value;
-      }
-      console.log(formData);
-
-      const res = await socialAPI.shareListing(
-        formData,
-        props.stateCopy.authToken
-      );
-      //console.log(res.updateUrl);
-
-      //sets redirectHome to true in App.js
-      props.useRedirectHome();
+    const formData = {};
+    const children = e.target.children;
+    for (let i = 0; i < children.length; i++) {
+      formData[`${children[i].name}`] = children[i].value;
     }
+    //to get inspectiontime values (nested in div)
+    const inspectionTimeValues = children[12].children;
+    for (let i = 0; i < inspectionTimeValues.length; i++) {
+      formData[`${inspectionTimeValues[i].name}`] =
+        inspectionTimeValues[i].value;
+    }
+    //to get amenities values (nested in divs within a div)
+    const amenitiesValues = children[14].children;
+    for (let i = 0; i < amenitiesValues.length; i++) {
+      formData[`${amenitiesValues[i].children[1].name}`] =
+        amenitiesValues[i].children[1].value;
+    }
+    console.log(formData);
+
+    const res = await socialAPI.shareListing(
+      formData,
+      props.stateCopy.authToken,
+      toggleSettings
+    );
+    console.log(res.linkedInUrl);
+
+    //sets redirectHome to true in App.js
+    props.useRedirectHome();
   };
 
   if (props.stateCopy.redirectHome) {
@@ -121,12 +118,24 @@ function ListingsPage(props) {
           selected
         </p>
         <div className="media-boxes">
+          {/*Render linked in*/}
           {props.stateCopy.linkedInConnected ? (
             <MediaBox
               handleToggle={props.handleToggle}
               mediaLogo="linkedin"
               mediaTitle="LinkedIn"
               isChecked={toggleSettings.linkedIn}
+            />
+          ) : (
+            ''
+          )}
+          {/*Render Twitter*/}
+          {props.stateCopy.twitterConnected ? (
+            <MediaBox
+              handleToggle={props.handleToggle}
+              mediaLogo="twitter"
+              mediaTitle="Twitter"
+              isChecked={toggleSettings.twitter}
             />
           ) : (
             ''
