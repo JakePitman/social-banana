@@ -13,7 +13,7 @@ usersRouter.post('/register', async (req, res) => {
     const token = await user.generateAuthToken();
     res.header('authorization', `Bearer ${token}`).send({ user });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(400).send({ error: error.message });
   }
 });
@@ -26,7 +26,7 @@ usersRouter.post('/login', async (req, res) => {
     const token = await user.generateAuthToken();
     res.header('authorization', `Bearer ${token}`).send({ user });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(400).send({ error: error.message });
   }
 });
@@ -37,7 +37,7 @@ usersRouter.get('/me', authenticate, async (req, res) => {
   try {
     res.status(200).send({ user });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(400).send({ error: error.message });
   }
 });
@@ -48,10 +48,10 @@ usersRouter.patch('/update', authenticate, async (req, res) => {
 
   try {
     await user.set({ name, company, phone });
-    const updatedUser = await user.save();
-    res.status(200).send({ updatedUser });
+    await user.save();
+    res.status(200).send({ user });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(400).send({ error: error.message });
   }
 });
@@ -63,7 +63,7 @@ usersRouter.delete('/logout', authenticate, async (req, res) => {
     await user.removeToken(token);
     res.status(200).send();
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(400).send({ error: error.message });
   }
 });
