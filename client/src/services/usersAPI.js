@@ -22,12 +22,16 @@ const getUser = async (authToken) => {
   return { user };
 };
 
-const updateUser = async (authToken) => {
-  const res = await axios.patch('/api/users/update', {
-    headers: { authorization: `Bearer ${authToken}` }
-  });
-  const { user } = res.data;
-  return { user };
+const updateUser = async (updates, authToken) => {
+  try {
+    const res = await axios.patch('/api/users/update', updates, {
+      headers: { authorization: `Bearer ${authToken}` }
+    });
+    const { user } = res.data;
+    return { user };
+  } catch (error) {
+    return Promise.reject(error.response.data.error.split(': ')[2]);
+  }
 };
 
 const logoutUser = async (authToken) => {

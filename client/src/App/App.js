@@ -52,10 +52,9 @@ class App extends Component {
           twitterToggleStatus: user.twitterToggleStatus,
           twitterConnected: user.twitterConnected
         }));
-        await this.getSocialAuthUrls();
+        await this.getSocialAuthUrls(authToken);
       } catch (error) {
         console.log(error);
-        localStorage.removeItem('authorization');
         this.setState(() => ({ authToken: null }));
       }
     }
@@ -81,10 +80,20 @@ class App extends Component {
         };
       });
       localStorage.setItem('authorization', `Bearer ${authToken}`);
-      await this.getSocialAuthUrls();
+      await this.getSocialAuthUrls(authToken);
     } catch (error) {
       console.log(error);
       return 'Invalid combination';
+    }
+  };
+
+  handleUpdate = async (updates) => {
+    try {
+      const res = await usersAPI.updateUser(updates, this.state.authToken);
+      const { name, company, phone } = res.user;
+      this.setState(() => ({ name, company, phone }));
+    } catch (error) {
+      return Promise.reject(error);
     }
   };
 
@@ -124,25 +133,27 @@ class App extends Component {
     }
   };
 
-  getSocialAuthUrls = async () => {
+  getSocialAuthUrls = async (authToken) => {
     let twitterURL;
     let linkedInURL;
     // Get authUrls
     try {
-      const res = await socialAPI.getTwitterURL(this.state.authToken);
+      const res = await socialAPI.getTwitterURL(authToken);
       twitterURL = res.url;
     } catch (error) {
       console.log(error);
       return Promise.reject(error);
     }
     try {
-      const res = await socialAPI.getLinkedInURL(this.state.authToken);
+      const res = await socialAPI.getLinkedInURL(authToken);
       linkedInURL = res.url;
     } catch (error) {
       console.log(error);
       return Promise.reject(error);
     }
     // Set State with authUrls
+    console.log(twitterURL);
+    console.log(linkedInURL);
     this.setState(() => {
       return {
         twitterURL,
@@ -178,6 +189,7 @@ class App extends Component {
                   {...this.state}
                   handleDisconnectSocial={this.handleDisconnectSocial}
                   getSocialAuthUrls={this.getSocialAuthUrls}
+                  handleUpdate={this.handleUpdate}
                 />
               )}
             />

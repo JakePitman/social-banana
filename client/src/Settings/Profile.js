@@ -4,24 +4,28 @@ import margaret from '../assets/img/margaret.png';
 import './profile.css';
 
 class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: '' };
+  state = {
+    name: this.props.name,
+    company: this.props.company,
+    phone: this.props.phone,
+    error: null
+  };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(e) {
+  handleChange = (e) => {
     e.preventDefault();
-    console.log('changed', e.target.value);
-    this.setState({ value: e.target.value });
-  }
+    this.setState({ [`${e.target.name}`]: e.target.value });
+  };
 
-  handleSubmit(e) {
-    alert('Successfully Updated to: ' + this.state.value + '!');
+  handleSubmit = async (e) => {
     e.preventDefault();
-  }
+    try {
+      await this.props.handleUpdate(this.state);
+      this.setState(() => ({ error: null }));
+    } catch (error) {
+      console.log(error);
+      this.setState(() => ({ error }));
+    }
+  };
 
   render() {
     const { email, name, company, phone } = this.props;
@@ -62,6 +66,7 @@ class Profile extends React.Component {
               name="phone"
             />
           </div>
+          {this.state.error && <div>{this.state.error}</div>}
           <input className="cta-primary" type="submit" value="Update" />
         </form>
       </div>
