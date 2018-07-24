@@ -52,9 +52,9 @@ class ListingsPage extends React.Component {
       linkedIn: this.props.stateCopy.linkedInToggleStatus,
       twitter: this.props.stateCopy.twitterToggleStatus
     };
-    console.log(this.state);
+    const listing = this.state;
     const res = await socialAPI.shareListing(
-      this.state,
+      listing,
       this.props.stateCopy.authToken,
       toggleSettings
     );

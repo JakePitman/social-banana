@@ -57,23 +57,27 @@ linkedInRouter.post('/share', authenticate, async (req, res) => {
       throw new Error('Forbidden, linkedIn account not connected');
     }
 
-    const { address, price, description } = req.body;
-    const propertyType = req.body['property-type'];
-    const landSize = req.body['land-size'];
-    const inspectionDate = req.body['inspection-date'];
-    const inspectionTime = req.body['inspection-time'];
+    const {
+      address,
+      price,
+      description,
+      propertyType,
+      landSize,
+      inspectionDate,
+      inspectionTime
+    } = req.body;
 
-    if (
-      !address ||
-      !price ||
-      !description ||
-      !propertyType ||
-      !landSize ||
-      !inspectionTime ||
-      !inspectionDate
-    ) {
-      throw new Error('Denied. Not all required listing fields given.');
-    }
+    //if (
+      //!address ||
+      //!price ||
+      //!description ||
+      //!propertyType ||
+      //!landSize ||
+      //!inspectionTime ||
+      //!inspectionDate
+    //) {
+      //throw new Error('Denied. Not all required listing fields given.');
+    //}
 
     const postBody = {
       comment: `${description}\n${propertyType} - ${landSize}m2 \nInspection: ${inspectionDate} : ${inspectionTime} \n#teambanana #property`,
