@@ -53,7 +53,6 @@ twitterRouter.get('/authURL', authenticate, async (req, res) => {
 
 // TODO: change to async await
 twitterRouter.get('/callback', async (req, res) => {
-  console.log('hello from /api/twitter/callback');
   // TODO: middlware - verify callback
   const { oauth_token, oauth_verifier, userId } = req.query;
 
@@ -144,9 +143,8 @@ twitterRouter.post('/share', authenticate, (req, res) => {
           }
           res.status(400).send(message);
         } else {
-          // construct Status link
+          // construct status link
           const jsonData = JSON.parse(data);
-          console.log(jsonData);
           const { id_str } = jsonData;
           const { screen_name } = jsonData.user;
           const twitterUrl = `https://twitter.com/${screen_name}/status/${id_str}`;
