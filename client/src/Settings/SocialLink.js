@@ -1,5 +1,6 @@
 import React from 'react';
-import Provider from './Modal';
+import SocialModal from './Modal';
+
 import './socialLink.css';
 
 class SocialLink extends React.Component {
@@ -16,7 +17,7 @@ class SocialLink extends React.Component {
   render() {
     return (
       <div className="modal">
-        <Provider media="linkedin" {...this.props} />
+        <SocialModal media="linkedin" {...this.props} />
       </div>
     );
   }

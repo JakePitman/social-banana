@@ -114,6 +114,7 @@ class App extends Component {
   };
 
   handleDisconnectSocial = async (socialMedia) => {
+    alert('You are now disconnecting...');
     if (socialMedia === 'linkedIn') {
       await socialAPI.disconnectLinkedIn(this.state.authToken);
       this.setState(() => ({ linkedInConnected: false }));
