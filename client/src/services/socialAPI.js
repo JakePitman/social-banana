@@ -29,8 +29,8 @@ const disconnectTwitter = async (authToken) => {
 };
 
 const shareListing = async (listing, authToken, toggleSettings) => {
-  let linkedInUrl = '';
-  let twitterUrl = '';
+  let linkedInUrl;
+  let twitterUrl;
   if (toggleSettings.linkedIn) {
     const res = await axios.post('/api/linkedin/share', listing, {
       headers: { authorization: `Bearer ${authToken}` }
