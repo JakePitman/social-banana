@@ -15,7 +15,7 @@ const getAccessToken = async (req, res, next) => {
     req.accessToken = response.data.access_token;
     next();
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     res.redirect(
       `/settings?linkedIn_connected=false&error_message=${error.message}`
     );

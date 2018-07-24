@@ -1,13 +1,21 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const validator = require('validator');
 
 const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
     trim: true,
-    unique: true
+    minlength: 1,
+    unique: true,
+    validate: {
+      validator: (value) => {
+        return validator.isEmail(value);
+      },
+      message: '{VALUE} is not a valid email'
+    }
   },
   password: {
     type: String,
@@ -16,15 +24,28 @@ const UserSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
+    minlength: 2,
+    maxlength: 20
   },
   company: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
+    minlength: 2,
+    maxlength: 20
   },
   phone: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
+    validate: {
+      validator: (value) => {
+        return validator.isMobilePhone(value, 'en-AU');
+      },
+      message: '{VALUE} is not a valid australian mobile number'
+    }
   },
   authTokens: [String],
   linkedIn: {

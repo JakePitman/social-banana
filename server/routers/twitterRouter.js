@@ -11,7 +11,6 @@ const twitterRouter = express.Router();
 
 // TODO: change to async await
 twitterRouter.get('/authURL', authenticate, async (req, res) => {
-  console.log('hello from api/twitter/authURL');
   const { user } = req;
   const userId = user._id;
 
@@ -34,7 +33,7 @@ twitterRouter.get('/authURL', authenticate, async (req, res) => {
       results
     ) {
       if (error) {
-        console.log(error);
+        console.error(error);
         res.send(error);
         return;
       }
@@ -46,7 +45,7 @@ twitterRouter.get('/authURL', authenticate, async (req, res) => {
       res.send({ url: authURL });
     });
   } catch (error) {
-    console.log(error);
+    console.error(error.message);
     res.status(400).send({ error: error.message });
   }
 });
@@ -81,7 +80,7 @@ twitterRouter.get('/callback', async (req, res) => {
       oauth_verifier,
       function(error, oauth_access_token, oauth_access_token_secret, results) {
         if (error) {
-          console.log(error);
+          console.error(error);
           res.redirect(
             `/settings?twitter_connected=false&error_message=${error.data}`
           );
@@ -95,7 +94,7 @@ twitterRouter.get('/callback', async (req, res) => {
       }
     );
   } catch (error) {
-    console.log(error);
+    console.error(error.message);
     res.redirect(
       `/settings?twitter_connected=false&error_message=${error.message}`
     );
@@ -153,7 +152,7 @@ twitterRouter.post('/share', authenticate, (req, res) => {
       }
     );
   } catch (error) {
-    console.log(error);
+    console.error(error.message);
     res.status(400).send({ error: error.message });
   }
 });
@@ -164,10 +163,9 @@ twitterRouter.delete('/disconnect', authenticate, (req, res) => {
   try {
     user.twitter.accessToken = null;
     user.save();
-
     res.status(200).send();
   } catch (error) {
-    console.log(error);
+    console.error(error.message);
     res.status(400).send({ error: error.message });
   }
 });

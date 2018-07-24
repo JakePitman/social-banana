@@ -12,9 +12,9 @@ describe('POST /api/users/register', () => {
     const inputParams = {
       email: 'example@example.com',
       password: 'password123',
-      name: 'bill',
-      company: 'Box Factory',
-      phone: '123123123'
+      name: 'James',
+      company: 'Test Company',
+      phone: '0425888777'
     };
 
     const res = await request(app)
@@ -58,6 +58,36 @@ describe('POST /api/users/register', () => {
     const res = await request(app)
       .post('/api/users/register')
       .send({ email, password });
+
+    expect(res.status).toBe(400);
+    done();
+  });
+
+  test('should have validation errors if invalid email', async (done) => {
+    const email = 'badbadbad';
+    const password = 'password123';
+    const name = 'Test Name';
+    const company = 'Test Company';
+    const phone = '0425111222';
+
+    const res = await request(app)
+      .post('/api/users/register')
+      .send({ email, password, name, company, phone });
+
+    expect(res.status).toBe(400);
+    done();
+  });
+
+  test('should have validation errors invalid email', async (done) => {
+    const email = 'bad@email.com';
+    const password = 'password123';
+    const name = 'Test Name';
+    const company = 'Test Company';
+    const phone = '12345432123213';
+
+    const res = await request(app)
+      .post('/api/users/register')
+      .send({ email, password, name, company, phone });
 
     expect(res.status).toBe(400);
     done();
@@ -118,6 +148,34 @@ describe('GET /api/users/me', () => {
 
     expect(res.status).toBe(401);
     expect(res.body.user).toBeFalsy();
+    done();
+  });
+});
+
+// USER UPDATE
+describe('PATCH /api/users/update', () => {
+  test('should update user', async (done) => {
+    const { _id, authTokens } = users[1];
+
+    const name = 'Billy';
+    const company = 'Test Company';
+    const phone = '0425888999';
+
+    const res = await request(app)
+      .patch('/api/users/update')
+      .set('authorization', `Bearer ${authTokens[0]}`)
+      .send({ name, company, phone });
+
+    expect(res.status).toBe(200);
+    expect(res.body.user).toBeTruthy();
+    expect(res.body.user.name).toBe(name);
+    expect(res.body.user.company).toBe(company);
+    expect(res.body.user.phone).toBe(phone);
+
+    const user = await User.findById(_id);
+    expect(user.name).toBe(name);
+    expect(user.company).toBe(company);
+    expect(user.phone).toBe(phone);
     done();
   });
 });

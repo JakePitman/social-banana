@@ -1,5 +1,4 @@
 require('dotenv').config();
-const jwt = require('jsonwebtoken');
 const { ObjectId } = require('mongoose').Types;
 
 const { mongoose } = require('./../mongoose');
@@ -12,49 +11,42 @@ const users = [
     email: 'margaretbananadev@gmail.com',
     name: 'Margaret',
     company: 'Banana Factory',
-    phone: '0425666245',
-    password: process.env.MARGARET_PASSWORD,
-    authTokens: [
-      jwt.sign({ _id: margaretId }, process.env.JWT_SECRET).toString()
-    ],
-    linkedIn: {
-      toggleStatus: true,
-      accessToken: process.env.MARGARET_LINKEDIN_ACCESS_TOKEN
-    }
+    phone: '0425111222',
+    password: process.env.MARGARET_PASSWORD
   },
   {
     email: 'mark@email.com',
     name: 'Mark',
     company: 'Banana Factory',
-    phone: '042512341234',
+    phone: '0425111222',
     password: process.env.MARGARET_PASSWORD
   },
   {
     email: 'jake@email.com',
     name: 'Jake',
     company: 'Banana Factory',
-    phone: '042598769876',
+    phone: '0425111222',
     password: process.env.MARGARET_PASSWORD
   },
   {
     email: 'serina@email.com',
     name: 'Serina',
     company: 'Banana Factory',
-    phone: '042598769876',
+    phone: '0425111222',
     password: process.env.MARGARET_PASSWORD
   },
   {
     email: 'babs@email.com',
     name: 'Babs',
     company: 'Banana Factory',
-    phone: '042598769876',
+    phone: '0425111222',
     password: process.env.MARGARET_PASSWORD
   },
   {
     email: 'franky@email.com',
     name: 'Franky',
     company: 'Banana Factory',
-    phone: '042598769876',
+    phone: '0425111222',
     password: process.env.MARGARET_PASSWORD
   }
 ];
