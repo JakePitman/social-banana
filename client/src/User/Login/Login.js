@@ -5,6 +5,10 @@ import auth from '../../services/auth';
 
 class Login extends React.Component {
   // const { handleLoggedIn } = props;
+  constructor() {
+    super();
+    this.state = {};
+  }
 
   handleLogin = async () => {
     // await new Promise((resolve) => setTimeout(resolve, 3000));

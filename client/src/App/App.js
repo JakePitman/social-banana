@@ -41,14 +41,14 @@ class App extends React.Component {
           <Route
             path="/settings"
             render={() =>
-              auth.isAuthenticated ? <Settings /> : <Redirect to="/" />
+              auth.isAuthenticated() ? <Settings /> : <Redirect to="/" />
             }
           />
           <Route
             exact
             path="/(login|register)/"
             render={() =>
-              auth.isAuthenticated ? <Redirect to="/" /> : <User />
+              auth.isAuthenticated() ? <Redirect to="/" /> : <User />
             }
           />
           <Redirect from="/Listing/*" to="/Listing" />
