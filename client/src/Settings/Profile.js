@@ -19,7 +19,7 @@ class Profile extends React.Component {
   }
 
   handleSubmit(e) {
-    alert('A name was submitted: ' + this.state.value);
+    alert('Successfully Updated ' + this.state.value);
     e.preventDefault();
   }
 
