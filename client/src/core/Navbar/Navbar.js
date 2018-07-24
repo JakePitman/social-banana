@@ -16,9 +16,12 @@ function Navbar() {
 
   // Display a certain set of links depending on login state
   // MAYBE TODO: Split navbar into more components depending on login state
-  const navbarLinks = (isLoggedIn) =>
-    isLoggedIn ? (
+  const navbarLinks = () =>
+    auth.isAuthenticated() && (
       <React.Fragment>
+        <li>
+          <Link to="/"> Home </Link>
+        </li>
         <li>
           <Link to="/listing"> Listing </Link>
         </li>
@@ -31,24 +34,17 @@ function Navbar() {
           </Link>
         </li>
       </React.Fragment>
-    ) : (
-      <React.Fragment>
-        <li>
-          <Link to="/register"> Register </Link>
-        </li>
-        <li>
-          <Link to="/login"> Login </Link>
-        </li>
-      </React.Fragment>
     );
 
   return (
-    <nav>
-      <span>
-        <Link to="/"> Home </Link>
-      </span>
-      <ul>{navbarLinks(auth.isAuthenticated())}</ul>
-    </nav>
+    <header>
+      <nav>
+        <h2> Realista </h2>
+        <ul>{navbarLinks()}</ul>
+      </nav>
+
+      <p> {auth.isAuthenticated() ? 'Logged In' : 'Logged Out'} </p>
+    </header>
   );
 }
 

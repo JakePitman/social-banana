@@ -27,7 +27,6 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h2> user: {auth.isAuthenticated() ? 'logged in' : 'logged out'} </h2>
         <Navbar />
         <Switch>
           <Route exact path="/" render={() => <Home />} />
