@@ -7,18 +7,18 @@ import Settings from '../Settings';
 import User from '../User';
 import auth from '../services/auth';
 
+// NOTE: EVERY ROUTE AND REDIRECT CHANGE RERENDERS
+
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loggedIn: false,
-    };
+    this.state = {};
   }
 
   // All login/logout backend logic to be here
-  handleLoggedIn = (value) => {
-    this.setState({ loggedIn: value });
-  };
+  // handleLoggedIn = (value) => {
+  //   this.setState({ loggedIn: value });
+  // };
 
   // Route will ONLY render if the route matches
   // React.Fragment mitigates unnecessary containing <div> tags
