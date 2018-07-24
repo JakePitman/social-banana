@@ -1,10 +1,9 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Navbar from '../core/Navbar';
-import Home from '../Home';
 import Listing from '../Listing';
 import Settings from '../Settings';
-import User from '../User';
+import Home from '../Home';
 import auth from '../services/auth';
 
 // NOTE: EVERY ROUTE AND REDIRECT CHANGE RERENDERS
@@ -44,13 +43,6 @@ class App extends React.Component {
               auth.isAuthenticated() ? <Settings /> : <Redirect to="/" />
             }
           />
-          <Route
-            exact
-            path="/(login|register)/"
-            render={() =>
-              auth.isAuthenticated() ? <Redirect to="/" /> : <User />
-            }
-          />
           <Redirect from="/Listing/*" to="/Listing" />
           <Redirect from="/Settings/*" to="/Settings" />
           <Redirect from="/login/*" to="/login" />
@@ -62,4 +54,11 @@ class App extends React.Component {
   }
 }
 
+// <Route
+//   exact
+//   path="/(login|register)/"
+//   render={() =>
+//     auth.isAuthenticated() ? <Redirect to="/" /> : <Home />
+//   }
+// />
 export default App;
