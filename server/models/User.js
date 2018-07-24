@@ -40,8 +40,12 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minlength: 6,
-    maxlength: 12
+    validate: {
+      validator: (value) => {
+        return validator.isMobilePhone(value, 'en-AU');
+      },
+      message: '{VALUE} is not a valid australian mobile number'
+    }
   },
   authTokens: [String],
   linkedIn: {
