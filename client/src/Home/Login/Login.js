@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import auth from '../../services/auth';
 
@@ -7,22 +7,34 @@ class Login extends React.Component {
   // const { handleLoggedIn } = props;
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      loading: false,
+      success: false,
+      error: false,
+    };
   }
 
   handleLogin = async () => {
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
-    await auth.login();
-    console.log('authenticated:', auth.isAuthenticated());
+    this.setState({ loading: true });
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      auth.login();
+      this.setState({ success: true });
+    } catch (err) {
+      this.setState({ error: true });
+    }
+    // console.log('authenticated:', auth.isAuthenticated());
   };
-  // Created a temporary button to login by setting isLoggedIn state
+
   render() {
     return (
       <React.Fragment>
+        {this.state.success && <Redirect to="/" />}
         <h1>Login</h1>
-        <Link to="/" onClick={this.handleLogin}>
-          Login
-        </Link>
+        <button onClick={this.handleLogin}>
+          {this.state.loading ? 'Loading' : 'Login'}
+        </button>
+        {this.state.error && <p>Oops! Something went wrong!</p>}
       </React.Fragment>
     );
   }
