@@ -1,7 +1,10 @@
 .navbar {
   display: flex;
   justify-content: flex-end;
-  margin-top: 16px;
+  padding-top: 10px;
+  height: 40px;
+  background: #fff;
+  box-shadow: 0px 4px 2px #6c92ff;
 }
 .navlink {
   margin: 4px 30px 4px 0px;
