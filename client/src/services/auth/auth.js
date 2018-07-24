@@ -1,13 +1,16 @@
 const auth = {
-  isLoggedIn: false,
   isAuthenticated() {
-    return this.isLoggedIn;
+    let result = false;
+    if (localStorage.getItem('loggedIn')) {
+      result = true;
+    }
+    return result;
   },
   login() {
-    this.isLoggedIn = true;
+    localStorage.setItem('loggedIn', true);
   },
   logout() {
-    this.isLoggedIn = false;
+    localStorage.removeItem('loggedIn');
   },
 };
 

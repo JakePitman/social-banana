@@ -32,9 +32,25 @@ class App extends React.Component {
         <Navbar />
         <Switch>
           <Route exact path="/" render={() => <Home />} />
-          <Route path="/listing" render={() => <Listing />} />
-          <Route path="/settings" render={() => <Settings />} />
-          <Route exact path="/(login|register)/" render={() => <User />} />
+          <Route
+            path="/listing"
+            render={() =>
+              auth.isAuthenticated() ? <Listing /> : <Redirect to="/" />
+            }
+          />
+          <Route
+            path="/settings"
+            render={() =>
+              auth.isAuthenticated ? <Settings /> : <Redirect to="/" />
+            }
+          />
+          <Route
+            exact
+            path="/(login|register)/"
+            render={() =>
+              auth.isAuthenticated ? <Redirect to="/" /> : <User />
+            }
+          />
           <Redirect from="/Listing/*" to="/Listing" />
           <Redirect from="/Settings/*" to="/Settings" />
           <Redirect from="/login/*" to="/login" />
