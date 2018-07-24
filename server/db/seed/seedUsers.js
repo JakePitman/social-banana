@@ -23,15 +23,36 @@ const users = [
     }
   },
   {
-    email: 'maybananadev@outlook.com',
-    name: 'Janet',
+    email: 'mark@email.com',
+    name: 'Mark',
     company: 'Banana Factory',
     phone: '042512341234',
     password: process.env.MARGARET_PASSWORD
   },
   {
-    email: 'june@email.com',
-    name: 'June',
+    email: 'jake@email.com',
+    name: 'Jake',
+    company: 'Banana Factory',
+    phone: '042598769876',
+    password: process.env.MARGARET_PASSWORD
+  },
+  {
+    email: 'serina@email.com',
+    name: 'Serina',
+    company: 'Banana Factory',
+    phone: '042598769876',
+    password: process.env.MARGARET_PASSWORD
+  },
+  {
+    email: 'babs@email.com',
+    name: 'Babs',
+    company: 'Banana Factory',
+    phone: '042598769876',
+    password: process.env.MARGARET_PASSWORD
+  },
+  {
+    email: 'franky@email.com',
+    name: 'Franky',
     company: 'Banana Factory',
     phone: '042598769876',
     password: process.env.MARGARET_PASSWORD

@@ -33,74 +33,51 @@ class App extends Component {
     redirectHome: false
   };
 
-  // TODO: same code used twice in didMount and login, need to break down into helper function!
   async componentDidMount() {
     const authHeader = localStorage.getItem('authorization');
     if (authHeader) {
-      // GET USER DATA
       try {
         const authToken = authHeader.split(' ')[1];
         const res = await usersAPI.getUser(authToken);
-        const {
-          email,
-          name,
-          company,
-          phone,
-          linkedInToggleStatus,
-          linkedInConnected,
-          twitterToggleStatus,
-          twitterConnected
-        } = res.user;
+        const { user } = res;
         this.setState(() => ({
           loggedIn: true,
-          email,
-          name,
-          company,
-          phone,
+          email: user.email,
+          name: user.name,
+          company: user.company,
+          phone: user.phone,
           authToken,
-          linkedInToggleStatus,
-          linkedInConnected,
-          twitterToggleStatus,
-          twitterConnected
+          linkedInToggleStatus: user.linkedInToggleStatus,
+          linkedInConnected: user.linkedInConnected,
+          twitterToggleStatus: user.twitterToggleStatus,
+          twitterConnected: user.twitterConnected
         }));
-
         await this.getSocialAuthUrls();
       } catch (error) {
         console.log(error);
+        localStorage.removeItem('authorization');
+        this.setState(() => ({ authToken: null }));
       }
     }
-    // set page loaded
     this.setState(() => ({ loaded: true }));
   }
 
-  // TODO: same code used twice in didMount and login, need to break down into helper function!
   handleLogin = async (inputEmail, inputPassword) => {
     try {
-      // GET USER DATA
       const res = await usersAPI.loginUser(inputEmail, inputPassword);
       const { user, authToken } = res;
-      const {
-        email,
-        name,
-        company,
-        phone,
-        linkedInToggleStatus,
-        linkedInConnected,
-        twitterToggleStatus,
-        twitterConnected
-      } = user;
       this.setState(() => {
         return {
           loggedIn: true,
-          email,
-          name,
-          company,
-          phone,
+          email: user.email,
+          name: user.name,
+          company: user.company,
+          phone: user.phone,
           authToken,
-          linkedInToggleStatus,
-          linkedInConnected,
-          twitterToggleStatus,
-          twitterConnected
+          linkedInToggleStatus: user.linkedInToggleStatus,
+          linkedInConnected: user.linkedInConnected,
+          twitterToggleStatus: user.twitterToggleStatus,
+          twitterConnected: user.twitterConnected
         };
       });
       localStorage.setItem('authorization', `Bearer ${authToken}`);
@@ -111,49 +88,45 @@ class App extends Component {
     }
   };
 
-  // TODO: add userAPI call to delete authToken from user
-  handleLogout = () => {
-    localStorage.removeItem('authorization');
-    this.setState(() => {
-      return {
-        loggedIn: false,
-        name: null,
-        company: null,
-        phone: null,
-        email: null,
-        authToken: null,
-        linkedInToggleStatus: false,
-        linkedInConnected: false,
-        twitterToggleStatus: false,
-        twitterConnected: false,
-        linkedInURL: null,
-        twitterURL: null
-      };
-    });
+  handleLogout = async () => {
+    try {
+      localStorage.removeItem('authorization');
+      this.setState(() => {
+        return {
+          loggedIn: false,
+          name: null,
+          company: null,
+          phone: null,
+          email: null,
+          authToken: null,
+          linkedInToggleStatus: false,
+          linkedInConnected: false,
+          twitterToggleStatus: false,
+          twitterConnected: false,
+          linkedInURL: null,
+          twitterURL: null
+        };
+      });
+      await usersAPI.logoutUser(this.state.authToken);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleDisconnectSocial = async (socialMedia) => {
-    console.log('hello from handleDisconnectSocial');
     if (socialMedia === 'linkedIn') {
       await socialAPI.disconnectLinkedIn(this.state.authToken);
-      this.setState(() => {
-        return {
-          linkedInConnected: false
-        };
-      });
+      this.setState(() => ({ linkedInConnected: false }));
     } else if (socialMedia === 'twitter') {
       await socialAPI.disconnectTwitter(this.state.authToken);
-      this.setState(() => {
-        return {
-          twitterConnected: false
-        };
-      });
+      this.setState(() => ({ twitterConnected: false }));
     }
   };
 
   getSocialAuthUrls = async () => {
     let twitterURL;
     let linkedInURL;
+    // Get authUrls
     try {
       const res = await socialAPI.getTwitterURL(this.state.authToken);
       twitterURL = res.url;
@@ -168,14 +141,13 @@ class App extends Component {
       console.log(error);
       return Promise.reject(error);
     }
-
+    // Set State with authUrls
     this.setState(() => {
       return {
         twitterURL,
         linkedInURL
       };
     });
-
     return Promise.resolve({ twitterURL, linkedInURL });
   };
 

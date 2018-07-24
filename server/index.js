@@ -18,12 +18,6 @@ app.use('/api/users', usersRouter);
 app.use('/api/linkedin', linkedInRouter);
 app.use('/api/twitter', twitterRouter);
 
-// This is to test the proxy of the front end server for development
-// app.get('/api/hello', (req, res) => {
-//   console.log('hello from /api/hello');
-//   res.send({ express: 'Hello From Express' });
-// });
-
 // After building the front end to static files, get express to host it in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
