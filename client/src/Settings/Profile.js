@@ -4,19 +4,30 @@ import margaret from '../assets/img/margaret.png';
 import './profile.css';
 
 class Profile extends React.Component {
-  handleChange = (event) => {
-    event.preventDefault();
-    console.log(event.target.value);
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    e.preventDefault();
+    console.log('changed', e.target.value);
+    this.setState({ value: e.target.value });
+  }
+
+  handleSubmit(e) {
+    alert('Successfully Updated to: ' + this.state.value + '!');
+    e.preventDefault();
+  }
 
   render() {
     const { email, name, company, phone } = this.props;
     return (
       <div className="Profile">
-        <form className="profile-form">
+        <form className="profile-form" onSubmit={this.handleSubmit}>
           <div className="profile-section">
             <img
               className="profile-picture"
@@ -51,6 +62,7 @@ class Profile extends React.Component {
               name="phone"
             />
           </div>
+          <input className="cta-primary" type="submit" value="Update" />
         </form>
       </div>
     );

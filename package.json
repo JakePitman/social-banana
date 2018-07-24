@@ -22,7 +22,8 @@
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.4",
     "oauth": "^0.9.15",
-    "validator": "^10.4.0"
+    "validator": "^10.4.0",
+    "react-modal": "^3.5.1"
   },
   "devDependencies": {
     "concurrently": "^3.6.0",

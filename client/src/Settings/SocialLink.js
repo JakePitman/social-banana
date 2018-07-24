@@ -1,7 +1,6 @@
 import React from 'react';
+import SocialModal from './Modal';
 
-import original from '../assets/img/original.png';
-import facebook from '../assets/img/facebook.png';
 import './socialLink.css';
 
 class SocialLink extends React.Component {
@@ -16,44 +15,9 @@ class SocialLink extends React.Component {
   }
 
   render() {
-    const {
-      linkedInURL,
-      twitterURL,
-      linkedInConnected,
-      twitterConnected,
-      handleDisconnectSocial
-    } = this.props;
     return (
-      <div className="sociallink">
-        {linkedInConnected ? (
-          <input
-            type="button"
-            onClick={() => {
-              handleDisconnectSocial('linkedIn');
-            }}
-            value="Disconnect LinkedIn"
-          />
-        ) : (
-          <a href={linkedInURL}>
-            <img src={original} alt="linkedinbtn" width="180" height="32" />
-          </a>
-        )}
-
-        {twitterConnected ? (
-          <input
-            type="button"
-            value="Disconnect Twitter"
-            onClick={() => {
-              handleDisconnectSocial('twitter');
-            }}
-          />
-        ) : (
-          <a href={twitterURL}>Connect to Twitter</a>
-        )}
-
-        {/* <a href="https://www.facebook.com/login">
-          <img src={facebook} alt="facebook button" width="180" height="38" />
-        </a> */}
+      <div className="modal">
+        <SocialModal media="linkedin" {...this.props} />
       </div>
     );
   }
