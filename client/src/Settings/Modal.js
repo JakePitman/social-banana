@@ -1,6 +1,7 @@
 import React from 'react';
 import original from '../assets/img/original.png';
 import twitter from '../assets/img/twitter_login_button.png';
+import './modal.css';
 import Modal from 'react-modal';
 
 const customStyles = {
@@ -32,7 +33,8 @@ class SocialModal extends React.Component {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.subtitle.style.color = '#f00';
+    this.subtitle.style.color = '#000';
+    this.subtitle.style.fontFamily = 'roboto';
   }
 
   closeModal() {
@@ -50,27 +52,6 @@ class SocialModal extends React.Component {
 
     return (
       <div className="sociallink">
-        <div>
-          <button onClick={this.openModal}>Open Modal</button>
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
-            <h2 ref={(subtitle) => (this.subtitle = subtitle)}>Hello</h2>
-            <button onClick={this.closeModal}>close</button>
-            <div>I am a modal</div>
-            <form>
-              <input />
-              <button>tab navigation</button>
-              <button>stays</button>
-              <button>inside</button>
-              <button>the modal</button>
-            </form>
-          </Modal>
-        </div>
         <div className="social-modal">
           {linkedInConnected ? (
             <input
@@ -99,10 +80,24 @@ class SocialModal extends React.Component {
               <img src={twitter} alt="twitterbtn" width="180" height="33" />
             </a>
           )}
-
-          {/* <a href="https://www.facebook.com/login">
-          <img src={facebook} alt="facebook button" width="180" height="38" />
-        </a> */}
+          <input
+            type="button"
+            onClick={this.openModal}
+            value="Where's Pikachu?"
+          />
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+            <h1 ref={(subtitle) => (this.subtitle = subtitle)}>
+              .. "Pika.." ..
+            </h1>
+            <img src="http://a.top4top.net/p_1990j031.gif" alt="Loading" />
+            <button onClick={this.closeModal}>close</button>
+          </Modal>
         </div>
       </div>
     );
