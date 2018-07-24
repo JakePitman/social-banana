@@ -110,10 +110,6 @@ twitterRouter.post('/share', authenticate, (req, res) => {
 
   console.log(req.body);
   const { address, price, description } = req.body;
-  const propertyType = req.body['property-type'];
-  const landSize = req.body['land-size'];
-  const inspectionDate = req.body['inspection-date'];
-  const inspectionTime = req.body['inspection-time'];
   const tweetStatus = `$${price} - ${address} - ${description} #teambanana`;
 
   try {
