@@ -29,24 +29,6 @@ class ListingsPage extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    //const formData = {};
-    //const children = e.target.children;
-    //for (let i = 0; i < children.length; i++) {
-    //formData[`${children[i].name}`] = children[i].value;
-    //}
-    ////to get inspectiontime values (nested in div)
-    //const inspectionTimeValues = children[12].children;
-    //for (let i = 0; i < inspectionTimeValues.length; i++) {
-    //formData[`${inspectionTimeValues[i].name}`] =
-    //inspectionTimeValues[i].value;
-    //}
-    ////to get amenities values (nested in divs within a div)
-    //const amenitiesValues = children[14].children;
-    //for (let i = 0; i < amenitiesValues.length; i++) {
-    //formData[`${amenitiesValues[i].children[1].name}`] =
-    //amenitiesValues[i].children[1].value;
-    //}
-    //console.log(formData);
 
     const toggleSettings = {
       linkedIn: this.props.stateCopy.linkedInToggleStatus,
