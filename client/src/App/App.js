@@ -151,28 +151,6 @@ class App extends Component {
     return Promise.resolve({ twitterURL, linkedInURL });
   };
 
-  // TODO: hook up profile editing ong settings page
-  // handleEdit = () => {
-  //   e.preventDefault();
-  //   const { user } = {
-  //     name: this.state.name,
-  //     email: this.state.email,
-  //     company: this.state.company,
-  //     phone: this.state.phone
-  //   }
-  //     .then(function(data) {
-  //       console.log(data);
-  //       if (data === 'success') {
-  //         this.setState({
-  //           msg: 'User has been edited.'
-  //         });
-  //       }
-  //     })
-  //     .catch(function(err) {
-  //       console.log(err);
-  //     });
-  // };
-
   render() {
     return (
       <BrowserRouter>

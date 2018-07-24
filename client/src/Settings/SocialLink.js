@@ -1,7 +1,7 @@
 import React from 'react';
 
 import original from '../assets/img/original.png';
-import facebook from '../assets/img/facebook.png';
+import twitter from '../assets/img/twitter_login_button.png';
 import './socialLink.css';
 
 class SocialLink extends React.Component {
@@ -48,7 +48,9 @@ class SocialLink extends React.Component {
             }}
           />
         ) : (
-          <a href={twitterURL}>Connect to Twitter</a>
+          <a href={twitterURL}>
+            <img src={twitter} alt="twitterbtn" width="180" height="33" />
+          </a>
         )}
 
         {/* <a href="https://www.facebook.com/login">
