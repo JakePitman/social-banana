@@ -39,6 +39,20 @@ usersRouter.get('/me', authenticate, async (req, res) => {
   }
 });
 
+usersRouter.patch('/update', authenticate, async (req, res) => {
+  const { user } = req;
+  const { name, company, phone } = req.body;
+
+  try {
+    await user.set({ name, company, phone });
+    const updatedUser = await user.save();
+    res.status(200).send({ updatedUser });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ error: error.message });
+  }
+});
+
 usersRouter.delete('/logout', authenticate, async (req, res) => {
   const { user, token } = req;
 

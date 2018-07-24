@@ -16,15 +16,24 @@ const UserSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
+    minlength: 2,
+    maxlength: 20
   },
   company: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
+    minlength: 2,
+    maxlength: 20
   },
   phone: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
+    minlength: 6,
+    maxlength: 12
   },
   authTokens: [String],
   linkedIn: {
