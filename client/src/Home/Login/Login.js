@@ -17,7 +17,7 @@ class Login extends React.Component {
   handleLogin = async () => {
     this.setState({ loading: true });
     try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       auth.login();
       this.setState({ success: true });
     } catch (err) {
