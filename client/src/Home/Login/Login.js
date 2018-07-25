@@ -1,12 +1,12 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // import auth from '../../services/auth';
 
 class Login extends React.Component {
   // const { handleLoggedIn } = props;
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       loading: false,
       success: false,
@@ -32,10 +32,25 @@ class Login extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleLogin = async () => {
+    this.setState({ loading: true });
+    try {
+      await this.props.handleLogin(this.state.email, this.state.password);
+      if (this.state.error) {
+        this.setState({ error: false });
+      }
+      // this.setState({ success: true });
+    } catch (err) {
+      this.setState({ error: true });
+    } finally {
+      this.setState({ loading: false, email: '', password: '' });
+    }
+  };
+  // {this.state.success && <Redirect to="/" />}
+
   render() {
     return (
       <React.Fragment>
-        {this.state.success && <Redirect to="/" />}
         <h1>Login</h1>
         <form>
           <input
@@ -51,17 +66,21 @@ class Login extends React.Component {
             onChange={this.handleOnChange}
           />
         </form>
-        <button>{this.state.loading ? 'Loading' : 'Login'}</button>
+        <button onClick={this.handleLogin}>
+          {this.state.loading ? 'Loading' : 'Login'}
+        </button>
         {this.state.error && <p>Oops! Something went wrong!</p>}
       </React.Fragment>
     );
   }
 }
 
-// Login.propTypes = {
-// };
+Login.propTypes = {
+  handleLogin: PropTypes.func,
+};
 
-// Login.defaultProps = {
-// };
+Login.defaultProps = {
+  handleLogin: null,
+};
 
 export default Login;

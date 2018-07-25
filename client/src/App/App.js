@@ -105,8 +105,8 @@ class App extends Component {
       localStorage.setItem('authorization', `Bearer ${authToken}`);
       await this.getSocialAuthUrls(authToken);
     } catch (error) {
-      console.log(error);
-      return 'Invalid combination';
+      // this.setState({ loggedIn: false });
+      throw error;
     }
   };
 
@@ -163,7 +163,16 @@ class App extends Component {
             handleLogout={this.handleLogout}
           />
           <Switch>
-            <Route exact path="/" render={() => <Home />} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Home
+                  loggedIn={this.state.loggedIn}
+                  handleLogin={this.handleLogin}
+                />
+              )}
+            />
             <Route
               exact
               path="/login"
