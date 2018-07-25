@@ -12,7 +12,7 @@ class Login extends React.Component {
       success: false,
       error: false,
       email: '',
-      password: '',
+      password: ''
     };
   }
 
@@ -51,8 +51,7 @@ class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Login</h1>
-        <form>
+        <div className="form-input">
           <input
             name="email"
             type="email"
@@ -65,7 +64,7 @@ class Login extends React.Component {
             value={this.state.password}
             onChange={this.handleOnChange}
           />
-        </form>
+        </div>
         <button onClick={this.handleLogin}>
           {this.state.loading ? 'Loading' : 'Login'}
         </button>
@@ -76,11 +75,11 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  handleLogin: PropTypes.func,
+  handleLogin: PropTypes.func
 };
 
 Login.defaultProps = {
-  handleLogin: null,
+  handleLogin: null
 };
 
 export default Login;
