@@ -1,9 +1,11 @@
 import React from 'react';
 // import { Route, Switch } from 'react-router-dom';
 // import PropTypes from 'prop-types';
+import logo from '../assets/img/logo.png';
 import Login from './Login';
 import Register from './Register';
 import auth from '../services/auth';
+import './home.css';
 
 // Want to create a login and register button that brings up
 // the appropriate form.
@@ -28,15 +30,18 @@ class Home extends React.Component {
       showUserForms = '';
     } else {
       showUserForms = (
-        <React.Fragment>
-          <button name="login" onClick={this.handleFormToggle}>
-            Login
-          </button>
-          <button name="register" onClick={this.handleFormToggle}>
-            Register
-          </button>
+        <div className="welcome">
+          <img className="logo" src={logo} height="200" alt="logo" />
+          <div className="form-toggle">
+            <button name="login" onClick={this.handleFormToggle}>
+              Login
+            </button>
+            <button name="register" onClick={this.handleFormToggle}>
+              Register
+            </button>
+          </div>
           {this.userForm()}
-        </React.Fragment>
+        </div>
       );
     }
     return showUserForms;
@@ -55,7 +60,7 @@ class Home extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1> Homepage </h1>
+        <h1> </h1>
 
         {this.showUserForms()}
       </React.Fragment>
