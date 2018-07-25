@@ -101,7 +101,6 @@ linkedInRouter.post(
 // Disconnect account from linkedIn
 linkedInRouter.delete('/disconnect', authenticate, (req, res) => {
   const { user } = req;
-  console.log('hello!!!!');
 
   try {
     user.linkedIn.accessToken = null;
