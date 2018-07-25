@@ -1,15 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      success: false,
-    };
-  }
-
   // Handle the logout by calling the logout API.
   // If successful, set the success state to true to cause a rerender into a redirect.
   // Then set success to false to prevent a second redirect.
