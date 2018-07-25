@@ -1,12 +1,14 @@
 .Account {
-  margin: -160px auto 200px auto;
+  margin: 10px auto 0 auto;
   max-width: 40rem;
-  box-shadow: 3px 10px 10px #908f8f;
-  background: rgba(252, 249, 249, 0.945);
+  border: 2px solid #fff;
+  padding: 0px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
-.Account-section {
-  margin: 70px 10px 30px 10px;
+.profile-section {
+  margin: 0px 10px 30px 10px;
   max-width: 30rem;
   border-radius: 3px;
   padding: 15px;
@@ -16,15 +18,15 @@
   text-align: center;
 }
 
-.Account-section img {
+.profile-section img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: -100px;
+  margin-top: -200px;
   padding: 10px;
 }
 
-.Account-section input {
+.profile-section input {
   color: #cccccc;
   font-size: 10px;
   margin-top: 5px;
@@ -35,7 +37,7 @@
   outline: 0;
 }
 
-.Account-form {
+.profile-form {
   margin: 200px auto 50px auto;
   max-width: 30rem;
   border-radius: 3px;
