@@ -32,35 +32,19 @@ class Navbar extends React.Component {
     if (auth.isAuthenticated()) {
       navbarLinks = (
         <div className="navbar">
-          <Link
-            className="navlink"
-            to="/"
-            style={{ textDecoration: 'none', color: '#908F8F' }}
-          >
+          <Link className="navlink" to="/">
             {' '}
             Home{' '}
           </Link>
-          <Link
-            className="navlink"
-            to="/listing"
-            style={{ textDecoration: 'none', color: '#908F8F' }}
-          >
+          <Link className="navlink" to="/listing">
             {' '}
             Listing{' '}
           </Link>
-          <Link
-            className="navlink"
-            to="/settings"
-            style={{ textDecoration: 'none', color: '#908F8F' }}
-          >
+          <Link className="navlink" to="/settings">
             {' '}
             Settings{' '}
           </Link>
-          <button
-            className="logout"
-            onClick={this.handleLogout}
-            style={{ textDecoration: 'none', color: '#908F8F' }}
-          >
+          <button className="logout" onClick={this.handleLogout}>
             Logout
           </button>
         </div>
