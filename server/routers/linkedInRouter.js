@@ -9,15 +9,15 @@ const {
   validateCallback
 } = require('./../middleware/linkedIn/validateCallback');
 const { getAccessToken } = require('./../middleware/linkedIn/getAccessToken');
-
 const {
   updateUserToggle
 } = require('./../middleware/linkedIn/updateUserToggle');
 const { validateListing } = require('./../middleware/linkedIn/validateListing');
 
-// LinkedIn Routes
+// LinkedIn Routes - OAuth 2.0
 const linkedInRouter = express.Router();
 
+// GET authURL to send user to authorize our app
 linkedInRouter.get('/authURL', authenticate, (req, res) => {
   const userId = req.user._id;
 
@@ -27,8 +27,11 @@ linkedInRouter.get('/authURL', authenticate, (req, res) => {
       LINKEDIN_REDIRECT_URI,
       LINKEDIN_STATE
     } = process.env;
+
+    // append the userId to callback url so to know identify the user in our database
     const redirect_uri = LINKEDIN_REDIRECT_URI + `%3FuserId%3D${userId}`;
     const url = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${LINKEDIN_CLIENT_ID}&redirect_uri=${redirect_uri}&state=${LINKEDIN_STATE}`;
+
     res.status(200).send({ url });
   } catch (error) {
     console.error(error.message);
@@ -36,6 +39,7 @@ linkedInRouter.get('/authURL', authenticate, (req, res) => {
   }
 });
 
+// LinkedIn sends request to our backend with access_code and state, validate the callback, exchange access_code for access_token with client id and secret
 linkedInRouter.get(
   '/callback',
   validateCallback,
@@ -57,6 +61,7 @@ linkedInRouter.get(
   }
 );
 
+// Share to LinkedIn, check user for accessToken, update user toggle status, validate listing
 linkedInRouter.post(
   '/share',
   authenticate,
@@ -86,6 +91,7 @@ linkedInRouter.post(
   }
 );
 
+// Disconnect account from linkedIn
 linkedInRouter.delete('/disconnect', authenticate, (req, res) => {
   const { user } = req;
 

@@ -6,16 +6,16 @@ const { User } = require('./../models/User');
 // Middleware
 const { authenticate } = require('./../middleware/authenticate');
 
-// Twitter Routes
+// Twitter Routes - OAuth 1.0a
 const twitterRouter = express.Router();
 
-// TODO: change to async await
+// Get twitter authURL to send user
 twitterRouter.get('/authURL', authenticate, async (req, res) => {
   const { user } = req;
   const userId = user._id;
 
   try {
-    // Contruct oauth
+    // Contruct oauth, append userId to callback url
     const oauth = new OAuth.OAuth(
       'https://api.twitter.com/oauth/request_token',
       'https://api.twitter.com/oauth/access_token',
@@ -37,7 +37,7 @@ twitterRouter.get('/authURL', authenticate, async (req, res) => {
         res.send(error);
         return;
       }
-      // Save to user
+      // Save tokenSecret to user
       user.twitter.temp.tokenSecret = oauth_token_secret;
       user.save();
       // Construct URL
@@ -50,9 +50,8 @@ twitterRouter.get('/authURL', authenticate, async (req, res) => {
   }
 });
 
-// TODO: change to async await
+// Twitter sends request to our backend with token, verifier and userId. Get userId from query, check token against saved tokenSecret. Trade user verifier for access_token and access_token_secret, save to user.
 twitterRouter.get('/callback', async (req, res) => {
-  // TODO: middlware - verify callback
   const { oauth_token, oauth_verifier, userId } = req.query;
 
   try {
@@ -86,7 +85,7 @@ twitterRouter.get('/callback', async (req, res) => {
           );
           return;
         }
-        // Save to user
+        // Save access_token and access_token_secret to user
         user.twitter.accessToken = oauth_access_token;
         user.twitter.accessTokenSecret = oauth_access_token_secret;
         user.save();
@@ -101,18 +100,22 @@ twitterRouter.get('/callback', async (req, res) => {
   }
 });
 
-// TODO: split into middleware
-// TODO: change to async await
+// Share listing to twitter
 twitterRouter.post('/share', authenticate, (req, res) => {
-  console.log('hello from api/twitter/share');
   const { user } = req;
-  const { accessToken, accessTokenSecret } = user.twitter;
-
-  console.log(req.body);
-  const { address, price, description } = req.body;
-  const tweetStatus = `$${price} - ${address} - ${description} #teambanana`;
 
   try {
+    const { accessToken, accessTokenSecret } = user.twitter;
+    if (!accessToken || !accessTokenSecret) {
+      res.status(401).send({ error: 'User not authorized' });
+      return;
+    }
+    const { address, price, description } = req.body;
+    if (!address || !price || !description) {
+      throw new Error('Denied. Not all required listing fields given.');
+    }
+
+    const tweetStatus = `$${price} - ${address} - ${description} #teambanana`;
     // Contruct oauth
     const oauth = new OAuth.OAuth(
       'https://api.twitter.com/oauth/request_token',
@@ -153,6 +156,7 @@ twitterRouter.post('/share', authenticate, (req, res) => {
   }
 });
 
+// Disconnect account from twitter
 twitterRouter.delete('/disconnect', authenticate, (req, res) => {
   const { user } = req;
 
