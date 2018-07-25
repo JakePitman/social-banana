@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../Home';
 // import Login from '../Login';
 import Settings from '../Settings';
@@ -173,57 +173,55 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          <Navbar
-            loggedIn={this.state.loggedIn}
-            handleLogout={this.handleLogout}
+      <div className="App">
+        <Navbar
+          loggedIn={this.state.loggedIn}
+          handleLogout={this.handleLogout}
+        />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home
+                loggedIn={this.state.loggedIn}
+                handleLogin={this.handleLogin}
+              />
+            )}
           />
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <Home
-                  loggedIn={this.state.loggedIn}
-                  handleLogin={this.handleLogin}
+          <Route
+            path="/settings"
+            render={() =>
+              this.state.loggedIn ? (
+                <Settings
+                  {...this.state}
+                  handleDisconnectSocial={this.handleDisconnectSocial}
+                  getSocialAuthUrls={this.getSocialAuthUrls}
+                  handleUpdate={this.handleUpdate}
                 />
-              )}
-            />
-            <Route
-              path="/settings"
-              render={() =>
-                this.state.loggedIn ? (
-                  <Settings
-                    {...this.state}
-                    handleDisconnectSocial={this.handleDisconnectSocial}
-                    getSocialAuthUrls={this.getSocialAuthUrls}
-                    handleUpdate={this.handleUpdate}
-                  />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-            />
-            <Route
-              path="/listing"
-              render={() =>
-                this.state.loggedIn ? (
-                  <Listing
-                    stateCopy={this.state}
-                    handleToggle={this.handleToggle}
-                  />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-            />
-            <Redirect from="/Listing/*" to="/Listing" />
-            <Redirect from="/Settings/*" to="/Settings" />
-            <Redirect to="/" />
-          </Switch>
-        </div>
-      </BrowserRouter>
+              ) : (
+                <Redirect to="/" />
+              )
+            }
+          />
+          <Route
+            path="/listing"
+            render={() =>
+              this.state.loggedIn ? (
+                <Listing
+                  stateCopy={this.state}
+                  handleToggle={this.handleToggle}
+                />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
+          />
+          <Redirect from="/Listing/*" to="/Listing" />
+          <Redirect from="/Settings/*" to="/Settings" />
+          <Redirect to="/" />
+        </Switch>
+      </div>
     );
   }
 }
