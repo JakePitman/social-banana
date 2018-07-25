@@ -1,0 +1,34 @@
+.welcome {
+  margin-top: 100px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.form-toggle {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px auto 0 auto;
+  max-width: 20rem;
+  padding: 15px;
+}
+
+.form-toggle button {
+  color: #cccccc;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: none;
+  cursor: pointer;
+}
+
+.form-toggle button:hover {
+  color: #908f8f;
+}
+
+.form-toggle .active {
+  color: #908f8f;
+}
