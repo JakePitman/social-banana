@@ -58,13 +58,7 @@ class Home extends React.Component {
   };
 
   render() {
-    return (
-      <React.Fragment>
-        <h1> </h1>
-
-        {this.showUserForms()}
-      </React.Fragment>
-    );
+    return <React.Fragment>{this.showUserForms()}</React.Fragment>;
   }
 }
 
