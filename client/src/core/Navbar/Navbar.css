@@ -1,0 +1,26 @@
+/* .welcome {
+    margin-top: 30px;
+  }
+   */
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  height: 40px;
+  background: #fff;
+  box-shadow: 0px 4px 2px #6c92ff;
+}
+.navlink {
+  margin: 4px 30px 4px 0px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+}
+
+.logout {
+  margin: 3px 30px 20px 0px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  border: none;
+  outline: 0;
+  cursor: pointer;
+}
