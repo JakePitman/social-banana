@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Login from './Login';
 import Register from './Register';
+import Search from './Login/Search';
 
 class Home extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class Home extends React.Component {
             Register
           </button>
         </div>
+
         {this.state.formState === 'login' && (
           <Login
             loggedIn={this.props.loggedIn}
@@ -39,7 +41,9 @@ class Home extends React.Component {
   };
 
   render() {
-    return <React.Fragment>{this.showUserForms()}</React.Fragment>;
+    return (
+      <React.Fragment>{this.showUserForms() || <Search />} </React.Fragment>
+    );
   }
 }
 

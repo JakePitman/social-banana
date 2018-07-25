@@ -16,6 +16,10 @@
   font-weight: lighter;
   font-size: 15px;
   margin-bottom: 50px;
+  margin: 30px auto 30px auto;
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
 }
 
 .listing-media-form {
@@ -46,6 +50,8 @@ select {
   border: 1px solid #cccccc;
   border-radius: 5px;
   font-size: 15px;
+  font-family: 'roboto';
+  padding: 5px 0 5px 10px;
 }
 
 .inspection-time {
@@ -121,6 +127,9 @@ select {
   border: 1px solid #cccccc;
   border-radius: 8px;
   width: 200px;
+  background-color: white;
+  padding: 0.6px;
+  margin-bottom: 5px;
 }
 
 .listing-media-logo {
@@ -135,15 +144,16 @@ select {
 .listing-media-title-container {
   height: 100%;
   display: flex;
+  float: left;
   justify-content: center;
   align-items: center;
   padding: 0 10px;
 }
 
 .listing-media-title {
-  font-family: helvetica;
-  font-weight: lighter;
-  color: #cccccc;
+  font-family: 'roboto';
+  font-weight: normal;
+  color: black;
 }
 
 .listing-media-switch-container {
@@ -159,7 +169,6 @@ select {
   display: inline-block;
   width: 45px;
   height: 20px;
-  margin: 0;
 }
 
 .listing-media-switch input {
@@ -176,7 +185,7 @@ select {
   background-color: #ccc;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  border: 1px solid #cccccc;
+  border: 2px solid #cccccc;
   border-radius: 34px;
 }
 

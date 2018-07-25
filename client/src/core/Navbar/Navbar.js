@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Search from '../../Home/Login/Search';
 
 class Navbar extends React.Component {
   // Handle the logout by calling the logout API.
@@ -63,8 +62,7 @@ class Navbar extends React.Component {
 
           {this.navbarLinks()}
         </nav>
-
-        {this.props.loggedIn && <Search />}
+        {this.props.loggedIn}
       </header>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 // import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 // import auth from '../../services/auth';
 
 class Login extends React.Component {
@@ -78,7 +79,6 @@ class Login extends React.Component {
               <button onClick={this.handleLogin}>
                 {this.state.loading ? 'Loading' : 'Login'}
               </button>
-
               {this.state.error && <p>Oops! Something went wrong!</p>}
             </div>
           </div>

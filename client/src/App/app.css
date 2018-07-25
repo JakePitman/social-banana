@@ -129,7 +129,7 @@ li button:hover {
 
 /* Logged in */
 
-header p {
+div p {
   font-family: 'roboto';
   color: white;
   margin-top: 40px;
@@ -142,7 +142,7 @@ header p {
 }
 
 /* search */
-header div h1 {
+div h1 {
   font-size: 40px;
   margin: -10px auto 10px auto;
   border-bottom: 2px solid #fff;
@@ -180,14 +180,14 @@ header div h1 {
 .state {
   font-family: 'roboto';
   font-size: 20px;
-  margin-left: 50px;
+  margin-left: 10px;
   margin-right: auto;
 }
 
 .suburb {
   font-family: 'roboto';
   font-size: 10px;
-  margin-left: 50px;
+  margin-left: 10px;
   margin-right: auto;
 }
 .search-input::before {
@@ -238,7 +238,11 @@ header div h1 {
 }
 
 .entire-form h1 {
-  margin-left: 12%;
+  color: black;
+  margin: 15px auto 0px -10px;
+  font-size: 23px;
+  text-decoration: none;
+  font-weight: 300;
   font-family: 'Roboto', sans-serif;
 }
 
