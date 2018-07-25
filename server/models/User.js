@@ -163,9 +163,10 @@ UserSchema.statics.findByCredentials = async function(email, password) {
   }
 };
 
-// Pre save, hash password and social access tokens
+// Pre save, hash password and social accessTokens
 UserSchema.pre('save', function(next) {
   const user = this;
+
   if (user.isModified('password')) {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(user.password, salt, (err, hash) => {
@@ -173,27 +174,29 @@ UserSchema.pre('save', function(next) {
         next();
       });
     });
-  } else if (user.isModified('linkedIn.accessToken')) {
-    // check if null (so when delete doesnt error)
-    if (user.linkedIn.accessToken) {
-      const hash = jwt
-        .sign(user.linkedIn.accessToken, process.env.JWT_SECRET)
-        .toString();
-      user.linkedIn.accessToken = hash;
-    }
+  } else if (
+    user.linkedIn.accessToken &&
+    user.isModified('linkedIn.accessToken')
+  ) {
+    // check if null (so on delete doesnt hash)
+    const hash = jwt
+      .sign(user.linkedIn.accessToken, process.env.JWT_SECRET)
+      .toString();
+    user.linkedIn.accessToken = hash;
     next();
-  } else if (user.isModified('twitter.accessToken')) {
-    // check if null (so when delete doesnt error)
-    if (user.twitter.accessToken) {
-      const hashAccessToken = jwt
-        .sign(user.twitter.accessToken, process.env.JWT_SECRET)
-        .toString();
-      user.twitter.accessToken = hashAccessToken;
-      const hashAccessTokenSecret = jwt
-        .sign(user.twitter.accessTokenSecret, process.env.JWT_SECRET)
-        .toString();
-      user.twitter.accessTokenSecret = hashAccessTokenSecret;
-    }
+  } else if (
+    user.twitter.accessToken &&
+    user.isModified('twitter.accessToken')
+  ) {
+    // check if null (so on delete doesnt hash)
+    const hashAccessToken = jwt
+      .sign(user.twitter.accessToken, process.env.JWT_SECRET)
+      .toString();
+    user.twitter.accessToken = hashAccessToken;
+    const hashAccessTokenSecret = jwt
+      .sign(user.twitter.accessTokenSecret, process.env.JWT_SECRET)
+      .toString();
+    user.twitter.accessTokenSecret = hashAccessTokenSecret;
     next();
   } else {
     next();
