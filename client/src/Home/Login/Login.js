@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import auth from '../../services/auth';
+import './login.css';
 
 class Login extends React.Component {
   // const { handleLoggedIn } = props;
@@ -32,9 +33,11 @@ class Login extends React.Component {
     return (
       <React.Fragment>
         {this.state.success && <Redirect to="/" />}
-        <input type="text" placeholder="email" name="emailField" />
-        <input type="password" placeholder="password" name="passwordField" />
-        <button onClick={this.handleLogin}>
+        <div className="form-input">
+          <input type="text" placeholder="email" name="emailField" />
+          <input type="password" placeholder="password" name="passwordField" />
+        </div>
+        <button className="login" onClick={this.handleLogin}>
           {this.state.loading ? 'Loading' : 'Login'}
         </button>
         {this.state.error && <p>Oops! Something went wrong!</p>}
