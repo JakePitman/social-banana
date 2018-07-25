@@ -66,12 +66,12 @@ class Navbar extends React.Component {
 
 Navbar.propTypes = {
   handleLogout: PropTypes.func,
-  loggedIn: PropTypes.bool,
+  loggedIn: PropTypes.bool
 };
 
 Navbar.defaultProps = {
   handleLogout: null,
-  loggedIn: null,
+  loggedIn: null
 };
 
 export default Navbar;

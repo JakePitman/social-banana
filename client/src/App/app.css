@@ -1,13 +1,48 @@
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    rgba(0, 0, 0, 0.5) url(../assets/img/home.jpg);
+  background-size: cover;
+  background-position: initial;
+}
 .navbar {
   display: flex;
   justify-content: flex-end;
   padding-top: 10px;
   height: 40px;
-  background: #fff;
-  box-shadow: 0px 4px 2px #6c92ff;
 }
 .navlink {
   margin: 4px 30px 4px 0px;
   font-family: 'Roboto', sans-serif;
   font-size: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.navlink:only-of-type {
+  padding: 8px;
+  width: 80px;
+  height: 20px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.navlink:only-of-type:hover {
+  padding: 8px;
+  width: 80px;
+  height: 20px;
+  background-color: white;
+  color: black;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+.navlink:hover {
+  border-bottom: 2px solid #fff;
+  padding-bottom: 3px;
+}
+
+.navlink:active {
+  border-bottom: 2px solid #6c92ff;
+  padding-bottom: 3px;
 }

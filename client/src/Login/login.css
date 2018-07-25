@@ -1,5 +1,11 @@
 .welcome {
   margin-top: 30px;
+  max-width: 25rem;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid #fff;
+  padding: 20px;
+  background-color: #fff;
 }
 
 #logoWorks {
@@ -35,13 +41,14 @@
 
 .form-toggle .active {
   color: #908f8f;
+  border-bottom: 2px solid #908f8f;
+  padding-bottom: 3px;
 }
 
 .form {
   margin: 0px auto;
   max-width: 25rem;
   padding: 15px;
-  box-shadow: 0px 8px 0.12px #cccccc;
   font-family: 'Roboto', sans-serif;
 }
 

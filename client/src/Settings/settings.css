@@ -1,7 +1,8 @@
 .Account {
-  margin: 200px auto;
+  margin: -160px auto 200px auto;
   max-width: 40rem;
   box-shadow: 3px 10px 10px #908f8f;
+  background: rgba(252, 249, 249, 0.945);
 }
 
 .Account-section {
