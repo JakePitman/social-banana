@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../Home';
-import Login from '../Login';
+// import Login from '../Login';
 import Settings from '../Settings';
 import Listing from '../Listing';
 import Navbar from '../core/Navbar';
@@ -30,32 +30,8 @@ class App extends Component {
     redirectHome: false,
   };
 
-  async componentDidMount() {
-    const authHeader = localStorage.getItem('authorization');
-    if (authHeader) {
-      try {
-        const authToken = authHeader.split(' ')[1];
-        const res = await usersAPI.getUser(authToken);
-        const { user } = res;
-        this.setState(() => ({
-          loggedIn: true,
-          email: user.email,
-          name: user.name,
-          company: user.company,
-          phone: user.phone,
-          authToken,
-          linkedInToggleStatus: user.linkedInToggleStatus,
-          linkedInConnected: user.linkedInConnected,
-          twitterToggleStatus: user.twitterToggleStatus,
-          twitterConnected: user.twitterConnected,
-        }));
-        await this.getSocialAuthUrls(authToken);
-      } catch (error) {
-        console.log(error);
-        this.setState(() => ({ authToken: null }));
-      }
-    }
-    this.setState(() => ({ loaded: true }));
+  componentDidMount() {
+    this.handleMount();
   }
 
   getSocialAuthUrls = async (authToken) => {
@@ -86,6 +62,34 @@ class App extends Component {
     return Promise.resolve({ twitterURL, linkedInURL });
   };
 
+  handleMount = async () => {
+    const authHeader = localStorage.getItem('authorization');
+    if (authHeader) {
+      try {
+        const authToken = authHeader.split(' ')[1];
+        const res = await usersAPI.getUser(authToken);
+        const { user } = res;
+        this.setState(() => ({
+          loggedIn: true,
+          email: user.email,
+          name: user.name,
+          company: user.company,
+          phone: user.phone,
+          authToken,
+          linkedInToggleStatus: user.linkedInToggleStatus,
+          linkedInConnected: user.linkedInConnected,
+          twitterToggleStatus: user.twitterToggleStatus,
+          twitterConnected: user.twitterConnected,
+        }));
+        await this.getSocialAuthUrls(authToken);
+      } catch (error) {
+        console.log(error);
+        this.setState(() => ({ authToken: null }));
+      }
+    }
+    this.setState(() => ({ loaded: true }));
+  };
+
   handleLogin = async (inputEmail, inputPassword) => {
     try {
       const res = await usersAPI.loginUser(inputEmail, inputPassword);
@@ -110,16 +114,6 @@ class App extends Component {
     }
   };
 
-  handleUpdate = async (updates) => {
-    try {
-      const res = await usersAPI.updateUser(updates, this.state.authToken);
-      const { name, company, phone } = res.user;
-      this.setState(() => ({ name, company, phone }));
-    } catch (error) {
-      return Promise.reject(error);
-    }
-  };
-
   handleLogout = async () => {
     try {
       await usersAPI.logoutUser(this.state.authToken);
@@ -140,6 +134,17 @@ class App extends Component {
       }));
     } catch (error) {
       console.log(error);
+      throw error;
+    }
+  };
+
+  handleUpdate = async (updates) => {
+    try {
+      const res = await usersAPI.updateUser(updates, this.state.authToken);
+      const { name, company, phone } = res.user;
+      this.setState(() => ({ name, company, phone }));
+    } catch (error) {
+      // return Promise.reject(error);
       throw error;
     }
   };
@@ -173,11 +178,6 @@ class App extends Component {
                   handleLogin={this.handleLogin}
                 />
               )}
-            />
-            <Route
-              exact
-              path="/login"
-              render={() => <Login handleLogin={this.handleLogin} />}
             />
             <Route
               path="/settings"
@@ -218,3 +218,8 @@ class App extends Component {
 }
 
 export default App;
+// <Route
+//   exact
+//   path="/login"
+//   render={() => <Login handleLogin={this.handleLogin} />}
+// />;
