@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../Home';
 // import Login from '../Login';
 import Settings from '../Settings';
 import Listing from '../Listing';
 import Navbar from '../core/Navbar';
-import { handleToggle } from '../services/stateFunctions';
+// import { handleToggle } from '../services/stateFunctions';
 import './app.css';
 
 // Helper Services
@@ -13,22 +13,25 @@ import usersAPI from '../services/usersAPI';
 import socialAPI from '../services/socialAPI';
 
 class App extends Component {
-  state = {
-    loaded: false,
-    loggedIn: false,
-    name: null,
-    company: null,
-    phone: null,
-    email: null,
-    authToken: null,
-    linkedInToggleStatus: false,
-    linkedInConnected: false,
-    twitterToggleStatus: false,
-    twitterConnected: false,
-    linkedInURL: null,
-    twitterURL: null,
-    redirectHome: false
-  };
+  constructor() {
+    super();
+    this.state = {
+      loaded: false,
+      loggedIn: false,
+      name: null,
+      company: null,
+      phone: null,
+      email: null,
+      authToken: null,
+      linkedInToggleStatus: false,
+      linkedInConnected: false,
+      twitterToggleStatus: false,
+      twitterConnected: false,
+      linkedInURL: null,
+      twitterURL: null,
+      redirectHome: false,
+    };
+  }
 
   componentDidMount() {
     this.handleMount();
@@ -57,7 +60,7 @@ class App extends Component {
     console.log(linkedInURL);
     this.setState(() => ({
       twitterURL,
-      linkedInURL
+      linkedInURL,
     }));
     return Promise.resolve({ twitterURL, linkedInURL });
   };
@@ -79,7 +82,7 @@ class App extends Component {
           linkedInToggleStatus: user.linkedInToggleStatus,
           linkedInConnected: user.linkedInConnected,
           twitterToggleStatus: user.twitterToggleStatus,
-          twitterConnected: user.twitterConnected
+          twitterConnected: user.twitterConnected,
         }));
         await this.getSocialAuthUrls(authToken);
       } catch (error) {
@@ -104,7 +107,7 @@ class App extends Component {
         linkedInToggleStatus: user.linkedInToggleStatus,
         linkedInConnected: user.linkedInConnected,
         twitterToggleStatus: user.twitterToggleStatus,
-        twitterConnected: user.twitterConnected
+        twitterConnected: user.twitterConnected,
       }));
       localStorage.setItem('authorization', `Bearer ${authToken}`);
       await this.getSocialAuthUrls(authToken);
@@ -130,7 +133,7 @@ class App extends Component {
         twitterToggleStatus: false,
         twitterConnected: false,
         linkedInURL: null,
-        twitterURL: null
+        twitterURL: null,
       }));
     } catch (error) {
       console.log(error);
@@ -159,59 +162,66 @@ class App extends Component {
     }
   };
 
+  handleToggle = (e) => {
+    const target = e.target.id;
+    if (target === 'LinkedInToggleButton') {
+      this.setState({ linkedInToggleStatus: !this.state.linkedInToggleStatus });
+    } else if (target === 'TwitterToggleButton') {
+      this.setState({ twitterToggleStatus: !this.state.twitterToggleStatus });
+    }
+  };
+
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          <Navbar
-            loggedIn={this.state.loggedIn}
-            handleLogout={this.handleLogout}
+      <div className="App">
+        <Navbar
+          loggedIn={this.state.loggedIn}
+          handleLogout={this.handleLogout}
+        />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home
+                loggedIn={this.state.loggedIn}
+                handleLogin={this.handleLogin}
+              />
+            )}
           />
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <Home
-                  loggedIn={this.state.loggedIn}
-                  handleLogin={this.handleLogin}
+          <Route
+            path="/settings"
+            render={() =>
+              this.state.loggedIn ? (
+                <Settings
+                  {...this.state}
+                  handleDisconnectSocial={this.handleDisconnectSocial}
+                  getSocialAuthUrls={this.getSocialAuthUrls}
+                  handleUpdate={this.handleUpdate}
                 />
-              )}
-            />
-            <Route
-              path="/settings"
-              render={() =>
-                this.state.loggedIn ? (
-                  <Settings
-                    {...this.state}
-                    handleDisconnectSocial={this.handleDisconnectSocial}
-                    getSocialAuthUrls={this.getSocialAuthUrls}
-                    handleUpdate={this.handleUpdate}
-                  />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-            />
-            <Route
-              path="/listing"
-              render={() =>
-                this.state.loggedIn ? (
-                  <Listing
-                    stateCopy={this.state}
-                    handleToggle={handleToggle.bind(this)}
-                  />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-            />
-            <Redirect from="/Listing/*" to="/Listing" />
-            <Redirect from="/Settings/*" to="/Settings" />
-            <Redirect to="/" />
-          </Switch>
-        </div>
-      </BrowserRouter>
+              ) : (
+                <Redirect to="/" />
+              )
+            }
+          />
+          <Route
+            path="/listing"
+            render={() =>
+              this.state.loggedIn ? (
+                <Listing
+                  stateCopy={this.state}
+                  handleToggle={this.handleToggle}
+                />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
+          />
+          <Redirect from="/Listing/*" to="/Listing" />
+          <Redirect from="/Settings/*" to="/Settings" />
+          <Redirect to="/" />
+        </Switch>
+      </div>
     );
   }
 }
