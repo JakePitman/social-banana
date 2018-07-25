@@ -11,6 +11,8 @@ class Login extends React.Component {
       loading: false,
       success: false,
       error: false,
+      emailField: '',
+      passwordField: ''
     };
   }
 
@@ -30,7 +32,8 @@ class Login extends React.Component {
     return (
       <React.Fragment>
         {this.state.success && <Redirect to="/" />}
-        <h1>Login</h1>
+        <input type="text" placeholder="email" name="emailField" />
+        <input type="password" placeholder="password" name="passwordField" />
         <button onClick={this.handleLogin}>
           {this.state.loading ? 'Loading' : 'Login'}
         </button>
