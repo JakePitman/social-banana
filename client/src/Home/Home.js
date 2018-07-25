@@ -18,12 +18,14 @@ class Home extends React.Component {
   showUserForms = () => {
     const showUserForms = !this.props.loggedIn && (
       <React.Fragment>
-        <button name="login" onClick={this.handleFormToggle}>
-          Login
-        </button>
-        <button name="register" onClick={this.handleFormToggle}>
-          Register
-        </button>
+        <div className="home-btn">
+          <button id="home" name="login" onClick={this.handleFormToggle}>
+            Login
+          </button>
+          <button id="home" name="register" onClick={this.handleFormToggle}>
+            Register
+          </button>
+        </div>
         {this.state.formState === 'login' && (
           <Login
             loggedIn={this.props.loggedIn}

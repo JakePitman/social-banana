@@ -5,10 +5,38 @@ body {
   background-position: initial;
 }
 
+/* Navbar */
+
 nav img {
   padding: 20px;
   height: 100%;
   display: block;
+}
+
+.home-btn {
+  float: right;
+  margin-top: -80px;
+}
+
+button#home {
+  cursor: pointer;
+  padding: 3px;
+  margin: 2px;
+  width: 80px;
+  height: 30px;
+  border: 1.5px solid #fff;
+  background-color: transparent;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 13px;
+  font-family: 'Roboto', sans-serif;
+}
+
+button#home:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid #fff;
 }
 
 ul {
@@ -58,6 +86,8 @@ li:active {
   padding-bottom: 3px;
 }
 
+/* Realista */
+
 .realista img {
   display: block;
   margin-left: auto;
@@ -72,6 +102,8 @@ li:active {
   color: #ffffff;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+/* Form  */
 
 .entire-form {
   margin-top: 30px;
