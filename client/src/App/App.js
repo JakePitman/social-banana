@@ -122,6 +122,7 @@ class App extends Component {
 
   handleLogout = async () => {
     try {
+      await usersAPI.logoutUser(this.state.authToken);
       localStorage.removeItem('authorization');
       this.setState(() => ({
         loggedIn: false,
@@ -137,9 +138,9 @@ class App extends Component {
         linkedInURL: null,
         twitterURL: null,
       }));
-      await usersAPI.logoutUser(this.state.authToken);
     } catch (error) {
       console.log(error);
+      throw error;
     }
   };
 
