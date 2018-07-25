@@ -6,11 +6,3 @@ export function handleToggle(e) {
     this.setState({ twitterToggleStatus: !this.state.twitterToggleStatus });
   }
 }
-
-export function resetRedirectHome(e) {
-  this.setState({ redirectHome: false });
-}
-
-export function useRedirectHome(e) {
-  this.setState({ redirectHome: true });
-}
