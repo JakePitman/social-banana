@@ -12,7 +12,7 @@ class Login extends React.Component {
       // success: false,
       error: false,
       email: '',
-      password: '',
+      password: ''
     };
   }
 
@@ -51,36 +51,48 @@ class Login extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Login</h1>
-        <form>
-          <input
-            name="email"
-            type="email"
-            value={this.state.email}
-            onChange={this.handleOnChange}
+        <div className="realista">
+          <img
+            src="https://realista.com.au/images/web/realista-new.svg"
+            alt="realista-logo"
+            height="20"
           />
-          <input
-            name="password"
-            type="password"
-            value={this.state.password}
-            onChange={this.handleOnChange}
-          />
-        </form>
-        <button onClick={this.handleLogin}>
-          {this.state.loading ? 'Loading' : 'Login'}
-        </button>
-        {this.state.error && <p>Oops! Something went wrong!</p>}
+          <h3>Where your home finds you</h3>
+          <div className="entire-form">
+            <h1>Login</h1>
+            <div className="form">
+              <form>
+                <input
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleOnChange}
+                />
+                <input
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.handleOnChange}
+                />
+              </form>
+              <button onClick={this.handleLogin}>
+                {this.state.loading ? 'Loading' : 'Login'}
+              </button>
+              {this.state.error && <p>Oops! Something went wrong!</p>}
+            </div>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
 }
 
 Login.propTypes = {
-  handleLogin: PropTypes.func,
+  handleLogin: PropTypes.func
 };
 
 Login.defaultProps = {
-  handleLogin: null,
+  handleLogin: null
 };
 
 export default Login;

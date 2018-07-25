@@ -55,7 +55,11 @@ class Navbar extends React.Component {
     return (
       <header>
         <nav>
-          <h2> Realista </h2>
+          <img
+            src="https://realista.com.au/images/web/header-logo.png"
+            alt="logo"
+          />
+
           {this.navbarLinks()}
         </nav>
         {this.props.loggedIn && <p>Logged In</p>}

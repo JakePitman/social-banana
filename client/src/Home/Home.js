@@ -7,7 +7,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formState: 'login',
+      formState: 'login'
     };
   }
 
@@ -37,23 +37,18 @@ class Home extends React.Component {
   };
 
   render() {
-    return (
-      <React.Fragment>
-        <h1> Homepage </h1>
-        {this.showUserForms()}
-      </React.Fragment>
-    );
+    return <React.Fragment>{this.showUserForms()}</React.Fragment>;
   }
 }
 
 Home.propTypes = {
   loggedIn: PropTypes.bool,
-  handleLogin: PropTypes.func,
+  handleLogin: PropTypes.func
 };
 
 Home.defaultProps = {
   loggedIn: null,
-  handleLogin: null,
+  handleLogin: null
 };
 
 export default Home;
