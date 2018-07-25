@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import SearchInput, { createFilter } from 'react-search-input';
 
-import properties from './mails';
+import properties from './properties';
 
-const KEYS_TO_FILTERS = ['user.name', 'user.state', 'suburb'];
+const KEYS_TO_FILTERS = ['user.state', 'suburb'];
 
 class Search extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class Search extends Component {
     return (
       <div>
         <p>Logged in</p>
-
+        <h1>Find a Property</h1>
         <SearchInput className="search-input" onChange={this.searchUpdated} />
         {filteredProperties.map((property) => {
           return (
@@ -30,6 +30,7 @@ class Search extends Component {
               <div className="agent" key={property.id}>
                 <div className="state">{property.user.state}</div>
                 <div className="suburb">{property.suburb}</div>
+                <div className="prop-img">{property.img}</div>
               </div>
             </div>
           );
