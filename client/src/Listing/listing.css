@@ -157,6 +157,8 @@ select {
   width: 80px;
   font-weight: normal;
   color: black;
+  width: 80px;
+  text-align: center;
 }
 
 .listing-media-switch-container {
