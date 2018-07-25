@@ -40,7 +40,6 @@ class Home extends React.Component {
     return (
       <React.Fragment>
         <h1> Homepage </h1>
-        <p>{this.props.loggedIn.toString()}</p>
         {this.showUserForms()}
       </React.Fragment>
     );
