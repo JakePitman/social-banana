@@ -50,6 +50,7 @@ twitterRouter.get('/authURL', authenticate, async (req, res) => {
   }
 });
 
+// TODO: split into middleware
 // Twitter sends request to our backend with token, verifier and userId. Get userId from query, check token against saved tokenSecret. Trade user verifier for access_token and access_token_secret, save to user.
 twitterRouter.get('/callback', async (req, res) => {
   const { oauth_token, oauth_verifier, userId } = req.query;
@@ -105,6 +106,7 @@ twitterRouter.get('/callback', async (req, res) => {
   }
 });
 
+// TODO: split into middleware
 // Share listing to twitter
 twitterRouter.post('/share', authenticate, (req, res) => {
   const { user } = req;
@@ -115,6 +117,9 @@ twitterRouter.post('/share', authenticate, (req, res) => {
       res.status(401).send({ error: 'User not authorized' });
       return;
     }
+    // update User
+    user.twitter.toggleStatus = true;
+    user.save();
     // Decode hashed accessToken and accessTokenSecret
     const decodedAccessToken = jwt.verify(accessToken, process.env.JWT_SECRET);
     const decodedAccessTokenSecret = jwt.verify(
