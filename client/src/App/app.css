@@ -47,6 +47,8 @@ ul {
   list-style-type: none;
   font-family: 'Roboto', sans-serif;
   color: white;
+  margin-top: -100px;
+  margin-right: 20px;
 }
 
 li a {
@@ -76,12 +78,12 @@ li:only-of-type:hover {
   border-radius: 10px;
   text-align: center;
 }
-li:hover {
+li a:hover {
   border-bottom: 2px solid #fff;
   padding-bottom: 3px;
 }
 
-li:active {
+li a:active {
   border-bottom: 2px solid #6c92ff;
   padding-bottom: 3px;
 }
@@ -101,6 +103,20 @@ li:active {
   letter-spacing: 1.3px;
   color: #ffffff;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Logged in */
+
+header p {
+  font-family: 'roboto';
+  color: white;
+  margin-top: 40px;
+  margin-left: -5px;
+  padding-top: 5px;
+  font-size: 14px;
+  width: 150px;
+  text-decoration-line: overline;
+  text-align: center;
 }
 
 /* Form  */
