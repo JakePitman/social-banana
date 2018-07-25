@@ -24,20 +24,11 @@ class Home extends React.Component {
         <button name="register" onClick={this.handleFormToggle}>
           Register
         </button>
-        {this.userForm()}
+        {this.state.formState === 'login' && <Login />}
+        {this.state.formState === 'register' && <Register />}
       </React.Fragment>
     );
     return showUserForms;
-  };
-
-  userForm = () => {
-    let userForm;
-    if (this.state.formState === 'login') {
-      userForm = <Login />;
-    } else if (this.state.formState === 'register') {
-      userForm = <Register />;
-    }
-    return userForm;
   };
 
   render() {
