@@ -78,6 +78,7 @@ class Login extends React.Component {
               <button onClick={this.handleLogin}>
                 {this.state.loading ? 'Loading' : 'Login'}
               </button>
+
               {this.state.error && <p>Oops! Something went wrong!</p>}
             </div>
           </div>
