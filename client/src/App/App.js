@@ -184,26 +184,39 @@ class App extends Component {
             />
             <Route
               path="/settings"
-              render={() => (
-                <Settings
-                  {...this.state}
-                  handleDisconnectSocial={this.handleDisconnectSocial}
-                  getSocialAuthUrls={this.getSocialAuthUrls}
-                  handleUpdate={this.handleUpdate}
-                />
-              )}
+              render={() =>
+                this.state.loggedIn ? (
+                  <Settings
+                    {...this.state}
+                    handleDisconnectSocial={this.handleDisconnectSocial}
+                    getSocialAuthUrls={this.getSocialAuthUrls}
+                    handleUpdate={this.handleUpdate}
+                  />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
             />
             <Route
               path="/listing"
-              render={() => (
-                <Listing
-                  stateCopy={this.state}
-                  handleToggle={handleToggle.bind(this)}
-                  resetRedirectHome={resetRedirectHome.bind(this)}
-                  useRedirectHome={useRedirectHome.bind(this)}
-                />
-              )}
+              render={() =>
+                this.state.loggedIn ? (
+                  <Listing
+                    stateCopy={this.state}
+                    handleToggle={handleToggle.bind(this)}
+                    resetRedirectHome={resetRedirectHome.bind(this)}
+                    useRedirectHome={useRedirectHome.bind(this)}
+                  />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
             />
+            <Redirect from="/Listing/*" to="/Listing" />
+            <Redirect from="/Settings/*" to="/Settings" />
+            {/* <Redirect from="/login/*" to="/login" />
+            <Redirect from="/register/*" to="/register" /> */}
+            <Redirect to="/" />
           </Switch>
         </div>
       </BrowserRouter>
