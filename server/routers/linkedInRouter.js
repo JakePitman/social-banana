@@ -10,11 +10,17 @@ const {
 } = require('./../middleware/linkedIn/validateCallback');
 const { getAccessToken } = require('./../middleware/linkedIn/getAccessToken');
 
+const {
+  updateUserToggle
+} = require('./../middleware/linkedIn/updateUserToggle');
+const { validateListing } = require('./../middleware/linkedIn/validateListing');
+
 // LinkedIn Routes
 const linkedInRouter = express.Router();
 
 linkedInRouter.get('/authURL', authenticate, (req, res) => {
   const userId = req.user._id;
+
   try {
     const {
       LINKEDIN_CLIENT_ID,
@@ -36,6 +42,7 @@ linkedInRouter.get(
   getAccessToken,
   async (req, res) => {
     const { user, accessToken } = req;
+
     try {
       // TODO: bcrypt accessToken (PRE SAVE!! :O)
       user.linkedIn.accessToken = accessToken;
@@ -50,65 +57,34 @@ linkedInRouter.get(
   }
 );
 
-linkedInRouter.post('/share', authenticate, async (req, res) => {
-  try {
-    const { accessToken } = req.user.linkedIn;
-    if (!accessToken) {
-      throw new Error('Forbidden, linkedIn account not connected');
+linkedInRouter.post(
+  '/share',
+  authenticate,
+  updateUserToggle,
+  validateListing,
+  async (req, res) => {
+    const { accessToken, shareBody } = req;
+
+    try {
+      const response = await axios({
+        method: 'POST',
+        url: 'https://api.linkedin.com/v1/people/~/shares?format=json',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-li-format': 'json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        data: shareBody
+      });
+      const { updateUrl } = response.data;
+
+      res.status(201).send({ updateUrl });
+    } catch (error) {
+      console.error(error.message);
+      res.status(400).send({ error: error.message });
     }
-
-    const {
-      address,
-      price,
-      description,
-      propertyType,
-      landSize,
-      inspectionDate,
-      inspectionTime
-    } = req.body;
-
-    //if (
-      //!address ||
-      //!price ||
-      //!description ||
-      //!propertyType ||
-      //!landSize ||
-      //!inspectionTime ||
-      //!inspectionDate
-    //) {
-      //throw new Error('Denied. Not all required listing fields given.');
-    //}
-
-    const postBody = {
-      comment: `${description}\n${propertyType} - ${landSize}m2 \nInspection: ${inspectionDate} : ${inspectionTime} \n#teambanana #property`,
-      content: {
-        title: `$${price} - \n${address}`,
-        description: `This doesnt even show! (<= 256chars)`,
-        'submitted-url': `https://www.teambanana.com.au/`,
-        'submitted-image-url': `http://3.bp.blogspot.com/-6kABIu06PfM/UqX3w2XZZ6I/AAAAAAAAB8E/dBnFmfebuIc/s1600/Banana-Cottage.jpg`
-      },
-      visibility: {
-        code: 'anyone'
-      }
-    };
-
-    const response = await axios({
-      method: 'POST',
-      url: 'https://api.linkedin.com/v1/people/~/shares?format=json',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-li-format': 'json',
-        Authorization: `Bearer ${accessToken}`
-      },
-      data: postBody
-    });
-    const { updateUrl } = response.data;
-    res.status(201).send({ updateUrl });
-  } catch (error) {
-    console.error(error.message);
-    res.status(400).send({ error: error.message });
   }
-});
+);
 
 linkedInRouter.delete('/disconnect', authenticate, (req, res) => {
   const { user } = req;
