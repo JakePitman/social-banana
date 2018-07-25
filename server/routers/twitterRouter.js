@@ -2,7 +2,7 @@ const express = require('express');
 const OAuth = require('oauth');
 
 const { User } = require('./../models/User');
-
+const jwt = require('jsonwebtoken');
 // Middleware
 const { authenticate } = require('./../middleware/authenticate');
 
@@ -77,7 +77,12 @@ twitterRouter.get('/callback', async (req, res) => {
       oauth_token,
       tokenSecret,
       oauth_verifier,
-      function(error, oauth_access_token, oauth_access_token_secret, results) {
+      async function(
+        error,
+        oauth_access_token,
+        oauth_access_token_secret,
+        results
+      ) {
         if (error) {
           console.error(error);
           res.redirect(
@@ -85,10 +90,10 @@ twitterRouter.get('/callback', async (req, res) => {
           );
           return;
         }
-        // Save access_token and access_token_secret to user
+        // Save access_token and access_token_secret to user (hashed on save)
         user.twitter.accessToken = oauth_access_token;
         user.twitter.accessTokenSecret = oauth_access_token_secret;
-        user.save();
+        await user.save();
         res.redirect(`/settings?twitter_connected=true`);
       }
     );
@@ -110,6 +115,13 @@ twitterRouter.post('/share', authenticate, (req, res) => {
       res.status(401).send({ error: 'User not authorized' });
       return;
     }
+    // Decode hashed accessToken and accessTokenSecret
+    const decodedAccessToken = jwt.verify(accessToken, process.env.JWT_SECRET);
+    const decodedAccessTokenSecret = jwt.verify(
+      accessTokenSecret,
+      process.env.JWT_SECRET
+    );
+
     const { address, price, description } = req.body;
     if (!address || !price || !description) {
       throw new Error('Denied. Not all required listing fields given.');
@@ -130,8 +142,8 @@ twitterRouter.post('/share', authenticate, (req, res) => {
     // Post to twitter
     oauth.post(
       'https://api.twitter.com/1.1/statuses/update.json',
-      accessToken,
-      accessTokenSecret,
+      decodedAccessToken,
+      decodedAccessTokenSecret,
       { status: tweetStatus },
       function(error, data) {
         if (error) {
@@ -162,6 +174,7 @@ twitterRouter.delete('/disconnect', authenticate, (req, res) => {
 
   try {
     user.twitter.accessToken = null;
+    user.twitter.accessTokenSecret = null;
     user.save();
     res.status(200).send();
   } catch (error) {

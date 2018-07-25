@@ -27,7 +27,7 @@ class App extends Component {
     twitterConnected: false,
     linkedInURL: null,
     twitterURL: null,
-    redirectHome: false,
+    redirectHome: false
   };
 
   componentDidMount() {
@@ -57,7 +57,7 @@ class App extends Component {
     console.log(linkedInURL);
     this.setState(() => ({
       twitterURL,
-      linkedInURL,
+      linkedInURL
     }));
     return Promise.resolve({ twitterURL, linkedInURL });
   };
@@ -79,7 +79,7 @@ class App extends Component {
           linkedInToggleStatus: user.linkedInToggleStatus,
           linkedInConnected: user.linkedInConnected,
           twitterToggleStatus: user.twitterToggleStatus,
-          twitterConnected: user.twitterConnected,
+          twitterConnected: user.twitterConnected
         }));
         await this.getSocialAuthUrls(authToken);
       } catch (error) {
@@ -104,7 +104,7 @@ class App extends Component {
         linkedInToggleStatus: user.linkedInToggleStatus,
         linkedInConnected: user.linkedInConnected,
         twitterToggleStatus: user.twitterToggleStatus,
-        twitterConnected: user.twitterConnected,
+        twitterConnected: user.twitterConnected
       }));
       localStorage.setItem('authorization', `Bearer ${authToken}`);
       await this.getSocialAuthUrls(authToken);
@@ -130,7 +130,7 @@ class App extends Component {
         twitterToggleStatus: false,
         twitterConnected: false,
         linkedInURL: null,
-        twitterURL: null,
+        twitterURL: null
       }));
     } catch (error) {
       console.log(error);
@@ -150,7 +150,6 @@ class App extends Component {
   };
 
   handleDisconnectSocial = async (socialMedia) => {
-    // alert('You are now disconnecting...');
     if (socialMedia === 'linkedIn') {
       await socialAPI.disconnectLinkedIn(this.state.authToken);
       this.setState(() => ({ linkedInConnected: false }));

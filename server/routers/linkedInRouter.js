@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 
 const { User } = require('./../models/User');
-
+const jwt = require('jsonwebtoken');
 // Middleware
 const { authenticate } = require('./../middleware/authenticate');
 const {
@@ -48,7 +48,7 @@ linkedInRouter.get(
     const { user, accessToken } = req;
 
     try {
-      // TODO: bcrypt accessToken (PRE SAVE!! :O)
+      // save accessToken to user (hashed on save)
       user.linkedIn.accessToken = accessToken;
       await user.save();
       res.redirect('/settings?linkedIn_connected=true');
@@ -61,7 +61,7 @@ linkedInRouter.get(
   }
 );
 
-// Share to LinkedIn, check user for accessToken, update user toggle status, validate listing
+// Share to LinkedIn. Check user for accessToken, update user toggle status, validate listing
 linkedInRouter.post(
   '/share',
   authenticate,
@@ -71,13 +71,20 @@ linkedInRouter.post(
     const { accessToken, shareBody } = req;
 
     try {
+      // decode hashed access token
+      const decodedAccessToken = jwt.verify(
+        accessToken,
+        process.env.JWT_SECRET
+      );
+
+      // share to linkedin
       const response = await axios({
         method: 'POST',
         url: 'https://api.linkedin.com/v1/people/~/shares?format=json',
         headers: {
           'Content-Type': 'application/json',
           'x-li-format': 'json',
-          Authorization: `Bearer ${accessToken}`
+          Authorization: `Bearer ${decodedAccessToken}`
         },
         data: shareBody
       });
@@ -94,6 +101,7 @@ linkedInRouter.post(
 // Disconnect account from linkedIn
 linkedInRouter.delete('/disconnect', authenticate, (req, res) => {
   const { user } = req;
+  console.log('hello!!!!');
 
   try {
     user.linkedIn.accessToken = null;
