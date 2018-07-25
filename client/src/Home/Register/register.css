@@ -1,0 +1,15 @@
+.form-input {
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+}
+
+.form-input input {
+  color: #cccccc;
+  margin: 4px 0px;
+  font-size: 14px;
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1px solid #908f8f;
+  outline: 0;
+}
