@@ -1,4 +1,5 @@
 import React from 'react';
+import './register.css';
 
 class Register extends React.Component {
   state = {
@@ -9,11 +10,11 @@ class Register extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="form-input">
         <input type="name" placeholder="name" name="name" />
         <input type="company" placeholder="company" name="company" />
         <input type="phone" placeholder="phone" name="phone" />
-      </React.Fragment>
+      </div>
     );
   }
 }
