@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import logo from '../assets/img/logo.png';
 import Login from './Login';
 import Register from './Register';
+import './home.css';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formState: 'login',
+      formState: 'login'
     };
   }
 
@@ -17,13 +19,16 @@ class Home extends React.Component {
 
   showUserForms = () => {
     const showUserForms = !this.props.loggedIn && (
-      <React.Fragment>
-        <button name="login" onClick={this.handleFormToggle}>
-          Login
-        </button>
-        <button name="register" onClick={this.handleFormToggle}>
-          Register
-        </button>
+      <div className="welcome">
+        <img className="logo" src={logo} height="200" alt="logo" />
+        <div className="form-toggle">
+          <button name="login" onClick={this.handleFormToggle}>
+            Login
+          </button>
+          <button name="register" onClick={this.handleFormToggle}>
+            Register
+          </button>
+        </div>
         {this.state.formState === 'login' && (
           <Login
             loggedIn={this.props.loggedIn}
@@ -31,7 +36,7 @@ class Home extends React.Component {
           />
         )}
         {this.state.formState === 'register' && <Register />}
-      </React.Fragment>
+      </div>
     );
     return showUserForms;
   };
@@ -39,7 +44,6 @@ class Home extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1> Homepage </h1>
         <p>{this.props.loggedIn.toString()}</p>
         {this.showUserForms()}
       </React.Fragment>
@@ -49,12 +53,12 @@ class Home extends React.Component {
 
 Home.propTypes = {
   loggedIn: PropTypes.bool,
-  handleLogin: PropTypes.func,
+  handleLogin: PropTypes.func
 };
 
 Home.defaultProps = {
   loggedIn: null,
-  handleLogin: null,
+  handleLogin: null
 };
 
 export default Home;
