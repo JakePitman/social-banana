@@ -14,7 +14,7 @@ class LoginForm extends React.Component {
     nameField: '',
     companyField: '',
     phoneField: '',
-    error: null
+    error: null,
   };
 
   handleFormToggleOnClick = (formType) => (e) => {
@@ -30,23 +30,14 @@ class LoginForm extends React.Component {
     e.preventDefault();
     const email = this.state.emailField;
     const password = this.state.passwordField;
-    const name = this.state.nameField;
-    const company = this.state.companyField;
-    const phoneField = this.state.phoneField;
 
     const error = await this.props.handleLogin(email, password);
     if (error) {
-      this.setState(() => {
-        return {
-          error
-        };
-      });
+      this.setState(() => ({
+        error,
+      }));
     }
   };
-
-  componentDidMount() {
-    this.props.resetRedirectHome();
-  }
 
   render() {
     return (

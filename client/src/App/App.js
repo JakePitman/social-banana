@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import Home from '../Home';
 import Login from '../Login';
 import Settings from '../Settings';
 import Listing from '../Listing';
 import Navbar from '../core/Navbar';
-import {
-  handleToggle,
-  resetRedirectHome,
-  useRedirectHome
-} from '../services/stateFunctions';
+import { handleToggle } from '../services/stateFunctions';
 import './app.css';
 
 // Helper Services
@@ -30,7 +27,7 @@ class App extends Component {
     twitterConnected: false,
     linkedInURL: null,
     twitterURL: null,
-    redirectHome: false
+    redirectHome: false,
   };
 
   async componentDidMount() {
@@ -50,7 +47,7 @@ class App extends Component {
           linkedInToggleStatus: user.linkedInToggleStatus,
           linkedInConnected: user.linkedInConnected,
           twitterToggleStatus: user.twitterToggleStatus,
-          twitterConnected: user.twitterConnected
+          twitterConnected: user.twitterConnected,
         }));
         await this.getSocialAuthUrls(authToken);
       } catch (error) {
@@ -60,78 +57,6 @@ class App extends Component {
     }
     this.setState(() => ({ loaded: true }));
   }
-
-  handleLogin = async (inputEmail, inputPassword) => {
-    try {
-      const res = await usersAPI.loginUser(inputEmail, inputPassword);
-      const { user, authToken } = res;
-      this.setState(() => {
-        return {
-          loggedIn: true,
-          email: user.email,
-          name: user.name,
-          company: user.company,
-          phone: user.phone,
-          authToken,
-          linkedInToggleStatus: user.linkedInToggleStatus,
-          linkedInConnected: user.linkedInConnected,
-          twitterToggleStatus: user.twitterToggleStatus,
-          twitterConnected: user.twitterConnected
-        };
-      });
-      localStorage.setItem('authorization', `Bearer ${authToken}`);
-      await this.getSocialAuthUrls(authToken);
-    } catch (error) {
-      console.log(error);
-      return 'Invalid combination';
-    }
-  };
-
-  handleUpdate = async (updates) => {
-    try {
-      const res = await usersAPI.updateUser(updates, this.state.authToken);
-      const { name, company, phone } = res.user;
-      this.setState(() => ({ name, company, phone }));
-    } catch (error) {
-      return Promise.reject(error);
-    }
-  };
-
-  handleLogout = async () => {
-    try {
-      localStorage.removeItem('authorization');
-      this.setState(() => {
-        return {
-          loggedIn: false,
-          name: null,
-          company: null,
-          phone: null,
-          email: null,
-          authToken: null,
-          linkedInToggleStatus: false,
-          linkedInConnected: false,
-          twitterToggleStatus: false,
-          twitterConnected: false,
-          linkedInURL: null,
-          twitterURL: null
-        };
-      });
-      await usersAPI.logoutUser(this.state.authToken);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  handleDisconnectSocial = async (socialMedia) => {
-    alert('You are now disconnecting...');
-    if (socialMedia === 'linkedIn') {
-      await socialAPI.disconnectLinkedIn(this.state.authToken);
-      this.setState(() => ({ linkedInConnected: false }));
-    } else if (socialMedia === 'twitter') {
-      await socialAPI.disconnectTwitter(this.state.authToken);
-      this.setState(() => ({ twitterConnected: false }));
-    }
-  };
 
   getSocialAuthUrls = async (authToken) => {
     let twitterURL;
@@ -154,13 +79,79 @@ class App extends Component {
     // Set State with authUrls
     console.log(twitterURL);
     console.log(linkedInURL);
-    this.setState(() => {
-      return {
-        twitterURL,
-        linkedInURL
-      };
-    });
+    this.setState(() => ({
+      twitterURL,
+      linkedInURL,
+    }));
     return Promise.resolve({ twitterURL, linkedInURL });
+  };
+
+  handleLogin = async (inputEmail, inputPassword) => {
+    try {
+      const res = await usersAPI.loginUser(inputEmail, inputPassword);
+      const { user, authToken } = res;
+      this.setState(() => ({
+        loggedIn: true,
+        email: user.email,
+        name: user.name,
+        company: user.company,
+        phone: user.phone,
+        authToken,
+        linkedInToggleStatus: user.linkedInToggleStatus,
+        linkedInConnected: user.linkedInConnected,
+        twitterToggleStatus: user.twitterToggleStatus,
+        twitterConnected: user.twitterConnected,
+      }));
+      localStorage.setItem('authorization', `Bearer ${authToken}`);
+      await this.getSocialAuthUrls(authToken);
+    } catch (error) {
+      console.log(error);
+      return 'Invalid combination';
+    }
+  };
+
+  handleUpdate = async (updates) => {
+    try {
+      const res = await usersAPI.updateUser(updates, this.state.authToken);
+      const { name, company, phone } = res.user;
+      this.setState(() => ({ name, company, phone }));
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
+  handleLogout = async () => {
+    try {
+      localStorage.removeItem('authorization');
+      this.setState(() => ({
+        loggedIn: false,
+        name: null,
+        company: null,
+        phone: null,
+        email: null,
+        authToken: null,
+        linkedInToggleStatus: false,
+        linkedInConnected: false,
+        twitterToggleStatus: false,
+        twitterConnected: false,
+        linkedInURL: null,
+        twitterURL: null,
+      }));
+      await usersAPI.logoutUser(this.state.authToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  handleDisconnectSocial = async (socialMedia) => {
+    // alert('You are now disconnecting...');
+    if (socialMedia === 'linkedIn') {
+      await socialAPI.disconnectLinkedIn(this.state.authToken);
+      this.setState(() => ({ linkedInConnected: false }));
+    } else if (socialMedia === 'twitter') {
+      await socialAPI.disconnectTwitter(this.state.authToken);
+      this.setState(() => ({ twitterConnected: false }));
+    }
   };
 
   render() {
@@ -172,15 +163,11 @@ class App extends Component {
             handleLogout={this.handleLogout}
           />
           <Switch>
+            <Route exact path="/" render={() => <Home />} />
             <Route
               exact
-              path="/"
-              render={() => (
-                <Login
-                  handleLogin={this.handleLogin}
-                  resetRedirectHome={resetRedirectHome.bind(this)}
-                />
-              )}
+              path="/login"
+              render={() => <Login handleLogin={this.handleLogin} />}
             />
             <Route
               path="/settings"
@@ -204,8 +191,6 @@ class App extends Component {
                   <Listing
                     stateCopy={this.state}
                     handleToggle={handleToggle.bind(this)}
-                    resetRedirectHome={resetRedirectHome.bind(this)}
-                    useRedirectHome={useRedirectHome.bind(this)}
                   />
                 ) : (
                   <Redirect to="/" />
@@ -214,8 +199,6 @@ class App extends Component {
             />
             <Redirect from="/Listing/*" to="/Listing" />
             <Redirect from="/Settings/*" to="/Settings" />
-            {/* <Redirect from="/login/*" to="/login" />
-            <Redirect from="/register/*" to="/register" /> */}
             <Redirect to="/" />
           </Switch>
         </div>

@@ -19,7 +19,8 @@ class ListingsPage extends React.Component {
     inspectionTime: '',
     bedrooms: '0',
     bathrooms: '0',
-    carSpaces: '0'
+    carSpaces: '0',
+    redirect: false,
   };
 
   handleChange = (e) => {
@@ -29,28 +30,9 @@ class ListingsPage extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    //const formData = {};
-    //const children = e.target.children;
-    //for (let i = 0; i < children.length; i++) {
-    //formData[`${children[i].name}`] = children[i].value;
-    //}
-    ////to get inspectiontime values (nested in div)
-    //const inspectionTimeValues = children[12].children;
-    //for (let i = 0; i < inspectionTimeValues.length; i++) {
-    //formData[`${inspectionTimeValues[i].name}`] =
-    //inspectionTimeValues[i].value;
-    //}
-    ////to get amenities values (nested in divs within a div)
-    //const amenitiesValues = children[14].children;
-    //for (let i = 0; i < amenitiesValues.length; i++) {
-    //formData[`${amenitiesValues[i].children[1].name}`] =
-    //amenitiesValues[i].children[1].value;
-    //}
-    //console.log(formData);
-
     const toggleSettings = {
       linkedIn: this.props.stateCopy.linkedInToggleStatus,
-      twitter: this.props.stateCopy.twitterToggleStatus
+      twitter: this.props.stateCopy.twitterToggleStatus,
     };
     const listing = this.state;
     const res = await socialAPI.shareListing(
@@ -62,18 +44,19 @@ class ListingsPage extends React.Component {
     console.log(res.twitterUrl);
 
     //sets redirectHome to true in App.js
-    this.props.useRedirectHome();
+    this.setState({ redirect: true });
   };
 
   render() {
-    if (this.props.stateCopy.redirectHome) {
-      //reset redirectHome to false in App.js before redirecting to home
-      //props.resetRedirectHome();
-      return <Redirect to="/" />;
-    }
+    //if (this.props.stateCopy.redirectHome) {
+    //  //reset redirectHome to false in App.js before redirecting to home
+    //  //props.resetRedirectHome();
+    //  return <Redirect to="/" />;
+    //}
 
     return (
       <div>
+        {this.state.redirect && <Redirect to="/" />}
         {/*---------------------FORM--------------------------*/}
         <form onSubmit={this.handleSubmit} className="listing-media-form">
           <h1 className="listing-title">List a Property</h1>
