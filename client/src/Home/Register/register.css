@@ -13,3 +13,28 @@
   border-bottom: 1px solid #908f8f;
   outline: 0;
 }
+
+.register {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  width: 40%;
+  padding: 0.5rem 0;
+  background: #6c92ff;
+  color: #ffffff;
+  border-radius: 8px;
+  margin: auto;
+}
+
+.register button:hover {
+  cursor: pointer;
+  background: #2196f3;
+  -webkit-transition: 0.1s;
+  color: azure;
+}
+
+.register button:active {
+  background: #908f8f;
+  -webkit-transition: -0.5s;
+  color: azure;
+}
