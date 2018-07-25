@@ -5,7 +5,7 @@ import Home from '../Home';
 import Settings from '../Settings';
 import Listing from '../Listing';
 import Navbar from '../core/Navbar';
-import { handleToggle } from '../services/stateFunctions';
+// import { handleToggle } from '../services/stateFunctions';
 import './app.css';
 
 // Helper Services
@@ -13,22 +13,25 @@ import usersAPI from '../services/usersAPI';
 import socialAPI from '../services/socialAPI';
 
 class App extends Component {
-  state = {
-    loaded: false,
-    loggedIn: false,
-    name: null,
-    company: null,
-    phone: null,
-    email: null,
-    authToken: null,
-    linkedInToggleStatus: false,
-    linkedInConnected: false,
-    twitterToggleStatus: false,
-    twitterConnected: false,
-    linkedInURL: null,
-    twitterURL: null,
-    redirectHome: false
-  };
+  constructor() {
+    super();
+    this.state = {
+      loaded: false,
+      loggedIn: false,
+      name: null,
+      company: null,
+      phone: null,
+      email: null,
+      authToken: null,
+      linkedInToggleStatus: false,
+      linkedInConnected: false,
+      twitterToggleStatus: false,
+      twitterConnected: false,
+      linkedInURL: null,
+      twitterURL: null,
+      redirectHome: false,
+    };
+  }
 
   componentDidMount() {
     this.handleMount();
@@ -57,7 +60,7 @@ class App extends Component {
     console.log(linkedInURL);
     this.setState(() => ({
       twitterURL,
-      linkedInURL
+      linkedInURL,
     }));
     return Promise.resolve({ twitterURL, linkedInURL });
   };
@@ -79,7 +82,7 @@ class App extends Component {
           linkedInToggleStatus: user.linkedInToggleStatus,
           linkedInConnected: user.linkedInConnected,
           twitterToggleStatus: user.twitterToggleStatus,
-          twitterConnected: user.twitterConnected
+          twitterConnected: user.twitterConnected,
         }));
         await this.getSocialAuthUrls(authToken);
       } catch (error) {
@@ -104,7 +107,7 @@ class App extends Component {
         linkedInToggleStatus: user.linkedInToggleStatus,
         linkedInConnected: user.linkedInConnected,
         twitterToggleStatus: user.twitterToggleStatus,
-        twitterConnected: user.twitterConnected
+        twitterConnected: user.twitterConnected,
       }));
       localStorage.setItem('authorization', `Bearer ${authToken}`);
       await this.getSocialAuthUrls(authToken);
@@ -130,7 +133,7 @@ class App extends Component {
         twitterToggleStatus: false,
         twitterConnected: false,
         linkedInURL: null,
-        twitterURL: null
+        twitterURL: null,
       }));
     } catch (error) {
       console.log(error);
@@ -156,6 +159,15 @@ class App extends Component {
     } else if (socialMedia === 'twitter') {
       await socialAPI.disconnectTwitter(this.state.authToken);
       this.setState(() => ({ twitterConnected: false }));
+    }
+  };
+
+  handleToggle = (e) => {
+    const target = e.target.id;
+    if (target === 'LinkedInToggleButton') {
+      this.setState({ linkedInToggleStatus: !this.state.linkedInToggleStatus });
+    } else if (target === 'TwitterToggleButton') {
+      this.setState({ twitterToggleStatus: !this.state.twitterToggleStatus });
     }
   };
 
@@ -199,7 +211,7 @@ class App extends Component {
                 this.state.loggedIn ? (
                   <Listing
                     stateCopy={this.state}
-                    handleToggle={handleToggle.bind(this)}
+                    handleToggle={this.handleToggle}
                   />
                 ) : (
                   <Redirect to="/" />
