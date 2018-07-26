@@ -66,12 +66,14 @@ class Login extends React.Component {
                 <input
                   name="email"
                   type="email"
+                  placeholder="email"
                   value={this.state.email}
                   onChange={this.handleOnChange}
                 />
                 <input
                   name="password"
                   type="password"
+                  placeholder="password"
                   value={this.state.password}
                   onChange={this.handleOnChange}
                 />
