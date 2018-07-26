@@ -1,7 +1,121 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Register() {
-  return <h1> Register </h1>;
+class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // redirect: false,
+      loading: false,
+      error: false,
+      email: '',
+      password: '',
+      name: '',
+      company: '',
+      phone: ''
+    };
+  }
+
+  handleOnChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleRegister = async () => {
+    this.setState({ loading: true });
+    try {
+      await this.props.handleRegister(
+        this.state.email,
+        this.state.password,
+        this.state.name,
+        this.state.company,
+        this.state.phone
+      );
+      if (this.state.error) {
+        this.setState({ error: false });
+      }
+    } catch (err) {
+      this.setState({ error: true });
+    } finally {
+      this.setState({
+        loading: false,
+        email: '',
+        password: '',
+        name: '',
+        company: '',
+        phone: ''
+      });
+    }
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <div className="realista">
+          <img
+            src="https://realista.com.au/images/web/realista-new.svg"
+            alt="realista-logo"
+            height="20"
+          />
+          <h3>Where your home finds you</h3>
+          <div className="entire-form">
+            <h1>Register</h1>
+            <div className="form">
+              <form>
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="email"
+                  value={this.state.email}
+                  onChange={this.handleOnChange}
+                />
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="password"
+                  value={this.state.password}
+                  onChange={this.handleOnChange}
+                />
+                <input
+                  name="name"
+                  type="name"
+                  placeholder="name"
+                  value={this.state.name}
+                  onChange={this.handleOnChange}
+                />
+                <input
+                  name="company"
+                  type="company"
+                  placeholder="company"
+                  value={this.state.company}
+                  onChange={this.handleOnChange}
+                />
+                <input
+                  name="phone"
+                  type="phone"
+                  placeholder="phone"
+                  value={this.state.phone}
+                  onChange={this.handleOnChange}
+                />
+              </form>
+
+              <button className="register" onClick={this.handleRegister}>
+                {this.state.loading ? 'Loading' : 'Register'}
+              </button>
+              {this.state.error && <p>Oops! Something went wrong!</p>}
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
+
+Register.propTypes = {
+  handleRegister: PropTypes.func
+};
+
+Register.defaultProps = {
+  handleRegister: null
+};
 
 export default Register;
