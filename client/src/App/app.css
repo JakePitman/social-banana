@@ -148,7 +148,7 @@ div p {
 /* search */
 div h1 {
   font-size: 40px;
-  margin: -10px auto 10px auto;
+  margin: -10px auto 30px auto;
   border-bottom: 2px solid #fff;
   width: 450px;
   padding-bottom: 3px;
@@ -168,7 +168,7 @@ div h1 {
   padding: 2px;
   background-color: #fff;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .search-input {
