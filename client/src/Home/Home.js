@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Login from './Login';
 import Register from './Register';
+import Search from './Login/Search';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formState: 'login',
+      formState: 'login'
     };
   }
 
@@ -18,12 +19,15 @@ class Home extends React.Component {
   showUserForms = () => {
     const showUserForms = !this.props.loggedIn && (
       <React.Fragment>
-        <button name="login" onClick={this.handleFormToggle}>
-          Login
-        </button>
-        <button name="register" onClick={this.handleFormToggle}>
-          Register
-        </button>
+        <div className="home-btn">
+          <button id="home" name="login" onClick={this.handleFormToggle}>
+            Login
+          </button>
+          <button id="home" name="register" onClick={this.handleFormToggle}>
+            Register
+          </button>
+        </div>
+
         {this.state.formState === 'login' && (
           <Login
             loggedIn={this.props.loggedIn}
@@ -38,22 +42,19 @@ class Home extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <h1> Homepage </h1>
-        {this.showUserForms()}
-      </React.Fragment>
+      <React.Fragment>{this.showUserForms() || <Search />} </React.Fragment>
     );
   }
 }
 
 Home.propTypes = {
   loggedIn: PropTypes.bool,
-  handleLogin: PropTypes.func,
+  handleLogin: PropTypes.func
 };
 
 Home.defaultProps = {
   loggedIn: null,
-  handleLogin: null,
+  handleLogin: null
 };
 
 export default Home;
