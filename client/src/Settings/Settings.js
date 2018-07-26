@@ -10,6 +10,7 @@ class Settings extends React.Component {
     console.log('hello from componentDidMount in Settings');
     try {
       if (this.props.authToken) {
+        console.log('getting social urls');
         await this.props.getSocialAuthUrls(this.props.authToken);
       }
     } catch (error) {
