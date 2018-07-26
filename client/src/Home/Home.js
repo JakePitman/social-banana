@@ -34,7 +34,9 @@ class Home extends React.Component {
             handleLogin={this.props.handleLogin}
           />
         )}
-        {this.state.formState === 'register' && <Register />}
+        {this.state.formState === 'register' && (
+          <Register handleRegister={this.props.handleRegister} />
+        )}
       </React.Fragment>
     );
     return showUserForms;
@@ -49,12 +51,14 @@ class Home extends React.Component {
 
 Home.propTypes = {
   loggedIn: PropTypes.bool,
-  handleLogin: PropTypes.func
+  handleLogin: PropTypes.func,
+  handleRegister: PropTypes.func
 };
 
 Home.defaultProps = {
   loggedIn: null,
-  handleLogin: null
+  handleLogin: null,
+  handleRegister: null
 };
 
 export default Home;
