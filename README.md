@@ -301,7 +301,7 @@ _Screenshot taken on 23 July 2018_
 
 ---
 
-    [ NEEDS TO BE COMPLETED ]
+- Show previous search entries when users enter the first few letters of city name
 
 ## **FINAL REVIEW**
 
