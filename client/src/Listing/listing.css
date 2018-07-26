@@ -88,7 +88,7 @@ select {
 }
 
 .upload-listing-button {
-  margin: 50px 0;
+  margin: 15px 0;
   width: 300px;
   height: 40px;
   border-radius: 10px;
@@ -129,7 +129,7 @@ select {
   width: 200px;
   background-color: white;
   padding: 0.6px;
-  margin-bottom: -15px;
+  margin-bottom: 20px;
 }
 
 .listing-media-logo {
