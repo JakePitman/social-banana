@@ -16,7 +16,8 @@
   height: 32px;
   width: 180px;
   margin-left: 20px;
-  border-radius: 5px;
+  border: none;
+  border-radius: 4px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
