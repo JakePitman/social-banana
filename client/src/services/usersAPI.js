@@ -1,10 +1,20 @@
 import axios from 'axios';
 
-const createUser = async (email, password) => {
-  const res = await axios.post('/api/users/register', { email, password });
-  const { user } = res.data;
-  const authToken = res.headers.authorization.split(' ')[1];
-  return { user, authToken };
+const createUser = async (email, password, name, company, phone) => {
+  try {
+    const res = await axios.post('/api/users/register', {
+      email,
+      password,
+      name,
+      company,
+      phone
+    });
+    const { user } = res.data;
+    const authToken = res.headers.authorization.split(' ')[1];
+    return { user, authToken };
+  } catch (error) {
+    return Promise.reject(error.response.data.error.split(': ')[2]);
+  }
 };
 
 const loginUser = async (email, password) => {

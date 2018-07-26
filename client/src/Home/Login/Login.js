@@ -1,53 +1,35 @@
 import React from 'react';
-// import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-// import auth from '../../services/auth';
-
 class Login extends React.Component {
-  // const { handleLoggedIn } = props;
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      // success: false,
       error: false,
       email: '',
       password: ''
     };
   }
 
-  // handleLogin = async () => {
-  //   this.setState({ loading: true });
-  //   try {
-  //     await new Promise((resolve) => setTimeout(resolve, 1000));
-  //     auth.login();
-  //     this.setState({ success: true });
-  //   } catch (err) {
-  //     this.setState({ error: true });
-  //   }
-  //   // console.log('authenticated:', auth.isAuthenticated());
-  // };
-
   handleOnChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleLogin = async () => {
+  handleSubmit = async (e) => {
+    e.preventDefault();
     this.setState({ loading: true });
     try {
       await this.props.handleLogin(this.state.email, this.state.password);
       if (this.state.error) {
         this.setState({ error: false });
       }
-      // this.setState({ success: true });
-    } catch (err) {
+    } catch (error) {
       this.setState({ error: true });
     } finally {
-      this.setState({ loading: false, email: '', password: '' });
+      this.setState({ loading: false });
     }
   };
-  // {this.state.success && <Redirect to="/" />}
 
   render() {
     return (
@@ -62,13 +44,14 @@ class Login extends React.Component {
           <div className="entire-form">
             <h1>Login</h1>
             <div className="form">
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <input
                   name="email"
                   type="email"
                   placeholder="email"
                   value={this.state.email}
                   onChange={this.handleOnChange}
+                  required
                 />
                 <input
                   name="password"
@@ -76,12 +59,13 @@ class Login extends React.Component {
                   placeholder="password"
                   value={this.state.password}
                   onChange={this.handleOnChange}
+                  required
                 />
+                {this.state.error && <div>Invalid Combination</div>}
+                <button type="submit">
+                  {this.state.loading ? 'Loading' : 'Login'}
+                </button>
               </form>
-              <button onClick={this.handleLogin}>
-                {this.state.loading ? 'Loading' : 'Login'}
-              </button>
-              {this.state.error && <p>Oops! Something went wrong!</p>}
             </div>
           </div>
         </div>
