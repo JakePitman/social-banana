@@ -20,6 +20,7 @@
   margin-right: auto;
   margin-top: -100px;
   padding: 40px;
+  border-radius: 20px;
 }
 
 .profile-section input {
@@ -61,12 +62,22 @@
 .profile-form-input input {
   color: #cccccc;
   font-size: 14px;
-  margin-top: 5px;
+  margin: 8px auto;
   width: 100%;
-  padding: 0.25rem;
+  padding: 0.5rem;
   border: 0;
+  border-radius: 8px;
   border-bottom: 1px solid #908f8f;
   outline: 0;
+}
+
+.profile-form-input input:focus {
+  color: #908f8f;
+}
+
+.profile-form-input label {
+  color: #cccccc;
+  margin-top: 8px;
 }
 
 .profile-form-toggle {
@@ -89,6 +100,7 @@
   font-family: 'Roboto', sans-serif;
   font-size: 15px;
   color: #ffffff;
+  border: none;
   border-radius: 8px;
   margin-left: 25%;
   margin-top: 20px;
