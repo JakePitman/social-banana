@@ -137,9 +137,9 @@ select {
 
 .listing-media-logo {
   position: relative;
-  left: -1px;
+  left: -2px;
   top: -1px;
-  height: 42px;
+  height: 43px;
   border: 1px;
   border-radius: 8px 0px 0px 8px;
 }
@@ -157,6 +157,8 @@ select {
   width: 80px;
   font-weight: normal;
   color: black;
+  width: 80px;
+  text-align: center;
 }
 
 .listing-media-switch-container {
@@ -195,8 +197,8 @@ select {
 .slider-round:before {
   position: absolute;
   content: '';
-  height: 18px;
-  width: 18px;
+  height: 16px;
+  width: 16px;
   left: -1px;
   bottom: -1px;
   background-color: white;

@@ -7,8 +7,6 @@ import socialAPI from '../services/socialAPI';
 import { Redirect } from 'react-router-dom';
 
 class ListingsPage extends React.Component {
-  redirectHome = this.props.stateCopy.redirectHome;
-
   state = {
     propertyType: 'house',
     address: '',
@@ -43,8 +41,6 @@ class ListingsPage extends React.Component {
     );
     console.log(res.linkedInUrl);
     console.log(res.twitterUrl);
-
-    //sets redirectHome to true in App.js
     this.setState({ redirect: true });
   };
 
