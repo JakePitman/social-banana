@@ -26,8 +26,8 @@ class Search extends Component {
         <SearchInput className="search-input" onChange={this.searchUpdated} />
         {filteredProperties.map((property) => {
           return (
-            <div className="search">
-              <div className="agent" key={property.id}>
+            <div className="search" key={property.id}>
+              <div className="agent">
                 <div className="state">{property.user.state}</div>
                 <div className="suburb">{property.suburb}</div>
                 <div className="prop-img">{property.img}</div>

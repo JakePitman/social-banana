@@ -5,9 +5,8 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // redirect: false,
       loading: false,
-      error: false,
+      error: null,
       email: '',
       password: '',
       name: '',
@@ -20,7 +19,8 @@ class Register extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleRegister = async () => {
+  handleSubmit = async (e) => {
+    e.preventDefault();
     this.setState({ loading: true });
     try {
       await this.props.handleRegister(
@@ -31,19 +31,12 @@ class Register extends React.Component {
         this.state.phone
       );
       if (this.state.error) {
-        this.setState({ error: false });
+        this.setState({ error: null });
       }
-    } catch (err) {
-      this.setState({ error: true });
+    } catch (error) {
+      this.setState({ error });
     } finally {
-      this.setState({
-        loading: false,
-        email: '',
-        password: '',
-        name: '',
-        company: '',
-        phone: ''
-      });
+      this.setState({ loading: false });
     }
   };
 
@@ -60,13 +53,14 @@ class Register extends React.Component {
           <div className="entire-form">
             <h1>Register</h1>
             <div className="form">
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <input
                   name="email"
                   type="email"
                   placeholder="email"
                   value={this.state.email}
                   onChange={this.handleOnChange}
+                  required
                 />
                 <input
                   name="password"
@@ -74,6 +68,7 @@ class Register extends React.Component {
                   placeholder="password"
                   value={this.state.password}
                   onChange={this.handleOnChange}
+                  required
                 />
                 <input
                   name="name"
@@ -81,6 +76,7 @@ class Register extends React.Component {
                   placeholder="name"
                   value={this.state.name}
                   onChange={this.handleOnChange}
+                  required
                 />
                 <input
                   name="company"
@@ -88,6 +84,7 @@ class Register extends React.Component {
                   placeholder="company"
                   value={this.state.company}
                   onChange={this.handleOnChange}
+                  required
                 />
                 <input
                   name="phone"
@@ -95,13 +92,13 @@ class Register extends React.Component {
                   placeholder="phone"
                   value={this.state.phone}
                   onChange={this.handleOnChange}
+                  required
                 />
+                {this.state.error && <div>{this.state.error}</div>}
+                <button type="submit" className="register">
+                  {this.state.loading ? 'Loading' : 'Register'}
+                </button>
               </form>
-
-              <button className="register" onClick={this.handleRegister}>
-                {this.state.loading ? 'Loading' : 'Register'}
-              </button>
-              {this.state.error && <p>Oops! Something went wrong!</p>}
             </div>
           </div>
         </div>

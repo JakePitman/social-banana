@@ -29,7 +29,7 @@ class App extends Component {
       twitterConnected: false,
       linkedInURL: null,
       twitterURL: null,
-      redirectHome: false,
+      redirectHome: false
     };
   }
 
@@ -60,7 +60,7 @@ class App extends Component {
     console.log(linkedInURL);
     this.setState(() => ({
       twitterURL,
-      linkedInURL,
+      linkedInURL
     }));
     return Promise.resolve({ twitterURL, linkedInURL });
   };
@@ -82,9 +82,9 @@ class App extends Component {
           linkedInToggleStatus: user.linkedInToggleStatus,
           linkedInConnected: user.linkedInConnected,
           twitterToggleStatus: user.twitterToggleStatus,
-          twitterConnected: user.twitterConnected,
+          twitterConnected: user.twitterConnected
         }));
-        await this.getSocialAuthUrls(authToken);
+        await this.getSocialAuthUrls(authToken); // temp
       } catch (error) {
         console.log(error);
         this.setState(() => ({ authToken: null }));
@@ -92,6 +92,45 @@ class App extends Component {
     }
     this.setState(() => ({ loaded: true }));
   };
+
+  /////////////////////////////////////////////////////////////////////////////
+  handleRegister = async (
+    inputEmail,
+    inputPassword,
+    inputName,
+    inputCompany,
+    inputPhone
+  ) => {
+    try {
+      const res = await usersAPI.createUser(
+        inputEmail,
+        inputPassword,
+        inputName,
+        inputCompany,
+        inputPhone
+      );
+      const { user, authToken } = res;
+      this.setState(() => ({
+        loggedIn: true,
+        email: user.email,
+        name: user.name,
+        company: user.company,
+        phone: user.phone,
+        authToken,
+        linkedInToggleStatus: user.linkedInToggleStatus,
+        linkedInConnected: user.linkedInConnected,
+        twitterToggleStatus: user.twitterToggleStatus,
+        twitterConnected: user.twitterConnected
+      }));
+      localStorage.setItem('authorization', `Bearer ${authToken}`);
+      await this.getSocialAuthUrls(authToken); // temp
+    } catch (error) {
+      // this.setState({ loggedIn: false });
+      throw error;
+    }
+  };
+
+  /////////////////////////////////////////////////////////////////////////////
 
   handleLogin = async (inputEmail, inputPassword) => {
     try {
@@ -107,10 +146,10 @@ class App extends Component {
         linkedInToggleStatus: user.linkedInToggleStatus,
         linkedInConnected: user.linkedInConnected,
         twitterToggleStatus: user.twitterToggleStatus,
-        twitterConnected: user.twitterConnected,
+        twitterConnected: user.twitterConnected
       }));
       localStorage.setItem('authorization', `Bearer ${authToken}`);
-      await this.getSocialAuthUrls(authToken);
+      await this.getSocialAuthUrls(authToken); // temp
     } catch (error) {
       // this.setState({ loggedIn: false });
       throw error;
@@ -133,7 +172,7 @@ class App extends Component {
         twitterToggleStatus: false,
         twitterConnected: false,
         linkedInURL: null,
-        twitterURL: null,
+        twitterURL: null
       }));
     } catch (error) {
       console.log(error);
@@ -186,6 +225,7 @@ class App extends Component {
               <Home
                 loggedIn={this.state.loggedIn}
                 handleLogin={this.handleLogin}
+                handleRegister={this.handleRegister}
               />
             )}
           />
