@@ -10,7 +10,7 @@ https://www.realista.com.au/
 
 **Group Prototype:**
 
-[ INSERT FINAL WEBSITE HERE] <<---
+https://social-banana.herokuapp.com
 
 ---
 
@@ -75,6 +75,10 @@ We strive to design, build, test and deploy a microservice web application proto
 
 ## **PROJECT MANAGEMENT**
 
+We logged a record of our first week in a diary style (available here: https://www.google.com.au/sheets/about/ ). This first week was spent researching different options for the tools and technology we would use. We started by creating our trello and figma boards, and agreeing on and practicing our github workflow. Once we felt comfortable with our tools, we started looking into making posts to Facebook, Twitter, and LinkedIn. After getting an overview of what would be involved for each social media, we agreed that LinkedIn would be the best place to start - as it seemed the easiest, and was a priority for our client.
+In our second week, we started coding. And used the development trello board (available here: https://trello.com/b/LNKpuZFz/development ) to list, claim, and check off functionalities that we would include in our app. We found it easiest to divide our roles by having three of us work mostly on one React component each, and two of us working on the back end. This worked well for us, as a lot of communication was needed between those on the front end and those on the back, which meant that we all developed a robust understanding of how the app works as a whole. Our github settings also required each pull request to be reviewed by at least one other team member before it could be merged, and this meant that we were constantly monitoring each other's assigned work. 
+Because this project largely revolved around technology that we had little experience with, we decided that our MVP would simply be an app that allows users to sign in with and make posts to LinkedIn. Functionality-wise, we managed to achieve our MVP by the end of the second week, and so we broadened our scope to include Twitter as well. After achieving this, we focused our efforts on refactoring our code to make it easier to read, and easier for our client to integrate, as well as polishing the UI.
+
 ---
 
 ### **TOOLS & RESOURCES**
@@ -131,7 +135,7 @@ We have had a 15 minute team meeting every morning with the following topics and
 - what we’ll accomplish between now and the next standup
 - anything that’s holding up our progress
 
-### **CLIENT INTERRACTION**
+### **CLIENT INTERACTION**
 
 We've communicated with our client - Realista - via Facebook Messenger, in which the group was added to a group chat for access to some of their resources and proposed wireframes.
 
@@ -164,6 +168,9 @@ Client meeting notes:
 ---
 
 ## **WORKFLOW**
+
+Our daily workflow started with a quick standup from each member (or pair). This was done mainly for the purpose of keeping all members up to speed on the app as a whole, but was also useful for flagging any issues encountered. Much of our early work envolved researching different possibilities and paths that we could take to complete our task, and so our standups were useful opportunities to flag dead-ends, and share possible solutions. After the standups, we would claim tasks from the trello boards - either individually or in pairs, and begin working on them. We would start by doing a hard reset of our master branch, so that each of us had an exact replica of origin/master's current state, and then rebase it into our individual development branches.
+When we were ready to push and create a PR, we would check the repository for any existing PRs and resolve them first, before rebasing, pushing, and creating the new PR. It was also vital for us to debrief at the end of the day, so that whatever we worked on at home that night would not be the same as, or confict with another team member's code.
 
 ---
 
@@ -295,23 +302,25 @@ Insights to our merges, commits, PR's and overall project flow can be found at
 ![sb-insights](readme_assets/sb-insights.png)
 _Screenshot taken on 23 July 2018_
 
----
-
 ## **IMPROVEMENTS**
 
----
+### Adding Facebook connectivity
+Our application could be improved by allowing users to connect and make posts to Facebook. We would need to further research Facebook's particular implementation of the OAuth2.0 protocol.
 
-    [ NEEDS TO BE COMPLETED ]
+### Integrating our app with Realista's website
+Our application was designed as a microservice, rather than a complete app on its own. As Realista uses an SQL database, and ours uses MongoDB, some refactoring would be necessary to accommodate. Our listing page would also become unnecessary, as Realista already has one. 
+
+### Our process
+Our progression through the development of our app involved a lot of refactoring. In particular, the Listing component was originally stateless, and took all of its information from the state in App.js. After we had achieved our MVP however, we realised that it would be better for it to be stateful, to make redirecting and capturing form-data easier. It would have saved time and complexity to think about how information would be passed around the app, as well as smaller features like re-directing, before beginning to code.
+
+### Posting an existing form to social media
+Another extension of this application would be the capability to capture data from forms already posted in the Realista website, and post it to social media. At the moment, our app captures and makes the social media posts at the same time the listing form is completed.
 
 ## **FINAL REVIEW**
 
----
-
-    [ NEEDS TO BE COMPLETED ]
+On final review of our application as deployed on Heroku, we have found it to be fully-functional, and we have exceeded our MVP.
 
 ## **CONTRIBUTERS**
-
----
 
 This project wouldn't have been possible without the strong efforts and dedication of the following developers:
 
