@@ -205,7 +205,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <React.Fragment>
         <Navbar
           loggedIn={this.state.loggedIn}
           handleLogout={this.handleLogout}
@@ -254,7 +254,7 @@ class App extends Component {
           <Redirect from="/Settings/*" to="/Settings" />
           <Redirect to="/" />
         </Switch>
-      </div>
+      </React.Fragment>
     );
   }
 }

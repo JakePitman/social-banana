@@ -8,7 +8,7 @@ class Login extends React.Component {
       loading: false,
       error: false,
       email: '',
-      password: ''
+      password: '',
     };
   }
 
@@ -61,7 +61,9 @@ class Login extends React.Component {
                   onChange={this.handleOnChange}
                   required
                 />
-                {this.state.error && <div>Invalid Combination</div>}
+                {this.state.error && (
+                  <div className="error">Invalid Combination</div>
+                )}
                 <button type="submit">
                   {this.state.loading ? 'Loading' : 'Login'}
                 </button>
@@ -75,11 +77,11 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  handleLogin: PropTypes.func
+  handleLogin: PropTypes.func,
 };
 
 Login.defaultProps = {
-  handleLogin: null
+  handleLogin: null,
 };
 
 export default Login;
