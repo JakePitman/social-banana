@@ -35,6 +35,7 @@ class ListingsPage extends React.Component {
       twitter: this.props.stateCopy.twitterToggleStatus
     };
     const listing = this.state;
+    console.log(this.props.stateCopy.authToken);
     const res = await socialAPI.shareListing(
       listing,
       this.props.stateCopy.authToken,
@@ -48,12 +49,6 @@ class ListingsPage extends React.Component {
   };
 
   render() {
-    //if (this.props.stateCopy.redirectHome) {
-    //  //reset redirectHome to false in App.js before redirecting to home
-    //  //props.resetRedirectHome();
-    //  return <Redirect to="/" />;
-    //}
-
     return (
       <div>
         {this.state.redirect && <Redirect to="/" />}
@@ -79,6 +74,7 @@ class ListingsPage extends React.Component {
             placeholder="Address"
             autoComplete="street-address"
             onChange={this.handleChange}
+            required
           />
           {/*---Description---*/}
           <label className="form-label">Description</label>
@@ -87,6 +83,7 @@ class ListingsPage extends React.Component {
             name="description"
             placeholder="Description"
             onChange={this.handleChange}
+            required
           />
           {/*---Price---*/}
           <label className="form-label">Price</label>
@@ -95,6 +92,7 @@ class ListingsPage extends React.Component {
             name="price"
             placeholder="$"
             onChange={this.handleChange}
+            required
           />
 
           {/*---LAND-SIZE---*/}

@@ -84,7 +84,6 @@ class App extends Component {
           twitterToggleStatus: user.twitterToggleStatus,
           twitterConnected: user.twitterConnected
         }));
-        await this.getSocialAuthUrls(authToken); // temp
       } catch (error) {
         console.log(error);
         this.setState(() => ({ authToken: null }));
@@ -93,7 +92,6 @@ class App extends Component {
     this.setState(() => ({ loaded: true }));
   };
 
-  /////////////////////////////////////////////////////////////////////////////
   handleRegister = async (
     inputEmail,
     inputPassword,
@@ -123,14 +121,11 @@ class App extends Component {
         twitterConnected: user.twitterConnected
       }));
       localStorage.setItem('authorization', `Bearer ${authToken}`);
-      await this.getSocialAuthUrls(authToken); // temp
     } catch (error) {
       // this.setState({ loggedIn: false });
       throw error;
     }
   };
-
-  /////////////////////////////////////////////////////////////////////////////
 
   handleLogin = async (inputEmail, inputPassword) => {
     try {
@@ -149,7 +144,6 @@ class App extends Component {
         twitterConnected: user.twitterConnected
       }));
       localStorage.setItem('authorization', `Bearer ${authToken}`);
-      await this.getSocialAuthUrls(authToken); // temp
     } catch (error) {
       // this.setState({ loggedIn: false });
       throw error;
@@ -186,7 +180,6 @@ class App extends Component {
       const { name, company, phone } = res.user;
       this.setState(() => ({ name, company, phone }));
     } catch (error) {
-      // return Promise.reject(error);
       throw error;
     }
   };
@@ -267,8 +260,3 @@ class App extends Component {
 }
 
 export default App;
-// <Route
-//   exact
-//   path="/login"
-//   render={() => <Login handleLogin={this.handleLogin} />}
-// />;
