@@ -20,7 +20,7 @@ class ListingsPage extends React.Component {
     bedrooms: '0',
     bathrooms: '0',
     carSpaces: '0',
-    redirect: false
+    redirect: false,
   };
 
   handleChange = (e) => {
@@ -32,7 +32,7 @@ class ListingsPage extends React.Component {
     e.preventDefault();
     const toggleSettings = {
       linkedIn: this.props.stateCopy.linkedInToggleStatus,
-      twitter: this.props.stateCopy.twitterToggleStatus
+      twitter: this.props.stateCopy.twitterToggleStatus,
     };
     const listing = this.state;
     console.log(this.props.stateCopy.authToken);
@@ -179,10 +179,10 @@ class ListingsPage extends React.Component {
             ) : (
               ''
             )}
-            <button className="upload-listing-button" type="submit">
-              Upload Listing
-            </button>
           </div>
+          <button className="upload-listing-button" type="submit">
+            Upload Listing
+          </button>
         </form>
       </div>
     );
